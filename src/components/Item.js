@@ -19,7 +19,7 @@ export class Item extends Component {
             }}>
               { this.props.title.split("<emoji>")[0] }
               { this.props.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').map((v, i) => {
-                  if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} aria-role="presentation" />
+                  if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} />
                 })
               }
             </Link>

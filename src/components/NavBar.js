@@ -12,8 +12,6 @@ export class NavBar extends Component {
     );
   }
   render() {
-    console.log(JSON.stringify(this.props.match));
-    console.log(JSON.stringify(this.props.location));
     return (
       <div id="navigation-sticky-wrapper">
           <nav id="navigation">
@@ -33,7 +31,7 @@ export class NavBar extends Component {
                         </div>
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul className="nav navbar-nav navbar-right" id="top-nav">
-                            <li><NavLink onClick={() => window.location.replace('/blog')} id="blog-menu" to="/blog"
+                            <li><NavLink onClick={() => window.location.replace('/')} id="blog-menu" to="/blog"
                               isActive={(match, location) => ["/", "/blog", "/index"].includes(location.pathname) || location.pathname.includes('/blog') || !isNaN(location.pathname.substr(1))}
                               className="elements" activeClassName="active">Blog</NavLink></li>
                             <li><NavLink id="projects-menu" to="/projects" className="elements" activeClassName="active">Projects</NavLink></li>

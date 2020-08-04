@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Item from './Item';
 
 export class Blog extends Component {
@@ -6,21 +7,19 @@ export class Blog extends Component {
   buttons = () => {
     let component = [];
     const newer = this.state.init-1;
-    const older = Number.parseInt(this.state.init)+1
+    const older = Number.parseInt(this.state.init)+1;
     if (this.state.init > 1) {
-      component.push(<li className="page-item">
-        <a className="page-link" style={{ width: 160, marginRight: 10, marginBottom: 10, borderRadius: 300, color: "#000", border: "2px solid #00000030" }}
-          href={"/"+newer} >
+      component.push(<li key="1" className="page-item">
+        <Link className="page-link" to={"/"+newer} onClick={() => window.location.replace("/#/"+newer)} style={{ width: 160, marginRight: 10, marginBottom: 10, borderRadius: 300, color: "#000", border: "2px solid #00000030" }}>
           <i className="fas fa-arrow-circle-left" style={{ paddingRight: 3 }} /> Newer Posts
-        </a>
+        </Link>
       </li>);
     }
     if (this.state.pages > this.state.init) {
-      component.push(<li className="page-item">
-        <a className="page-link" style={{ width: 160, borderRadius: 300, color: "#000", border: "2px solid #00000030" }}
-          href={"/"+older} >
+      component.push(<li key="2" className="page-item">
+        <Link className="page-link" to={"/"+older} onClick={() => window.location.replace("/#/"+older)} style={{ width: 160, borderRadius: 300, color: "#000", border: "2px solid #00000030" }}>
           Older Posts  <i className="fas fa-arrow-circle-right" style={{ paddingLeft: 3 }} />
-        </a>
+        </Link>
       </li>);
     }
     return (<React.Fragment>{component}</React.Fragment>);
@@ -28,6 +27,14 @@ export class Blog extends Component {
   componentDidMount() {
     let url = this.props.init ? "https://blog-cjr.herokuapp.com/api/"+this.props.init : "https://blog-cjr.herokuapp.com/api";
     if (!this.state || this.state.posts.length === 0) {
+      fetch(url)
+        .then(result => result.json())
+        .then(resultJSON => this.setState({posts: resultJSON.posts, init: resultJSON.init, pages: resultJSON.pages}));
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.init && this.state.init != nextProps.init) {
+      let url = nextProps.init ? "https://blog-cjr.herokuapp.com/api/"+nextProps.init : "https://blog-cjr.herokuapp.com/api";
       fetch(url)
         .then(result => result.json())
         .then(resultJSON => this.setState({posts: resultJSON.posts, init: resultJSON.init, pages: resultJSON.pages}));

@@ -68,7 +68,7 @@ export class Post extends Component {
                           <h1 style={{ fontWeight: "bold", color: "#000", marginBottom: 20 }} >
                             { this.state.title.split("<emoji>")[0] }
                             { this.state.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').map((v, i) => {
-                                if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} aria-role="presentation" />
+                                if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} />
                               })
                             }
                           </h1>
