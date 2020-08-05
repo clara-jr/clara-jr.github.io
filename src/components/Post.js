@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+const loading = 'images/loading.gif';
 
 export class Post extends Component {
   socialWindow = (url) => {
@@ -50,7 +51,7 @@ export class Post extends Component {
   }
   render() {
     if (!this.props.location.state && this.state.title == '' && this.state.error == '') {
-      return null;
+      return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
     } else if (this.state.error != '') {
       return <Error error={this.state.error}/>
     } else {

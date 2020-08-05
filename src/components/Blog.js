@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Item from './Item';
+const loading = 'images/loading.gif';
 
 export class Blog extends Component {
   state = { posts: [], init: 1, pages: 1 };
@@ -48,7 +49,9 @@ export class Blog extends Component {
     }
   }
   render() {
-    if (this.state.pages <= 1) {
+    if (!this.state.posts.length) {
+      return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
+    } else if (this.state.pages <= 1) {
       return (
         <div className="container">
           <div className="row blog-items">
