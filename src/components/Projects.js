@@ -3,6 +3,9 @@ import Project from './Project';
 import json from '../assets/projects.json';
 
 export class Projects extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div className="container">

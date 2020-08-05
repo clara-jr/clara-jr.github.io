@@ -25,6 +25,7 @@ export class Blog extends Component {
     return (<React.Fragment>{component}</React.Fragment>);
   }
   componentDidMount() {
+    window.scrollTo(0, 0);
     let url = this.props.init ? "https://blog-cjr.herokuapp.com/api/"+this.props.init : "https://blog-cjr.herokuapp.com/api";
     if (!this.state || this.state.posts.length === 0) {
       fetch(url)

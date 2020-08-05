@@ -3,6 +3,9 @@ import cv from '../assets/docs/CV-es.pdf';
 const me = 'images/me.jpg';
 
 export class About extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     return (
       <div className="container">

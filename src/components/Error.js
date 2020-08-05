@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(faSkull)
 
 class Error extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
    return (
     <div style={{ marginRight: "5%", marginLeft: "5%", textAlign: "center" }}>
