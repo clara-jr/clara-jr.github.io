@@ -28,10 +28,10 @@ body {font: 18px/28px body, sans-serif;}
 #navigation { position:fixed; }
 #navigation-sticky-wrapper { height: 1px; }
 #transparentNav {
-    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
-    background: -o-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
-    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
     background: linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -o-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
 }
 pre, code { font-family: mono, monospace; }
 a#cv {

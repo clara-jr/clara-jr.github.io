@@ -14,7 +14,7 @@ export class Post extends Component {
   setShareLinks = (str) => {
       const pageUrl = encodeURIComponent(document.URL);
       let url = '';
-      let tweet = this.props.location.state.title.split(" ");
+      let tweet = this.props.location.state.title.split("<emoji>")[0].split(" ");
       tweet = tweet.filter(val => val !== "" && val !== "\n");
       tweet = tweet.join(" ");
       switch (str) {

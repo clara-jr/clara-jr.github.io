@@ -153,10 +153,10 @@ px      68    160    252    */
   nav .block {
     padding: 0px;
     margin-bottom: 0px;
-    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
-    background: -o-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
-    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
     background: linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -o-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #ffffff);
   }
   nav .block .navbar-brand img {
     padding-left: 10px;
