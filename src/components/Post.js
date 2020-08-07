@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
-const loading = 'images/loading.gif';
+const loading = '../images/loading.gif';
 
 export class Post extends Component {
   state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '' };
