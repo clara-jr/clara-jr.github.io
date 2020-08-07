@@ -73,7 +73,7 @@ export class Post extends Component {
                               })
                             }
                           </h1>
-                          <h2 className="subheading" style={{ marginBottom: 10 }}>{this.props.subtitle}</h2>
+                          <h2 className="subheading" style={{ marginBottom: 10 }}>{this.state.subtitle}</h2>
                           <div className="post-content">
                             <div className="post-meta d-flex">
                               <div className="post-author-date-area d-flex">
