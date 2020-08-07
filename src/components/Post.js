@@ -5,6 +5,7 @@ import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-
 const loading = 'images/loading.gif';
 
 export class Post extends Component {
+  state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '' };
   socialWindow = (url) => {
       const left = (window.screen.width - 570) / 2;
       const top = (window.screen.height - 570) / 2;
@@ -14,7 +15,7 @@ export class Post extends Component {
   setShareLinks = (str) => {
       const pageUrl = encodeURIComponent(document.URL);
       let url = '';
-      let tweet = this.props.location.state.title.split("<emoji>")[0].split(" ");
+      let tweet = this.state.title.split("<emoji>")[0].split(" ");
       tweet = tweet.filter(val => val !== "" && val !== "\n");
       tweet = tweet.join(" ");
       switch (str) {
@@ -34,7 +35,6 @@ export class Post extends Component {
           break;
       }
   }
-  state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '' };
   componentDidMount() {
     window.scrollTo(0, 0);
     const id = this.props.match.params.id;
