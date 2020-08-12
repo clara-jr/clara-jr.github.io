@@ -14,7 +14,7 @@ export class Project extends Component {
                 <span dangerouslySetInnerHTML={{__html: this.props.title}}></span>
                 <br />
                 👉🏻 <a target="blank" className="page-link" style={{ width: 160, borderRadius: 300, color: "#000", border: "2px solid #00000030", fontSize: 13, padding: "5px 5px" }}
-                  href="https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7">
+                  href={this.props.url}>
                   ¡Quiero saber más!
                 </a>
               </h2>

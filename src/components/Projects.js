@@ -11,7 +11,7 @@ export class Projects extends Component {
       <div className="container">
         <div className="col-12 mx-auto" style={{ marginRight: "10%", marginLeft: "10%" }}>
           { json.map((v, i) =>
-              <Project key={i} title={v.title} description={v.description} image={v.image} date={v.date}/>
+              <Project key={i} title={v.title} description={v.description} image={v.image} date={v.date} url={v.url}/>
             )
           }
         </div>
