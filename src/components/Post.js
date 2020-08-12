@@ -108,14 +108,14 @@ export class Post extends Component {
                     <div className="row">
                       <div id="section-post" className="col-12 mx-auto" style={{ marginRight: "10%", marginLeft: "10%" }}>
                         { this.state.cuerpo.map((v, i) => {
-                            if (v.startsWith('<h2>')) { return <h2 className="section-heading">{ this.state.cuerpo[i].slice(4,-5) }</h2> }
+                            if (v.startsWith('<h2>')) { return <h2 className="section-heading">{ v.slice(4,-5) }</h2> }
                             else if (v.startsWith('<code>')) {
                               if (v.includes('<a class="line">')) {
                                 return (<div className="highlighter-rouge">
                                   <div className="highlight">
                                     <pre className="col-xs-12">
                                       {"                                            "}
-                                      <code className="code-colors" dangerouslySetInnerHTML={{__html: this.state.cuerpo[i].slice(6,-7)}}></code>
+                                      <code className="code-colors" dangerouslySetInnerHTML={{__html: v.slice(6,-7)}}></code>
                                       {"\n"}
                                       {"                                          "}
                                     </pre>
@@ -126,13 +126,16 @@ export class Post extends Component {
                                     <div className="highlight">
                                       <pre className="col-xs-12">
                                         {"                                            "}
-                                        <code dangerouslySetInnerHTML={{__html: this.state.cuerpo[i].slice(6,-7)}}></code>
+                                        <code dangerouslySetInnerHTML={{__html: v.slice(6,-7)}}></code>
                                         {"\n"}
                                         {"                                          "}
                                       </pre>
                                     </div>
                                   </div>);
                               }
+                            }
+                            else if (v.startsWith('<tweet>')) {
+                              return (<div dangerouslySetInnerHTML={{__html: v.slice(7,-8)}}></div>);
                             }
                             else if (v.startsWith('<img>')) {
                               return (<div style={{ textAlign: "center", marginTop: 15 }}>
