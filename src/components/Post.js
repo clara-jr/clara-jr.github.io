@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Tweet } from 'react-twitter-widgets';
 const loading = '../images/loading.gif';
 
 export class Post extends Component {
@@ -135,7 +136,7 @@ export class Post extends Component {
                               }
                             }
                             else if (v.startsWith('<tweet>')) {
-                              return (<div dangerouslySetInnerHTML={{__html: v.slice(7,-8)}}></div>);
+                              return (<Tweet tweetId={v.split("/status/")[1].split("?")[0]}/>);
                             }
                             else if (v.startsWith('<img>')) {
                               return (<div style={{ textAlign: "center", marginTop: 15 }}>
