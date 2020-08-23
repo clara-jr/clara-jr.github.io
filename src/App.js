@@ -19,7 +19,7 @@ export class App extends Component {
             <Route path="/blog/:id" component={Post} />
   					<Route path="/projects" component={Projects} />
   					<Route path="/about" component={About} />
-            <Route path={["/blog", "/index", "/", "/:init"]} exact component={(props) => <Blog init={props.match.params.init} />} />
+            <Route path={["/blog", "/index", "/",]} exact component={Blog} />} />
   					<Route component={Error} />
   				</Switch>
   			</div>

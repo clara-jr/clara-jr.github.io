@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Tweet } from 'react-twitter-widgets';
 const loading = '../images/loading.gif';
+const endpoint = "https://4zsmzv3ooi.execute-api.eu-west-1.amazonaws.com/dev";
+const secretKey = "3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl5L35PYtkaN3mvdmCqxE370cv2hOxmJr1UJK8aN8";
 
 export class Post extends Component {
   state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '' };
@@ -40,12 +42,12 @@ export class Post extends Component {
     window.scrollTo(0, 0);
     const id = this.props.match.params.id;
     if (!this.props.location.state) {
-      let url = "https://blog-cjr.herokuapp.com/api/blog/"+id;
-      fetch(url)
+      let url = endpoint+"/blog/"+id;
+      fetch(url, { headers: { 'authorisation': secretKey } })
         .then(result => result.json())
         .then(resultJSON => resultJSON.post)
-        .then(post => this.setState({title: post.title, subtitle: post.subtitle, date: post.date, cuerpo: post.cuerpo, quote: post.quote}))
-        .catch(error => this.setState({error: 'Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog'}));
+        .then(post => this.setState({ title: post.title, subtitle: post.subtitle, date: post.date, cuerpo: post.cuerpo, quote: post.quote }))
+        .catch(error => this.setState({ error: 'Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog' }));
     } else {
       this.setState(this.props.location.state);
     }
@@ -53,7 +55,7 @@ export class Post extends Component {
   render() {
     if (!this.props.location.state && this.state.title == '' && this.state.error == '') {
       return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
-    } else if (this.state.error != '') {
+    } else if (this.state.error && this.state.error != '') {
       return <Error error={this.state.error}/>
     } else {
       return (
