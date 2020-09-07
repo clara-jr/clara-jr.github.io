@@ -6,7 +6,7 @@ import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export class NavBar extends Component {
   rss = (str, social) => {
-    let faIcon = social == 'twitter' ? faTwitter : faGithub;
+    let faIcon = social === 'twitter' ? faTwitter : faGithub;
     return (
       <a href={"https://"+social+".com/"+str} className="social" target="blank"><FontAwesomeIcon icon={faIcon}/></a>
     );
