@@ -6,7 +6,7 @@ export class Project extends Component {
       <React.Fragment>
         <div className="row blog-items" id="about">
           <div className="project_photo col-xs-12 col-sm-4 col-md-3 col-lg-2">
-            <img style={{ borderRadius: 4 }} src={process.env.PUBLIC_URL + this.props.image} />
+            <img alt="" style={{ borderRadius: 4 }} src={process.env.PUBLIC_URL + this.props.image} />
           </div>
           <div className="col-xs-12 col-sm-8 col-md-9 col-lg-10">
             <div className="post-preview">

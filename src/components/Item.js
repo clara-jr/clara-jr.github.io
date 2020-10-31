@@ -14,12 +14,13 @@ export class Item extends Component {
                 subtitle: this.props.subtitle,
                 date: this.props.date,
                 cuerpo: this.props.cuerpo,
-                quote: this.props.quote
+                quote: this.props.quote,
+                image: this.props.image
               }
             }}>
               { this.props.title.split("<emoji>")[0] }
-              { this.props.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').map((v, i) => {
-                  if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} />
+              { this.props.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').filter((v, i) => i >= 1 && v !== "").map((v, i) => {
+                  return <i key={i} className={"em em-"+v} />
                 })
               }
             </Link>

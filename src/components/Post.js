@@ -3,12 +3,13 @@ import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Tweet } from 'react-twitter-widgets';
+import MetaTags from 'react-meta-tags';
 const loading = '../images/loading.gif';
 const endpoint = "https://4zsmzv3ooi.execute-api.eu-west-1.amazonaws.com/dev";
 const secretKey = "3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl5L35PYtkaN3mvdmCqxE370cv2hOxmJr1UJK8aN8";
 
 export class Post extends Component {
-  state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '' };
+  state = { title: '', subtitle: '', date: '', cuerpo: [], quote: '', error: '', image: '' };
   socialWindow = (url) => {
       const left = (window.screen.width - 570) / 2;
       const top = (window.screen.height - 570) / 2;
@@ -46,20 +47,28 @@ export class Post extends Component {
       fetch(url, { headers: { 'authorisation': secretKey } })
         .then(result => result.json())
         .then(resultJSON => resultJSON.post)
-        .then(post => this.setState({ title: post.title, subtitle: post.subtitle, date: post.date, cuerpo: post.cuerpo, quote: post.quote }))
+        .then(post => {
+          post.image = post.image === "" ? "https://pbs.twimg.com/profile_images/796757169915969536/8YVxmvQf_400x400.jpg" : "https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/" + post.image;
+          this.setState({ title: post.title, subtitle: post.subtitle, date: post.date, cuerpo: post.cuerpo, quote: post.quote, image: post.image })
+        })
         .catch(error => this.setState({ error: 'Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog' }));
     } else {
       this.setState(this.props.location.state);
     }
   }
   render() {
-    if (!this.props.location.state && this.state.title == '' && this.state.error == '') {
+    if (!this.props.location.state && this.state.title === '' && this.state.error === '') {
       return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
-    } else if (this.state.error && this.state.error != '') {
+    } else if (this.state.error && this.state.error !== '') {
       return <Error error={this.state.error}/>
     } else {
       return (
         <div className="container" style={{ padding: 0 }}>
+          <MetaTags>
+            <meta name="twitter:title" content={`${this.state.title.split("<emoji>")[0]}`} />
+            <meta name="twitter:description" content={`${this.state.subtitle}`} />
+            <meta name="twitter:image" content={`${this.state.image}`} />
+          </MetaTags>
           <div className="row justify-content-center" id="post-father">
             <div className="col-xs-12" id="post">
               <div className="single-post">
@@ -71,8 +80,8 @@ export class Post extends Component {
                         <div className="post-heading" style={{ marginBlockEnd: "1em" }}>
                           <h1 style={{ fontWeight: "bold", color: "#000", marginBottom: 20 }} >
                             { this.state.title.split("<emoji>")[0] }
-                            { this.state.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').map((v, i) => {
-                                if (i >= 1 && v != "") return <i key={i} className={"em em-"+v} />
+                            { this.state.title.split("<emoji>").join('@%$').split('</emoji>').join('@%$').split('@%$').filter((v, i) => i >= 1 && v !== "").map((v, i) => {
+                                return <i key={i} className={"em em-"+v} />
                               })
                             }
                           </h1>
@@ -143,6 +152,7 @@ export class Post extends Component {
                             else if (v.startsWith('<img>')) {
                               return (<div style={{ textAlign: "center", marginTop: 15 }}>
                                 <img
+                                  alt=""
                                   src={"https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/"+v.slice(5,-6)}
                                   style={{ textAlign: "center", maxWidth: "100%" }}
                                 />
@@ -150,6 +160,7 @@ export class Post extends Component {
                             }
                             else if (v.startsWith('<iframe>')) {
                               return (<iframe
+                                title="repl.it"
                                 height="400px"
                                 width="100%"
                                 src={"https://repl.it/@ClaraJimenez/"+v.slice(8,-9)+"?lite=true"}
@@ -165,7 +176,7 @@ export class Post extends Component {
                                 let component = [];
                                 for (var p in postsp) {
                                     if (postsp[p].startsWith('<a')) {
-                                      component.push(<sup><a target="_blank" href={postsp[p].split("</a>")[0].split(">")[0].slice(8)}>{postsp[p].split("</a>")[0].split(">")[1]}</a></sup>);
+                                      component.push(<sup><a target="_blank" rel="noopener noreferrer" href={postsp[p].split("</a>")[0].split(">")[0].slice(8)}>{postsp[p].split("</a>")[0].split(">")[1]}</a></sup>);
                                     } else {
                                       component.push(postsp[p]);
                                     }

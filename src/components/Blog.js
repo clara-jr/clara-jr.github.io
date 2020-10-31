@@ -31,13 +31,12 @@ export class Blog extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     let url = this.state.next ? endpoint+"/"+this.state.next : endpoint;
-    let body = this.state.lastEvaluatedKey ? { lastEvaluatedKey: this.state.lastEvaluatedKey } : {};
     if (!this.state || !this.state.posts || this.state.posts.length === 0) {
       fetch(url, { headers: { 'Content-Type': 'application/json', 'authorisation': secretKey, 'Body': JSON.stringify(this.state.lastEvaluatedKey) || '{}' } })
         .then(result => result.json())
         .then(resultJSON => {
           let keys = this.state.keys;
-          if (resultJSON.lastEvaluatedKey && resultJSON.lastEvaluatedKey != {} && resultJSON.lastEvaluatedKey != '' && !keys.some(key => key.id === resultJSON.lastEvaluatedKey.id)) keys.push(resultJSON.lastEvaluatedKey);
+          if (resultJSON.lastEvaluatedKey && resultJSON.lastEvaluatedKey !== {} && resultJSON.lastEvaluatedKey !== '' && !keys.some(key => key.id === resultJSON.lastEvaluatedKey.id)) keys.push(resultJSON.lastEvaluatedKey);
           this.setState({ posts: resultJSON.posts, init: resultJSON.init, next: resultJSON.init, pages: resultJSON.pages, lastEvaluatedKey: {}, keys: keys })
         })
         .catch(error => this.setState({ error: 'Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!' }));
@@ -45,12 +44,11 @@ export class Blog extends Component {
   }
   componentWillReceiveProps(nextProps) {
     let url = this.state.next ? endpoint+"/"+this.state.next : endpoint;
-    let body = this.state.lastEvaluatedKey ? { lastEvaluatedKey: this.state.lastEvaluatedKey } : {};
     fetch(url, { headers: { 'Content-Type': 'application/json', 'authorisation': secretKey, 'Body': JSON.stringify(this.state.lastEvaluatedKey) || '{}' } })
       .then(result => result.json())
       .then(resultJSON => {
         let keys = this.state.keys;
-        if (resultJSON.lastEvaluatedKey && resultJSON.lastEvaluatedKey != {} && resultJSON.lastEvaluatedKey != '' && !keys.some(key => key.id === resultJSON.lastEvaluatedKey.id)) keys.push(resultJSON.lastEvaluatedKey);
+        if (resultJSON.lastEvaluatedKey && resultJSON.lastEvaluatedKey !== {} && resultJSON.lastEvaluatedKey !== '' && !keys.some(key => key.id === resultJSON.lastEvaluatedKey.id)) keys.push(resultJSON.lastEvaluatedKey);
         this.setState({ posts: resultJSON.posts, init: resultJSON.init, next: resultJSON.init, pages: resultJSON.pages, lastEvaluatedKey: {}, keys: keys });
         window.scrollTo({
           top: 0,
@@ -62,7 +60,7 @@ export class Blog extends Component {
   render() {
     if (this.state.posts && !this.state.posts.length) {
       return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
-    } else if (this.state.error && this.state.error != '') {
+    } else if (this.state.error && this.state.error !== '') {
       return <Error error={this.state.error}/>
     } else if (this.state.pages <= 1) {
       return (
@@ -71,7 +69,7 @@ export class Blog extends Component {
             <div className="col-12 mx-auto" style={{ marginRight: "10%", marginLeft: "10%" }}>
               <div>
                 { this.state.posts.map((v, i) =>
-                    <Item key={i} id={v.id} title={v.title} subtitle={v.subtitle} date={v.date} cuerpo={v.cuerpo} quote={v.quote} />
+                    <Item key={i} id={v.id} title={v.title} subtitle={v.subtitle} date={v.date} cuerpo={v.cuerpo} quote={v.quote} image={v.image || ""} />
                   )
                 }
               </div>
@@ -80,7 +78,6 @@ export class Blog extends Component {
         </div>
       );
     } else {
-      const init = ( this.state.init <= this.state.pages && this.state.init >= 1 ) ? this.state.init : ( this.state.init > this.state.pages ) ? this.state.pages : 1;
       return (
         <React.Fragment>
           <div className="container">
@@ -88,7 +85,7 @@ export class Blog extends Component {
               <div className="col-12 mx-auto" style={{ marginRight: "10%", marginLeft: "10%" }}>
                 <div>
                   { this.state.posts.map((v, i) =>
-                      <Item key={i} id={v.id} title={v.title} subtitle={v.subtitle} date={v.date} cuerpo={v.cuerpo} quote={v.quote} />
+                      <Item key={i} id={v.id} title={v.title} subtitle={v.subtitle} date={v.date} cuerpo={v.cuerpo} quote={v.quote} image={v.image || ""} />
                     )
                   }
                 </div>

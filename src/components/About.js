@@ -11,7 +11,7 @@ export class About extends Component {
       <div className="container">
         <div className="row" id="about" style={{ marginRight: 5, marginLeft: 5 }}>
           <div className="about_photo col-xs-12 col-sm-4 col-md-3 col-lg-2">
-            <img style={{ borderRadius: 4 }} src={me} />
+            <img alt="clear_is_me" style={{ borderRadius: 4 }} src={me} />
           </div>
           <pre className="about_inner col-xs-12 col-sm-8 col-md-9 col-lg-10">
             {"      "}
@@ -56,7 +56,7 @@ export class About extends Component {
               <a className="line linemoji">9</a>wave.
               <span className="code-function">send</span>(
               <span className="code-string">
-                '¡Hola! <span style={{ fontSize: 18 }}>👋🏻</span>'
+                '¡Hola! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👋🏻</span>'
               </span>
               );{"\n"}
               {"        "}
@@ -67,8 +67,8 @@ export class About extends Component {
               <span className="code-function">send</span>(
               <span className="code-string">
                 'Soy Clara. En este blog escribo generalmente sobre ciencia{" "}
-                <span style={{ fontSize: 18 }}>👩🏻‍🔬</span> y tecnología{" "}
-                <span style={{ fontSize: 18 }}>👩🏻‍💻</span>.'
+                <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍🔬</span> y tecnología{" "}
+                <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍💻</span>.'
               </span>
               );{"\n"}
               {"        "}
@@ -97,7 +97,7 @@ export class About extends Component {
               <a className="line linemoji">16</a>bye.
               <span className="code-function">send</span>(
               <span className="code-string">
-                '¡Que os divirtáis! <span style={{ fontSize: 18 }}>😋</span>'
+                '¡Que os divirtáis! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>😋</span>'
               </span>
               );{"\n"}
               {"        "}
@@ -106,7 +106,7 @@ export class About extends Component {
               {"        "}
               <a className="line linemoji">18</a>
               <a id="cv" download href={cv}>
-                cv.<span className="code-function">dowload</span>(⬇️);
+                cv.<span role="img" aria-label="emoji" className="code-function">dowload</span>(⬇️);
               </a>
             </code>
             {"\n"}
