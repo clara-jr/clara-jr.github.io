@@ -3,7 +3,6 @@ import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Tweet } from 'react-twitter-widgets';
-import MetaTags from 'react-meta-tags';
 const loading = '../images/loading.gif';
 const endpoint = "https://4zsmzv3ooi.execute-api.eu-west-1.amazonaws.com/dev";
 const secretKey = "3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl5L35PYtkaN3mvdmCqxE370cv2hOxmJr1UJK8aN8";
@@ -47,10 +46,9 @@ export class Post extends Component {
       fetch(url, { headers: { 'authorisation': secretKey } })
         .then(result => result.json())
         .then(resultJSON => resultJSON.post)
-        .then(post => {
-          post.image = post.image === "" ? "https://pbs.twimg.com/profile_images/796757169915969536/8YVxmvQf_400x400.jpg" : "https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/" + post.image;
+        .then(post => 
           this.setState({ title: post.title, subtitle: post.subtitle, date: post.date, cuerpo: post.cuerpo, quote: post.quote, image: post.image })
-        })
+        )
         .catch(error => this.setState({ error: 'Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog' }));
     } else {
       this.setState(this.props.location.state);
@@ -62,13 +60,11 @@ export class Post extends Component {
     } else if (this.state.error && this.state.error !== '') {
       return <Error error={this.state.error}/>
     } else {
+      document.querySelector('meta[name="twitter:title"]').setAttribute("content", this.state.title.split("<emoji>")[0]);
+      document.querySelector('meta[name="twitter:description"]').setAttribute("content", this.state.subtitle);
+      if (this.state.image !== "") document.querySelector('meta[name="twitter:image"]').setAttribute("content", "https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/" + this.state.image);
       return (
         <div className="container" style={{ padding: 0 }}>
-          <MetaTags>
-            <meta name="twitter:title" content={`${this.state.title.split("<emoji>")[0]}`} />
-            <meta name="twitter:description" content={`${this.state.subtitle}`} />
-            <meta name="twitter:image" content={`${this.state.image}`} />
-          </MetaTags>
           <div className="row justify-content-center" id="post-father">
             <div className="col-xs-12" id="post">
               <div className="single-post">
