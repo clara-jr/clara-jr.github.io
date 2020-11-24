@@ -1,5 +1,12 @@
 [
   {
+    "title": "Alexa Skill: Papá Noel",
+    "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es una Skill muy navideña para hablar y cantar con Papá Noel",
+    "image": "images/noel.jpg",
+    "date": "Noviembre 2020",
+    "url": "https://www.amazon.es/clara-jr-Papá-Noel/dp/B08NF2GLWB"
+  },
+  {
     "title": "Alexa Skill: The Werewolves Game",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB, una API REST y una API WebSocket utilizando Amazon API Gateway y Serverless Framework; es un audiojuego interactivo narrado por Alexa en el que los jugadores deben entrar en una sala en la web <a class=\"link\" target=\"blank\" href=\"http://hombreslobo.es\">hombreslobo.es</a> que simbolizará un pueblo en el que los jugadores son sus habitantes, recibiendo cada uno un rol en sus pantallas: hombre lobo o campesino; todos duermen cada noche y los lobos se despiertan para matar a un campesino seleccionando el nombre del jugador en sus pantallas, cuando el pueblo despierta, deben averiguar quiénes son los lobos",
     "image": "images/wolf.png",
