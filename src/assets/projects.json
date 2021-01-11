@@ -1,5 +1,12 @@
 [
   {
+    "title": "Alexa Skill: ¿Quién es Quién?",
+    "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es un audiojuego basado en el juego de mesa ¿Quién es Quién? perfecto para dispositivos con pantalla y jugable en dispositivos sin pantalla gracias a la web <a class=\"link\" target=\"blank\" href=\"http://quienesquienjuego.es\">quienesquienjuego.es</a>, desde la cual puedes descargar e imprimir un tablero ¡y hasta unas tarjetitas con los personajes!",
+    "image": "images/quien.png",
+    "date": "Enero 2021",
+    "url": "https://www.amazon.es/clara-jr-Quién-es/dp/B08SJJG7TC"
+  },
+  {
     "title": "Alexa Skill: Papá Noel",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es una Skill muy navideña para hablar y cantar con Papá Noel",
     "image": "images/noel.jpg",
