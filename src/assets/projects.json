@@ -1,5 +1,12 @@
 [
   {
+    "title": "Finalist + Best Games & Trivia Skill - Alexa Skills Challenge: Beyond Voice",
+    "description": "Gané el premio en la categoría Best Games & Trivia Skill y fui finalista del <a class=\"link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/blogs/alexa/alexa-skills-kit/2021/01/announcing-the-alexa-skills-challenge--beyond-voice-winners-\">Alexa Skills Challenge: Beyond Voice</a> organizado por Amazon Alexa; participé con mi Alexa Skill basada en el popular juego <a class=\"link\" target=\"blank\" href=\"https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7\">Los Hombres Lobo</a>, también conocido como Pueblo Duerme",
+    "image": "images/devpost.png",
+    "date": "Enero 2021",
+    "url": "https://devpost.com/software/the-werewolves-game"
+  },
+  {
     "title": "Alexa Skill: ¿Quién es Quién?",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es un audiojuego basado en el juego de mesa ¿Quién es Quién? perfecto para dispositivos con pantalla y jugable en dispositivos sin pantalla gracias a la web <a class=\"link\" target=\"blank\" href=\"http://quienesquienjuego.es\">quienesquienjuego.es</a>, desde la cual puedes descargar e imprimir un tablero ¡y hasta unas tarjetitas con los personajes!",
     "image": "images/quien.png",
