@@ -12,20 +12,20 @@ const setShareLinks = (rrss, title) => {
   tweet = tweet.filter(val => val !== '' && val !== '\n')
   tweet = tweet.join(' ')
   switch (rrss) {
-  case 'whatsapp':
-    url = 'https://api.whatsapp.com/send?text=' + tweet + '%20' + pageUrl
-    _socialWindow(url)
-    break
-  case 'facebook':
-    url = 'https://www.facebook.com/sharer.php?u=' + pageUrl + '&quote=' + tweet
-    _socialWindow(url)
-    break
-  case 'twitter':
-    url = 'https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + tweet
-    _socialWindow(url)
-    break
-  default:
-    break
+    case 'whatsapp':
+      url = 'https://api.whatsapp.com/send?text=' + tweet + '%20' + pageUrl
+      _socialWindow(url)
+      break
+    case 'facebook':
+      url = 'https://www.facebook.com/sharer.php?u=' + pageUrl + '&quote=' + tweet
+      _socialWindow(url)
+      break
+    case 'twitter':
+      url = 'https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + tweet
+      _socialWindow(url)
+      break
+    default:
+      break
   }
 }
 

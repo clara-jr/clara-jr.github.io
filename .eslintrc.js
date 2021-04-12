@@ -1,48 +1,30 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true,
-    'node': true
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
   },
-  'extends': [
-    'eslint:recommended',
-    'plugin:react/recommended'
+  extends: [
+    'plugin:react/recommended',
+    'standard'
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
-  },
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
     },
-    'ecmaVersion': 2018,
-    'sourceType': 'module'
+    ecmaVersion: 12,
+    sourceType: 'module'
   },
-  'plugins': [
+  plugins: [
     'react'
   ],
-  'rules': {
+  rules: {
     'react/no-unescaped-entities': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    'react/jsx-no-comment-textnodes': 'off',
+    'node/handle-callback-err': 'warn',
     'no-undef': 'warn',
-    'no-unused-vars': 'warn',
-    'indent': [
-      'error',
-      2
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'never'
-    ]
+    'no-unused-vars': 'warn'
   }
 }
