@@ -25,7 +25,6 @@ const Blog = () => {
         behavior: 'smooth'
       })
     }).catch(error => setError('Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!'))
-    // eslint-disable-next-line
   }, [lastEvaluatedKey, next])
   const buttons = () => {
     const component = []
@@ -51,21 +50,6 @@ const Blog = () => {
     return <img src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
   } else if (error) {
     return <Error error={error}/>
-  } else if (pages <= 1) {
-    return (
-      <div className="container">
-        <div className="row blog-items">
-          <div className="col-12 mx-auto" style={{ marginRight: '10%', marginLeft: '10%' }}>
-            <div>
-              { posts.map((v, i) =>
-                <Item key={i} id={v.id} title={v.title} subtitle={v.subtitle} date={v.date} cuerpo={v.cuerpo} quote={v.quote} image={v.image || ''} />
-              )
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    )
   } else {
     return (
       <React.Fragment>
@@ -81,16 +65,20 @@ const Blog = () => {
             </div>
           </div>
         </div>
-        <div className="clearfix visible-block" />
-        <div id="buttons" className="col-12">
-          <div className="pagination-area d-sm-flex mt-15" style={{ textAlign: 'center' }} >
-            <nav aria-label="#">
-              <ul className="pagination">
-                { buttons() }
-              </ul>
-            </nav>
+        { (pages > 1) &&
+          (<React.Fragment>
+          <div className="clearfix visible-block" />
+          <div id="buttons" className="col-12">
+            <div className="pagination-area d-sm-flex mt-15" style={{ textAlign: 'center' }} >
+              <nav aria-label="#">
+                <ul className="pagination">
+                  { buttons() }
+                </ul>
+              </nav>
+            </div>
           </div>
-        </div>
+          </React.Fragment>)
+        }
       </React.Fragment>
     )
   }
