@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.91e1a43f.chunk.css",
-    "main.js": "/static/js/main.7c591c8f.chunk.js",
-    "main.js.map": "/static/js/main.7c591c8f.chunk.js.map",
+    "main.css": "/static/css/main.305e2075.chunk.css",
+    "main.js": "/static/js/main.10cc4804.chunk.js",
+    "main.js.map": "/static/js/main.10cc4804.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.56b3efbf.js",
     "runtime-main.js.map": "/static/js/runtime-main.56b3efbf.js.map",
-    "static/css/2.681ef4a3.chunk.css": "/static/css/2.681ef4a3.chunk.css",
-    "static/js/2.400d2e25.chunk.js": "/static/js/2.400d2e25.chunk.js",
-    "static/js/2.400d2e25.chunk.js.map": "/static/js/2.400d2e25.chunk.js.map",
+    "static/css/2.815a2401.chunk.css": "/static/css/2.815a2401.chunk.css",
+    "static/js/2.6a11f793.chunk.js": "/static/js/2.6a11f793.chunk.js",
+    "static/js/2.6a11f793.chunk.js.map": "/static/js/2.6a11f793.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.51d747b25f421f7c771ccb6131f634b6.js": "/precache-manifest.51d747b25f421f7c771ccb6131f634b6.js",
+    "precache-manifest.96ab20b9df05c0fd8c95b4f54975a864.js": "/precache-manifest.96ab20b9df05c0fd8c95b4f54975a864.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.681ef4a3.chunk.css.map": "/static/css/2.681ef4a3.chunk.css.map",
-    "static/css/main.91e1a43f.chunk.css.map": "/static/css/main.91e1a43f.chunk.css.map",
-    "static/js/2.400d2e25.chunk.js.LICENSE.txt": "/static/js/2.400d2e25.chunk.js.LICENSE.txt",
+    "static/css/2.815a2401.chunk.css.map": "/static/css/2.815a2401.chunk.css.map",
+    "static/css/main.305e2075.chunk.css.map": "/static/css/main.305e2075.chunk.css.map",
+    "static/js/2.6a11f793.chunk.js.LICENSE.txt": "/static/js/2.6a11f793.chunk.js.LICENSE.txt",
     "static/media/CV-es.pdf": "/static/media/CV-es.5d76af36.pdf",
     "static/media/main.css": "/static/media/IBMPlexSans-TextItalic.3ad6ff9a.otf",
     "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff",
@@ -21,9 +21,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.56b3efbf.js",
-    "static/css/2.681ef4a3.chunk.css",
-    "static/js/2.400d2e25.chunk.js",
-    "static/css/main.91e1a43f.chunk.css",
-    "static/js/main.7c591c8f.chunk.js"
+    "static/css/2.815a2401.chunk.css",
+    "static/js/2.6a11f793.chunk.js",
+    "static/css/main.305e2075.chunk.css",
+    "static/js/main.10cc4804.chunk.js"
   ]
 }
