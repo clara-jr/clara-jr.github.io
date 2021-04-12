@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { getPosts } from '../services/posts';
 import Error from './Error';
 import Item from './Item';
 const loading = 'images/loading.gif';
-const endpoint = "https://4zsmzv3ooi.execute-api.eu-west-1.amazonaws.com/dev";
-const secretKey = "3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl5L35PYtkaN3mvdmCqxE370cv2hOxmJr1UJK8aN8";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -14,29 +13,20 @@ const Blog = () => {
   const [keys, setKeys] = useState([{}]);
   const [lastEvaluatedKey, setLastEvaluatedKey] = useState({});
   const [error, setError] = useState('');
-  let prevNext = useRef(next);
   useEffect(() => {
-    let url = next ? endpoint+"/"+next : endpoint;
-    if (!posts || posts.length === 0  || prevNext.current !== next) {
-      fetch(url, { headers: { 'Content-Type': 'application/json', 'authorisation': secretKey, 'Body': JSON.stringify(lastEvaluatedKey) || '{}' } })
-        .then(result => result.json())
-        .then(resultJSON => {
-          if (resultJSON.lastEvaluatedKey && resultJSON.lastEvaluatedKey !== {} && resultJSON.lastEvaluatedKey !== '' && !keys.some(key => key.id === resultJSON.lastEvaluatedKey.id)) keys.push(resultJSON.lastEvaluatedKey);
-          setPosts(resultJSON.posts);
-          setInit(resultJSON.init);
-          setNext(resultJSON.init);
-          setPages(resultJSON.pages);
-          setKeys(keys);
-          setLastEvaluatedKey({});
-          prevNext.current = next
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        })
-        .catch(error => setError('Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!'));
-    }
-  }, [next, init, keys, posts, lastEvaluatedKey])
+    getPosts(lastEvaluatedKey, next).then(({posts, init, pages, lastEvaluatedKey}) => {
+      setPosts(posts);
+      setInit(init);
+      setPages(pages);
+      if (lastEvaluatedKey && !keys.some(key => key.id === lastEvaluatedKey.id)) keys.push(lastEvaluatedKey);
+      setKeys(keys);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }).catch(error => setError('Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!'))
+  // eslint-disable-next-line
+  }, [lastEvaluatedKey, next])
   const buttons = () => {
     let component = [];
     const newer = init-1;
@@ -59,7 +49,7 @@ const Blog = () => {
   }
   if (posts && !posts.length) {
     return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
-  } else if (error !== '') {
+  } else if (error) {
     return <Error error={error}/>
   } else if (pages <= 1) {
     return (

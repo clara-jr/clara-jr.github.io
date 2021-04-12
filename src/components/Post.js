@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { getPost, getImage } from '../services/posts';
+import { setShareLinks } from '../services/rrss';
 import Error from './Error';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Tweet } from 'react-twitter-widgets';
 import MetaTags from 'react-meta-tags';
 const loading = '../images/loading.gif';
-const endpoint = "https://4zsmzv3ooi.execute-api.eu-west-1.amazonaws.com/dev";
-const secretKey = "3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl5L35PYtkaN3mvdmCqxE370cv2hOxmJr1UJK8aN8";
 
 const Post = (props) => {
   const [title, setTitle] = useState('');
@@ -16,68 +16,29 @@ const Post = (props) => {
   const [quote, setQuote] = useState('');
   const [image, setImage] = useState('');
   const [error, setError] = useState('');
-  const socialWindow = (url) => {
-      const left = (window.screen.width - 570) / 2;
-      const top = (window.screen.height - 570) / 2;
-      const params = "menubar=no,toolbar=no,status=no,width=570,height=570,top=" + top + ",left=" + left;
-      window.open(url, "NewWindow", params);
-  }
-  const setShareLinks = (str) => {
-      const pageUrl = encodeURIComponent(document.URL);
-      let url = '';
-      let tweet = title.split("<emoji>")[0].split(" ");
-      tweet = tweet.filter(val => val !== "" && val !== "\n");
-      tweet = tweet.join(" ");
-      switch (str) {
-        case 'whatsapp':
-          url = "https://api.whatsapp.com/send?text=" + tweet + "%20" + pageUrl;
-          socialWindow(url);
-          break;
-        case 'facebook':
-          url = "https://www.facebook.com/sharer.php?u=" + pageUrl + "&quote=" + tweet;
-          socialWindow(url);
-          break;
-        case 'twitter':
-          url = "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + tweet;
-          socialWindow(url);
-          break;
-        default:
-          break;
-      }
+  const setPost = ({ title, subtitle, date, cuerpo, quote, image }) => {
+    setTitle(title);
+    setSubtitle(subtitle);
+    setDate(date);
+    setCuerpo(cuerpo);
+    setQuote(quote);
+    setImage(getImage(image));
   }
   useEffect(() => {
     window.scrollTo(0, 0);
     const id = props.match.params.id;
     if (!props.location.state) {
-      let url = endpoint+"/blog/"+id;
-      fetch(url, { headers: { 'authorisation': secretKey } })
-        .then(result => result.json())
-        .then(resultJSON => resultJSON.post)
-        .then(post => {
-          setTitle(post.title);
-          setSubtitle(post.subtitle);
-          setDate(post.date);
-          setCuerpo(post.cuerpo);
-          setQuote(post.quote);
-          if (post.image && post.image !== '') setImage("https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/" + post.image);
-          else setImage("https://pbs.twimg.com/profile_images/796757169915969536/8YVxmvQf_400x400.jpg");
-        })
-        .catch(error => setError('Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog'));
+      getPost(id).then((post) => {
+        setPost(post);
+      }).catch(error => setError('Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog'))
     } else {
-      setTitle(props.location.state.title || '');
-      setSubtitle(props.location.state.subtitle || '');
-      setDate(props.location.state.date || '');
-      setCuerpo(props.location.state.cuerpo || []);
-      setQuote(props.location.state.quote || '');
-      setImage(props.location.state.image || '');
+      setPost(props.location.state);
       setError(props.location.state.error || '');
-      if (props.location.state.image && props.location.state.image !== '') setImage("https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/" + props.location.state.image);
-      else setImage("https://pbs.twimg.com/profile_images/796757169915969536/8YVxmvQf_400x400.jpg");
     }
   }, [props.match.params.id, props.location.state])
   if (!props.location.state && title === '' && error === '') {
     return <img src={loading} alt="loading..." style={{ display: "block", marginTop: 100, marginLeft: "auto", marginRight: "auto", width: 200 }} />
-  } else if (error !== '') {
+  } else if (error) {
     return <Error error={error}/>
   } else {
     return (
@@ -118,13 +79,13 @@ const Post = (props) => {
                             </div>
                             <div className="post-comment-share-area d-flex">
                               <div className="post-share">
-                                <a onClick={() => setShareLinks('whatsapp')} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share whatsapp">
+                                <a onClick={() => setShareLinks('whatsapp', title)} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share whatsapp">
                                   <FontAwesomeIcon icon={faWhatsapp}/>
                                 </a>
-                                <a onClick={() => setShareLinks('facebook')} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share facebook">
+                                <a onClick={() => setShareLinks('facebook', title)} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share facebook">
                                   <FontAwesomeIcon icon={faFacebook}/>
                                 </a>
-                                <a onClick={() => setShareLinks('twitter')} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share twitter">
+                                <a onClick={() => setShareLinks('twitter', title)} style={{ fontSize: 20, paddingRight: 10, color: "#000" }} className="social-share twitter">
                                   <FontAwesomeIcon icon={faTwitter}/>
                                 </a>
                               </div>
