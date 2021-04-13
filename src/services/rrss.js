@@ -9,7 +9,7 @@ const setShareLinks = (rrss, title) => {
   const pageUrl = encodeURIComponent(document.URL)
   let url = ''
   let tweet = title.split('<emoji>')[0].split(' ')
-  tweet = tweet.filter(val => val !== '' && val !== '\n')
+  tweet = tweet.filter((val) => val !== '' && val !== '\n')
   tweet = tweet.join(' ')
   switch (rrss) {
     case 'whatsapp':
@@ -29,6 +29,4 @@ const setShareLinks = (rrss, title) => {
   }
 }
 
-export {
-  setShareLinks
-}
+export { setShareLinks }

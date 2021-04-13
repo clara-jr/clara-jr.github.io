@@ -12,18 +12,17 @@ const Project = (props) => {
             <h2 className="post-title">
               <span dangerouslySetInnerHTML={{ __html: props.title }}></span>
               <br />
-              👉🏻 <a target="blank" className="page-link" style={{ width: 160, borderRadius: 300, color: '#000', border: '2px solid #00000030', fontSize: 13, padding: '5px 5px' }}
-                href={props.url}>
+              👉🏻{' '}
+              <a target="blank" className="page-link" style={{ width: 160, borderRadius: 300, color: '#000', border: '2px solid #00000030', fontSize: 13, padding: '5px 5px' }} href={props.url}>
                 ¡Quiero saber más!
               </a>
             </h2>
-            <h3 className="post-subtitle project" dangerouslySetInnerHTML={{ __html: props.description }}>
-            </h3>
+            <h3 className="post-subtitle project" dangerouslySetInnerHTML={{ __html: props.description }}></h3>
             <p className="post-meta">{props.date}</p>
           </div>
         </div>
       </div>
-      <hr/>
+      <hr />
     </React.Fragment>
   )
 }

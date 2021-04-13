@@ -4,8 +4,8 @@ const secretKey = '3dZcHE1HxLD6SccATNNxFuTbwDH36sXOV5b2xM3bJ45QvmqnuXxhELVDHCpUl
 const getPosts = (lastEvaluatedKey, next) => {
   const url = next ? `${endpoint}/${next}` : endpoint
   return fetch(url, { headers: { 'Content-Type': 'application/json', authorisation: secretKey, Body: JSON.stringify(lastEvaluatedKey) || '{}' } })
-    .then(result => result.json())
-    .then(resultJSON => {
+    .then((result) => result.json())
+    .then((resultJSON) => {
       console.log(resultJSON)
       return resultJSON
     })
@@ -14,8 +14,8 @@ const getPosts = (lastEvaluatedKey, next) => {
 const getPost = (id) => {
   const url = `${endpoint}/blog/${id}`
   return fetch(url, { headers: { authorisation: secretKey } })
-    .then(result => result.json())
-    .then(resultJSON => {
+    .then((result) => result.json())
+    .then((resultJSON) => {
       const { post } = resultJSON
       return post
     })
@@ -26,8 +26,4 @@ const getImage = (image) => {
   else return 'https://pbs.twimg.com/profile_images/796757169915969536/8YVxmvQf_400x400.jpg'
 }
 
-export {
-  getPosts,
-  getPost,
-  getImage
-}
+export { getPosts, getPost, getImage }

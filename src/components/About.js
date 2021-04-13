@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import cv from '../assets/docs/CV-es.pdf'
 const me = 'images/me.jpg'
 
@@ -25,29 +25,19 @@ const About = () => {
             {'\n'}
             {'        '}
             <a className="line">3</a>
-            <span className="code-keyword">const</span> wave ={' '}
-            <span className="code-function">require</span>(
-            <span className="code-string">'wave'</span>);{'\n'}
+            <span className="code-keyword">const</span> wave = <span className="code-function">require</span>(<span className="code-string">'wave'</span>);{'\n'}
             {'        '}
             <a className="line">4</a>
-            <span className="code-keyword">const</span> description ={' '}
-            <span className="code-function">require</span>(
-            <span className="code-string">'description'</span>);{'\n'}
+            <span className="code-keyword">const</span> description = <span className="code-function">require</span>(<span className="code-string">'description'</span>);{'\n'}
             {'        '}
             <a className="line">5</a>
-            <span className="code-keyword">const</span> blablabla ={' '}
-            <span className="code-function">require</span>(
-            <span className="code-string">'blablabla'</span>);{'\n'}
+            <span className="code-keyword">const</span> blablabla = <span className="code-function">require</span>(<span className="code-string">'blablabla'</span>);{'\n'}
             {'        '}
             <a className="line">6</a>
-            <span className="code-keyword">const</span> bye ={' '}
-            <span className="code-function">require</span>(
-            <span className="code-string">'bye'</span>);{'\n'}
+            <span className="code-keyword">const</span> bye = <span className="code-function">require</span>(<span className="code-string">'bye'</span>);{'\n'}
             {'        '}
             <a className="line">7</a>
-            <span className="code-keyword">const</span> cv ={' '}
-            <span className="code-function">require</span>(
-            <span className="code-string">'cv'</span>);{'\n'}
+            <span className="code-keyword">const</span> cv = <span className="code-function">require</span>(<span className="code-string">'cv'</span>);{'\n'}
             {'        '}
             <a className="line">8</a>
             {'\n'}
@@ -55,7 +45,11 @@ const About = () => {
             <a className="line linemoji">9</a>wave.
             <span className="code-function">send</span>(
             <span className="code-string">
-              '¡Hola! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👋🏻</span>'
+              '¡Hola!{' '}
+              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>
+                👋🏻
+              </span>
+              '
             </span>
             );{'\n'}
             {'        '}
@@ -66,8 +60,14 @@ const About = () => {
             <span className="code-function">send</span>(
             <span className="code-string">
               'Soy Clara. En este blog escribo generalmente sobre ciencia{' '}
-              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍🔬</span> y tecnología{' '}
-              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍💻</span>.'
+              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>
+                👩🏻‍🔬
+              </span>{' '}
+              y tecnología{' '}
+              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>
+                👩🏻‍💻
+              </span>
+              .'
             </span>
             );{'\n'}
             {'        '}
@@ -75,19 +75,11 @@ const About = () => {
             {'\n'}
             {'        '}
             <a className="line">13</a>blablabla.
-            <span className="code-function">send</span>(
-            <span className="code-string">
-              'Es mi pequeño rincón de conocimiento pero también podéis encontrar en
-              él vuestro propio aprendizaje.'
-            </span>
+            <span className="code-function">send</span>(<span className="code-string">'Es mi pequeño rincón de conocimiento pero también podéis encontrar en él vuestro propio aprendizaje.'</span>
             );{'\n'}
             {'        '}
             <a className="line">14</a>blablabla.
-            <span className="code-function">send</span>(
-            <span className="code-string">
-              'Incluyo además contenido sobre proyectos o desarrollos software que
-              me han resultado interesantes.'
-            </span>
+            <span className="code-function">send</span>(<span className="code-string">'Incluyo además contenido sobre proyectos o desarrollos software que me han resultado interesantes.'</span>
             );{'\n'}
             {'        '}
             <a className="line">15</a>
@@ -96,7 +88,11 @@ const About = () => {
             <a className="line linemoji">16</a>bye.
             <span className="code-function">send</span>(
             <span className="code-string">
-              '¡Que os divirtáis! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>😋</span>'
+              '¡Que os divirtáis!{' '}
+              <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>
+                😋
+              </span>
+              '
             </span>
             );{'\n'}
             {'        '}
@@ -105,7 +101,11 @@ const About = () => {
             {'        '}
             <a className="line linemoji">18</a>
             <a id="cv" download href={cv}>
-              cv.<span role="img" aria-label="emoji" className="code-function">dowload</span>(⬇️);
+              cv.
+              <span role="img" aria-label="emoji" className="code-function">
+                dowload
+              </span>
+              (⬇️);
             </a>
           </code>
           {'\n'}

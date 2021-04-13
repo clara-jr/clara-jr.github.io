@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Blog from './components/Blog'
@@ -11,9 +10,9 @@ const App = () => {
   return (
     <Router>
       <div>
-        <NavBar/>
-        <br/>
-        <br/>
+        <NavBar />
+        <br />
+        <br />
         <Switch>
           <Route path="/blog/:id" component={Post} />
           <Route path="/projects" component={Projects} />

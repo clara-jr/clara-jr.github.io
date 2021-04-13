@@ -10,6 +10,7 @@
 <pre>
 git clone https://github.com/clara-jr/clara-jr.github.io.git
 cd clara-jr.github.io
+npm install --save react-meta-tags --legacy-peer-deps
 npm install
 </pre>
 
