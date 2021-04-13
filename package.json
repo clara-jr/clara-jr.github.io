@@ -27,6 +27,8 @@
     "test": "react-scripts test",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
+    "pretty": "npx prettier . --check **/*.{js,html}",
+    "pretty:fix": "npx prettier . --write **/*.{js,html}",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build"
