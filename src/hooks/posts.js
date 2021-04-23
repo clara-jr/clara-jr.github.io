@@ -66,7 +66,6 @@ const usePost = (props) => {
         })
     } else {
       setPost(postFromCache)
-      setError(postFromCache.error || '')
     }
   }, [id])
 
