@@ -50,7 +50,7 @@ const Blog = () => {
     return <React.Fragment>{component}</React.Fragment>
   }
   if (posts && !posts.length) {
-    return <img src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
+    return <img loading='lazy' src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
   } else if (error) {
     return <Error error={error} />
   } else {

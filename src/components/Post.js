@@ -10,7 +10,7 @@ import { usePost } from '../hooks/posts'
 const Post = (props) => {
   const { title, subtitle, date, cuerpo, quote, image, error } = usePost(props)
   if (!props.location.state && !title && !error) {
-    return <img src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
+    return <img loading='lazy' src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
   } else if (error) {
     return <Error error={error} />
   } else {
@@ -116,7 +116,7 @@ const Post = (props) => {
                         } else if (v.startsWith('<img>')) {
                           return (
                             <div style={{ textAlign: 'center', marginTop: 15 }}>
-                              <img alt="" src={'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/' + v.slice(5, -6)} style={{ textAlign: 'center', maxWidth: '100%' }} />
+                              <img loading='lazy' alt="" src={'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/' + v.slice(5, -6)} style={{ textAlign: 'center', maxWidth: '100%' }} />
                             </div>
                           )
                         } else if (v.startsWith('<iframe>')) {
