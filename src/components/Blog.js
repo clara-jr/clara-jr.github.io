@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getPosts } from '../services/posts'
 import Error from './Error'
 import Item from './Item'
 const loading = 'images/loading.gif'
+import { usePosts } from '../hooks/posts'
 
 const Blog = () => {
-  const [posts, setPosts] = useState([])
-  const [init, setInit] = useState(0)
   const [next, setNext] = useState(0)
-  const [pages, setPages] = useState(1)
-  const [keys, setKeys] = useState([{}])
   const [lastEvaluatedKey, setLastEvaluatedKey] = useState({})
-  const [error, setError] = useState('')
-  useEffect(() => {
-    getPosts(lastEvaluatedKey, next)
-      .then(({ posts, init, pages, lastEvaluatedKey }) => {
-        setPosts(posts)
-        setInit(init)
-        setPages(pages)
-        if (lastEvaluatedKey && !keys.some((key) => key.id === lastEvaluatedKey.id)) keys.push(lastEvaluatedKey)
-        setKeys(keys)
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        })
-      })
-      .catch((error) => setError('Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!'))
-  }, [lastEvaluatedKey, next])
+  const { posts, init, pages, keys, error } = usePosts({ lastEvaluatedKey, next })
   const buttons = () => {
     const component = []
     const newer = init - 1

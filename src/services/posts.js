@@ -6,7 +6,6 @@ const getPosts = (lastEvaluatedKey, next) => {
   return fetch(url, { headers: { 'Content-Type': 'application/json', authorisation: secretKey, Body: JSON.stringify(lastEvaluatedKey) || '{}' } })
     .then((result) => result.json())
     .then((resultJSON) => {
-      console.log(resultJSON)
       return resultJSON
     })
 }

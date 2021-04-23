@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { getPost, getImage } from '../services/posts'
 import { setShareLinks } from '../services/rrss'
 import Error from './Error'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,38 +5,11 @@ import { faWhatsapp, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-
 import { Tweet } from 'react-twitter-widgets'
 import MetaTags from 'react-meta-tags'
 const loading = '../images/loading.gif'
+import { usePost } from '../hooks/posts'
 
 const Post = (props) => {
-  const [title, setTitle] = useState('')
-  const [subtitle, setSubtitle] = useState('')
-  const [date, setDate] = useState('')
-  const [cuerpo, setCuerpo] = useState([])
-  const [quote, setQuote] = useState('')
-  const [image, setImage] = useState('')
-  const [error, setError] = useState('')
-  const setPost = ({ title, subtitle, date, cuerpo, quote, image }) => {
-    setTitle(title)
-    setSubtitle(subtitle)
-    setDate(date)
-    setCuerpo(cuerpo)
-    setQuote(quote)
-    setImage(getImage(image))
-  }
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    const id = props.match.params.id
-    if (!props.location.state) {
-      getPost(id)
-        .then((post) => {
-          setPost(post)
-        })
-        .catch((error) => setError('Ups! No sé a qué post quieres acceder... Inténtalo de nuevo desde el blog'))
-    } else {
-      setPost(props.location.state)
-      setError(props.location.state.error || '')
-    }
-  }, [props.match.params.id, props.location.state])
-  if (!props.location.state && title === '' && error === '') {
+  const { title, subtitle, date, cuerpo, quote, image, error } = usePost(props)
+  if (!props.location.state && !title && !error) {
     return <img src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
   } else if (error) {
     return <Error error={error} />
