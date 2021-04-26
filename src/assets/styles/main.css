@@ -1221,6 +1221,15 @@ a.link:hover {
   border-bottom: 2px solid #000;;
 }
 
+a.title-link {
+  color: inherit;
+  border-bottom: 2px solid #00000030
+}
+
+a.title-link:hover {
+  border-bottom: 2px solid #000;;
+}
+
 h3.project {
   line-height: 1.3;
 }

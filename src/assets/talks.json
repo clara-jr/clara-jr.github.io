@@ -1,0 +1,18 @@
+[
+  {
+    "title": "¿Podríamos crear un juego al estilo Among Us con Alexa? <a class=\"title-link\" target=\"blank\" href=\"https://events.codemotion.com/conferences/online/2021/online-tech-conference-spanish-edition-spring\">@ Codemotion Online Tech Conference</a>",
+    "description": "2020 ha sido el año de quedarse en casa y, en 2021, se sufren las secuelas de esto. Todavía seguimos pasando mucho tiempo enfrente del ordenador o del móvil: viendo twitch, jugando al Among Us o, por qué no, creando nuestro propio Among Us. En esta charla veremos cómo crear un juego al estilo Among Us, generalmente conocido como Hombres Lobo o Pueblo Duerme, utilizando computación <b>serverless</b>, <b>WebSocket</b> y <b>Node.js</b>... ¡Y dejaremos que <b>Alexa</b> sea nuestra narradora!",
+    "image": "https://pbs.twimg.com/media/EzSJbsjUYBEpgoS?format=jpg",
+    "date": "Abril 2021",
+    "url": "",
+    "slides": "https://slides.com/clear_is_me/amongus-alexa-codemotion/fullscreen"
+  },
+  {
+    "title": "Easy-Peasy Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
+    "description": "En esta charla vemos cómo podemos crear una Alexa Skill en un momentito: desde el diseño del <b>modelo de interacción vocal</b> hasta la implementación del código de nuestra Skill con ejemplos en <b>JavaScript</b>, pasando por conceptos como <b>Account Linking</b>, <b>persistencia</b> de datos, <b>SSML</b>, y hasta <b>APL</b> para dispositivos con pantalla.",
+    "image": "https://pbs.twimg.com/media/EoT5i8UXcAMkwHx.jpg",
+    "date": "Diciembre 2020",
+    "url": "https://www.youtube.com/watch?v=msr30-fZWNg",
+    "slides": "https://slides.com/clear_is_me/alexa_skills/fullscreen"
+  }
+]
