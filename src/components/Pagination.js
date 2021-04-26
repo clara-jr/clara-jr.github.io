@@ -9,12 +9,7 @@ const Pagination = ({ init, pages, changePage }) => {
     if (init >= 1) {
       component.push(
         <li key="1" className="page-item">
-          <Link
-            className="page-link"
-            to={'/'}
-            onClick={() => changePage(newer)}
-            style={{ width: 160, marginRight: 10, marginBottom: 10, borderRadius: 300, color: '#000', border: '2px solid #00000030' }}
-          >
+          <Link className="page-link" to={'/'} onClick={() => changePage(newer)} style={{ width: 160, marginRight: 10, marginBottom: 10, borderRadius: 300, color: '#000', border: '2px solid #00000030' }}>
             <i className="fas fa-arrow-circle-left" style={{ paddingRight: 3 }} /> Newer Posts
           </Link>
         </li>
@@ -23,12 +18,7 @@ const Pagination = ({ init, pages, changePage }) => {
     if (pages > init + 1) {
       component.push(
         <li key="2" className="page-item">
-          <Link
-            className="page-link"
-            to={'/'}
-            onClick={() => changePage(older)}
-            style={{ width: 160, borderRadius: 300, color: '#000', border: '2px solid #00000030' }}
-          >
+          <Link className="page-link" to={'/'} onClick={() => changePage(older)} style={{ width: 160, borderRadius: 300, color: '#000', border: '2px solid #00000030' }}>
             Older Posts <i className="fas fa-arrow-circle-right" style={{ paddingLeft: 3 }} />
           </Link>
         </li>
@@ -44,9 +34,7 @@ const Pagination = ({ init, pages, changePage }) => {
           <div id="buttons" className="col-12">
             <div className="pagination-area d-sm-flex mt-15" style={{ textAlign: 'center' }}>
               <nav aria-label="#">
-                <ul className="pagination">
-                  {buttons()}
-                </ul>
+                <ul className="pagination">{buttons()}</ul>
               </nav>
             </div>
           </div>

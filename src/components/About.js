@@ -10,7 +10,7 @@ const About = () => {
     <div className="container">
       <div className="row" id="about" style={{ marginRight: 5, marginLeft: 5 }}>
         <div className="about_photo col-xs-12 col-sm-4 col-md-3 col-lg-2">
-          <img loading='lazy' alt="clear_is_me" style={{ borderRadius: 4 }} src={me} />
+          <img loading="lazy" alt="clear_is_me" style={{ borderRadius: 4 }} src={me} />
         </div>
         <pre className="about_inner col-xs-12 col-sm-8 col-md-9 col-lg-10">
           {'      '}

@@ -116,7 +116,7 @@ const Post = (props) => {
                         } else if (v.startsWith('<img>')) {
                           return (
                             <div style={{ textAlign: 'center', marginTop: 15 }}>
-                              <img loading='lazy' alt="" src={'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/' + v.slice(5, -6)} style={{ textAlign: 'center', maxWidth: '100%' }} />
+                              <img loading="lazy" alt="" src={'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/' + v.slice(5, -6)} style={{ textAlign: 'center', maxWidth: '100%' }} />
                             </div>
                           )
                         } else if (v.startsWith('<iframe>')) {

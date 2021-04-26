@@ -5,7 +5,7 @@ const Project = (props) => {
     <React.Fragment>
       <div className="row blog-items" id="about">
         <div className="project_photo col-xs-12 col-sm-4 col-md-3 col-lg-2">
-          <img loading='lazy' alt="" style={{ borderRadius: 4 }} src={process.env.PUBLIC_URL + props.image} />
+          <img loading="lazy" alt="" style={{ borderRadius: 4 }} src={process.env.PUBLIC_URL + props.image} />
         </div>
         <div className="col-xs-12 col-sm-8 col-md-9 col-lg-10">
           <div className="post-preview">
