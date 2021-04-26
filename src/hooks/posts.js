@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 import { getPosts, getPost, getImage } from '../services/posts'
 
-const usePosts = ({ lastEvaluatedKey, next }) => {
+const usePosts = () => {
   const [posts, setPosts] = useState([])
   const [init, setInit] = useState(0)
   const [pages, setPages] = useState(1)
   const [keys, setKeys] = useState([{}])
   const [error, setError] = useState('')
+
+  const [next, setNext] = useState(0)
+  const [lastEvaluatedKey, setLastEvaluatedKey] = useState({})
+  const changePage = (page) => {
+    setLastEvaluatedKey(keys[page])
+    setNext(page)
+  }
 
   useEffect(() => {
     getPosts(lastEvaluatedKey, next)
@@ -24,7 +31,7 @@ const usePosts = ({ lastEvaluatedKey, next }) => {
       .catch((error) => setError('Ups! Culpa mía.. algo no va bien, lo solucionaré en un ratillo!'))
   }, [lastEvaluatedKey, next])
 
-  return { posts, init, pages, keys, error }
+  return { posts, init, pages, error, changePage }
 }
 
 const usePost = (props) => {

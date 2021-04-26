@@ -10,7 +10,7 @@ import { usePost } from '../hooks/posts'
 const Post = (props) => {
   const { title, subtitle, date, cuerpo, quote, image, error } = usePost(props)
   if (!props.location.state && !title && !error) {
-    return <img loading='lazy' src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
+    return <img src={loading} alt="loading..." style={{ display: 'block', marginTop: 100, marginLeft: 'auto', marginRight: 'auto', width: 200 }} />
   } else if (error) {
     return <Error error={error} />
   } else {
