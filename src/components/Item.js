@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Item = (props) => {
+const Item = ({ id, title, subtitle, date, cuerpo, quote, image }) => {
   return (
     <React.Fragment>
       <div className="post-preview">
@@ -9,19 +9,19 @@ const Item = (props) => {
           <Link
             className="index-item"
             to={{
-              pathname: '/blog/' + props.id,
+              pathname: '/blog/' + id,
               state: {
-                title: props.title,
-                subtitle: props.subtitle,
-                date: props.date,
-                cuerpo: props.cuerpo,
-                quote: props.quote,
-                image: props.image,
+                title,
+                subtitle,
+                date,
+                cuerpo,
+                quote,
+                image,
               },
             }}
           >
-            {props.title.split('<emoji>')[0]}
-            {props.title
+            {title.split('<emoji>')[0]}
+            {title
               .split('<emoji>')
               .join('@%$')
               .split('</emoji>')
@@ -33,8 +33,8 @@ const Item = (props) => {
               })}
           </Link>
         </h2>
-        <h3 className="post-subtitle">{props.subtitle}</h3>
-        <p className="post-meta">{props.date}</p>
+        <h3 className="post-subtitle">{subtitle}</h3>
+        <p className="post-meta">{date}</p>
       </div>
       <hr />
     </React.Fragment>
