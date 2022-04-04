@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import cv from '../assets/docs/CV-es.pdf'
-const me = 'images/me.jpg'
+const me = 'images/fullscat.jpg'
 
 const About = () => {
   useEffect(() => {
