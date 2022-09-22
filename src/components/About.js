@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import cv from '../assets/docs/CV-es.pdf'
 const me = 'images/fullscat.jpg'
+const medraw = 'images/fullscat-draw.jpg'
 
 const About = () => {
   useEffect(() => {
@@ -10,7 +11,7 @@ const About = () => {
     <div className="container">
       <div className="row" id="about" style={{ marginRight: 5, marginLeft: 5 }}>
         <div className="about_photo col-xs-12 col-sm-4 col-md-3 col-lg-2">
-          <img loading="lazy" alt="clear_is_me" style={{ borderRadius: 4 }} src={me} />
+          <img id="me" loading="lazy" alt="clear_is_me" style={{ borderRadius: 4 }} src={me} onMouseOver={e => (e.currentTarget.src = medraw)} onMouseOut={e => (e.currentTarget.src = me)} />
         </div>
         <pre className="about_inner col-xs-12 col-sm-8 col-md-9 col-lg-10">
           {'      '}
@@ -25,19 +26,19 @@ const About = () => {
             {'\n'}
             {'        '}
             <a className="line">3</a>
-            <span className="code-keyword">const</span> wave = <span className="code-function">require</span>(<span className="code-string">'wave'</span>);{'\n'}
+            <span className="code-keyword">import</span> wave <span className="code-keyword">from</span> <span className="code-string">'wave'</span>;{'\n'}
             {'        '}
             <a className="line">4</a>
-            <span className="code-keyword">const</span> description = <span className="code-function">require</span>(<span className="code-string">'description'</span>);{'\n'}
+            <span className="code-keyword">import</span> description <span className="code-keyword">from</span> <span className="code-string">'description'</span>;{'\n'}
             {'        '}
             <a className="line">5</a>
-            <span className="code-keyword">const</span> blablabla = <span className="code-function">require</span>(<span className="code-string">'blablabla'</span>);{'\n'}
+            <span className="code-keyword">import</span> blablabla <span className="code-keyword">from</span> <span className="code-string">'blablabla'</span>;{'\n'}
             {'        '}
             <a className="line">6</a>
-            <span className="code-keyword">const</span> bye = <span className="code-function">require</span>(<span className="code-string">'bye'</span>);{'\n'}
+            <span className="code-keyword">import</span> bye <span className="code-keyword">from</span> <span className="code-string">'bye'</span>;{'\n'}
             {'        '}
             <a className="line">7</a>
-            <span className="code-keyword">const</span> cv = <span className="code-function">require</span>(<span className="code-string">'cv'</span>);{'\n'}
+            <span className="code-keyword">import</span> cv <span className="code-keyword">from</span> <span className="code-string">'cv'</span>;{'\n'}
             {'        '}
             <a className="line">8</a>
             {'\n'}

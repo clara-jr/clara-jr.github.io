@@ -1,5 +1,12 @@
 [
   {
+    "title": "Alexa Skill: Habla con Pocoyó",
+    "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es una adaptación del personaje infantil Pocoyó realizada en colaboración con Zinkia Entertainment, S.A.",
+    "image": "images/pocoyo.png",
+    "date": "Septiembre 2022",
+    "url": "https://www.amazon.es/clara-jr-Habla-con-Pocoyo/dp/B0BG5KF5DW"
+  },
+  {
     "title": "Finalist + Best Games & Trivia Skill - Alexa Skills Challenge: Beyond Voice",
     "description": "Gané el premio en la categoría Best Games & Trivia Skill y fui finalista del <a class=\"link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/blogs/alexa/alexa-skills-kit/2021/01/announcing-the-alexa-skills-challenge--beyond-voice-winners-\">Alexa Skills Challenge: Beyond Voice</a> organizado por Amazon Alexa; participé con mi Alexa Skill basada en el popular juego <a class=\"link\" target=\"blank\" href=\"https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7\">Los Hombres Lobo</a>, también conocido como Pueblo Duerme",
     "image": "images/devpost.png",
