@@ -8,7 +8,7 @@ const { frontmatter } = Astro.props;
 let date = dayjs(frontmatter.pubDate).format('MMMM D, YYYY');
 date = date.charAt(0).toUpperCase() + date.slice(1);
 --- 
-<BaseLayout title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} image={frontmatter.image} date={date}>
+<BaseLayout title={`Clara's Blog | ${frontmatter.title}`} description={frontmatter.description} author={frontmatter.author} image={frontmatter.image} date={date}>
   <main>
     <div class="post-heading">
       <h1>{frontmatter.title}</h1>

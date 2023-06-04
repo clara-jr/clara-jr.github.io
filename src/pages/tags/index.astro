@@ -9,7 +9,7 @@ const tagsWithCount = Object.entries(posts.reduce((prev, post) => {
 	});
 	return runningTags;
 }, {})).sort((a, b) => a[0] > b[0] ? 1 : -1);
-const pageTitle = "Tags";
+const pageTitle = "Clara's Blog | Tags";
 ---
 <BaseLayout title={pageTitle}>
   <main>

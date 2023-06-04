@@ -25,15 +25,15 @@ import talks from '../content/talks.json'
 const lastTalks = talks.slice(0,3)
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout title="Clara's Blog">
 	<main>
     <h2 class="post-title">¡Hola! 👋🏻</h2>
     <p style={{ fontSize: '16px' }}>Soy Clara. Estudié Teleco y pasé 4 años de mi vida en un Centro de Investigación rodeada de artículos y dando clase en la Universidad. Más tarde, decidí que había llegado el momento de cambiar y empecé en una nueva empresa trabajando con mi <i>guilty pleasure</i>: JavaScript. Se podría decir que, en 2020, mi carrera profesional se marcó un <i>plot twist</i> - pasé de ser una estudiante de Doctorado a trabajar como desarrolladora FullStack. Mientras tanto, también llevo desde 2019 creando aplicaciones de voz para Alexa (obviamente en JavaScript 😼) y soy <a class="intro-link" href="https://developer.amazon.com/en-US/alexa/champions/clara-jimenez-recio">Alexa Champion</a>.</p>
-    <h2 class="post-title index-title">Last Posts</h2>
+    <h2 class="post-title index-title">Latest Posts</h2>
     {lastPosts.map((post) => <Item url={post.url} title={post.frontmatter.title} date={post.frontmatter.pubDate}/>)}
-    <h2 class="post-title index-title">Last Projects</h2>
+    <h2 class="post-title index-title">Latest Projects</h2>
     {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date}/>)}
-    <h2 class="post-title index-title">Last Talks</h2>
+    <h2 class="post-title index-title">Latest Talks</h2>
     {lastTalks.map((talk) => <Item url={talk.url} title={talk.preview} date={talk.date}/>)}
 	</main>
 </BaseLayout>
