@@ -1,0 +1,259 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: 'Callbacks, Promises y Async Await: patrones asíncronos en JavaScript 👩🏻‍💻'
+pubDate: 2020/08/12
+description: 'JavaScript no espera a que mi código termine para ejecutar lo siguiente, ¿qué puedo hacer?'
+author: 'Clara Jiménez'
+image:
+    url: '' 
+    alt: 'Async JavaScript'
+tags: ["javascript"]
+---
+El motor de JavaScript es asíncrono y no bloqueante, lo que quiere decir que está diseñado para no esperar a que un bloque de código se ejecute por completo antes de seguir ejecutando las siguientes partes del código. En ocasiones es necesario esperar a que una orden se ejecute para ejecutar la funcionalidad siguiente, por ejemplo, si realizamos peticiones a servidores externos, las cuales tardarán un tiempo determinado o, incluso, podrán resultar en un error que habrá que tener en cuenta para ejecutar una u otra acción en nuestro código. Debemos esperar hasta conseguir la respuesta de vuelta del servidor para continuar ejecutando cierta parte de nuestro código. En este desafío de programación tenemos los callbacks, las promesas y async await.
+
+Utilizamos Callbacks
+--------------------
+
+Un callback es una función que se pasa a otra función como parámetro, con intención de ser invocada seguidamente dentro de la función externa para completar alguna acción. La función callback no se ejecuta a menos que sea llamada por la función que la contiene: es “called back”, de ahí su nombre.
+
+Los callbacks son un concepto básico de la programación funcional, en la cual son ampliamente utilizados. Podemos encontrarlas en múltiples funciones de JavaScript, desde setInterval hasta en peticiones a APIs externas o consultas a bases de datos e incluso en las funciones .map() .reduce() .find() o .filter() propias de la programación funcional.
+
+Podemos observar el uso de callbacks en peticiones realizadas a una base de datos, por ejemplo, DynamoDB alojada en AWS. Vemos cómo a nuestra función addItem le llega una función como parámetro, es decir, un callback. Además, este callback tiene dos parámetros para contemplar posibles errores en su ejecución. A su vez, la función addItem hace uso del método PUT del cliente de DynamoDB para AWS en su versión callback, pasándole de nuevo una función como parámetro, la cual también maneja posibles errores en su ejecución.
+
+```javascript
+// utils.js
+
+const AWS = require('aws-sdk');
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const db = process.env.DB_TABLE;
+
+exports.addItem = (id, name, callback) => {
+  const params = {
+    TableName: db,
+    Item : {
+      id,
+      name
+    }
+  };
+  dynamoDb.put(params, (error, result) => {
+    if (error) callback(error);
+    else callback(null, result);
+  });
+}
+```
+
+```javascript
+// app.js
+
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+const utils = require('utils.js');
+
+app.post('/', (req, res) => {
+  const { id, name } = req.body;
+  utils.addItem(id, name, (error, result) => {
+    if (error) console.log('error: ' + error);
+    else console.log('success');
+  });
+});
+```
+
+Bueno, pues en este código sólo hemos recurrido a un callback para añadir un elemento a una base de datos, pero ¿y si necesitamos ejecutar varios callbacks anidados? En este momento el código se vuelve complicado, tanto su lectura como su mantenimiento a futuro. Y si no lo creéis, comprobémoslo con el siguiente ejemplo.
+
+Imaginemos que, en lugar de hacer una inserción en la base de datos, hacemos un GET de un elemento en concreto y modificamos uno de sus atributos. Tenemos dos operaciones anidadas y vamos a comprobar el resultado del código utilizando callbacks.
+
+```javascript
+// utils.js
+
+exports.getItem = (id, callback) => {
+  const params = {
+    TableName: db,
+    Key : {
+      id
+    }
+  };
+  return dynamoDb.get(params, (error, result) => {
+    if (error) callback(error);
+    else callback(null, result);
+  });
+}
+
+exports.updateItem = (id, name, callback) => {
+  const params = {
+    TableName: db,
+    Key : {
+      id
+    },
+    UpdateExpression: "SET #name=:name",
+    ExpressionAttributeNames : {
+      "#name": "name"
+    },
+    ExpressionAttributeValues:{
+      ":name": name
+    },
+    ReturnValues: "ALL_NEW"
+  };
+  return dynamoDb.update(params), (error, result) => {
+    if (error) callback(error);
+    else callback(null, result);
+  });
+}
+```
+
+```javascript
+// app.js
+
+app.put('/', (req, res) => {
+  const { id } = req.body;
+  utils.getItem(id, (error, result) => {
+    if (error) {
+      console.log('error GET: ' + error);
+    } else {
+      utils.updateItem(id, result.Item.name + '_updated', (error, result) => {
+        if (error) console.log('error UPDATE: ' + error);
+        else console.log('success');
+      });
+    }
+  });
+});
+```
+
+Este lío que se forma cuando tenemos varios callbacks anidados es conocido como “callback hell”. Los callbacks son por tanto útiles para operaciones asíncronas reducidas. Cuando se trabaja con múltiples operaciones anidadas, no se consideran la mejor práctica. En este caso, llegan las promesas u objetos Promise, simplificando el mantenimiento de nuestro código.
+
+Bueno, mejor utilizamos Promises
+--------------------------------
+
+Pues sí, justo, las promesas llegan, entre otras cosas, para resolver la infernal anidación de callbacks y por tanto, para sustituirlos en ciertas situaciones.
+
+El objeto Promise es usado para computaciones asíncronas. Una promesa representa un valor que puede estar disponible ahora, en el futuro, o nunca. Un objeto Promise se crea de la siguiente manera:
+
+```javascript
+new Promise( function(resolve, reject) { ... } );
+```
+
+Al crear una promesa, la información que pasamos como parámetro es además un callback. Y no sólo eso, si no que esta función recibe a su vez como parámetros dos funciones, o sea ser, dos callbacks: resolve y reject. El callback resolve se ejecutará en caso de que todo vaya bien mientras que el callback reject se ejecutará en caso de error. Esto desencadenará la ejecución de una parte del código (.then) u otra (.catch) en el lugar en que se llamó a la promesa.
+
+Veamos cómo serían los dos ejemplos anteriores con el uso de callbacks, en este caso, con el uso de promesas.
+
+```javascript
+// utils.js
+
+exports.addItem = (id, name) => {
+  const params = {
+    TableName: db,
+    Item : {
+      id,
+      name: name
+    }
+  };
+  return dynamoDb.put(params).promise();
+}
+
+exports.getItem = (id) => {
+  const params = {
+    TableName: db,
+    Key : {
+      id
+    }
+  };
+  return dynamoDb.get(params).promise();
+}
+
+exports.updateItem = (id, name) => {
+  const params = {
+    TableName: db,
+    Key : {
+      id
+    },
+    UpdateExpression: "SET #name=:name",
+    ExpressionAttributeNames : {
+      "#name": "name"
+    },
+    ExpressionAttributeValues:{
+      ":name": name
+    },
+    ReturnValues: "ALL_NEW"
+  };
+  return dynamoDb.update(params).promise();
+}
+```
+
+En el caso del cliente de DynamoDB de AWS, el método .promise() genera directamente el objeto Promise que devolverá la ejecución del callback resolve o reject según el caso, y por tanto, se ejecutará una u otra parte de nuestro código: .then o .catch respectivamente.
+
+```javascript
+// app.js
+
+app.post('/', (req, res) => {
+  const { id, name } = req.body;
+  utils.addItem(id, name).then(() => {
+    console.log('success');
+  }).catch(error => {
+    console.log('error: ' + error);
+  });
+};
+
+app.put('/', (req, res) => {
+  const { id } = req.body;
+  utils.getItem(id).then((result) => {
+    return utils.updateItem(result.Item.name + '_updated');
+  }).then(() => {
+    console.log('success');
+  }).catch(error => {
+    console.log('error: ' + error);
+  });
+};
+```
+
+Comprobamos cómo, especialmente en el caso de operaciones anidadas, el uso de promesas permite un código más limpio y fácilmente mantenible. Sin embargo, es cierto que los callbacks permiten un manejo más fácil de los errores, identificando rápidamente en qué callback se produjo el error, mientras que, las promesas recogen todos los errores bajo un solo catch. En este caso, es tarea del desarrollador diseñar mensajes de error representativos que faciliten la detección del origen del error.
+
+Async Await en ECMAScript 7
+---------------------------
+
+Una función async tan sólo es una modificación de la sintaxis utilizada en la escritura de promesas. Podríamos llamarlo azúcar sintáctico para la implementación de promesas, haciendo que escribir promesas sea más fácil (sí, más todavía). El callback resolve de una promesa se transforma en un mero return y el callback reject pasa a ser un throw.
+
+Async await facilita la comprensión de nuestro código, convirtiendo una función cualquiera, en una Promise: async permite devolver una promesa y await indica la llamada a una promesa, un código asíncrono al que esperar el término de su ejecución. Para gestionar el resultado o los errores de este tipo de funciones se puede utilizar try/catch.
+
+```javascript
+// app.js
+
+app.post('/', async (req, res) => {
+  const { id, name } = req.body;
+  try {
+    await dynamo.addItem(id, name);
+    console.log('success');
+  } catch(error) {
+    console.log('error: ' + error);
+  }
+});
+
+app.put('/', async (req, res) => {
+  const { id } = req.body;
+  try {
+    const result = await dynamo.getItem(id);
+    await dynamo.updateItem(result.Item.name + '_updated');
+    console.log('success');
+  } catch(error) {
+    console.log('error: ' + error);
+  }
+});
+```
+
+Y recordad: await debe ir siempre dentro de una función declarada como asíncrona con async,… ¿o no?
+
+Top-Level Await en Node.js v14.8.0
+----------------------------------
+
+Top-level await estaba disponible a partir de Node.js v13.3+ haciendo uso del flag --harmony-top-level-await. Esto permitía utilizar await fuera de una función declarada con async.
+
+Pero tener que indicar el flag para poder disponer de esta funcionalidad se volvía un poco tedioso y por eso llegó finalmente la versión 14 de Node.js en la que ¡liberaron await de esta flag! Fue concretamente Myles Borins quien liberó ayer a nuestra querida top-level await.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Happy Top-Level Await Day!!!!! <a href="https://t.co/iI25oDBVZ7">https://t.co/iI25oDBVZ7</a></p>&mdash; sMyle (@MylesBorins) <a href="https://twitter.com/MylesBorins/status/1293230008358625281?ref_src=twsrc%5Etfw">August 11, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+Y con esto y un bizcocho,… ¡hasta ECMAScript 8!
+
+> “Top-Level await is the best feature in the JavaScript language in a minute. There are definitely no deep problems with it and no one is worried about deadlock.”
+>
+> ###### Myles Borins

@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Project from '../components/Project.astro'
+
+import projects from '../content/projects.json'
+
+const pageTitle = "Projects";
+---
+
+<BaseLayout title={pageTitle}>
+	<main>
+    {projects.map((project) => <Project title={project.title} description={project.description} image={project.image} date={project.date} url={project.url} />)}
+	</main>
+</BaseLayout>

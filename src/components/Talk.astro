@@ -1,0 +1,26 @@
+---
+const { title, description, date, url, slides } = Astro.props;
+---
+
+<div class="blog-items">
+  <div>
+    <h2 class="post-title">
+      <span set:html={title}></span>
+      { url && <p style={{fontSize: '22px', marginTop: '10px', marginBottom: '0px'}}>
+        🎙
+        <a target="blank" class="page-link" href={url}>
+          ¡Quiero ver la charla!
+        </a>
+      </p> }
+      { slides && <p style={{fontSize: '22px', marginTop: '15px'}}>
+        📝
+        <a target="blank" class="page-link" href={slides}>
+          ¡Quiero ver las slides!
+        </a>
+      </p> }
+    </h2>
+    <h3 class="post-subtitle project" set:html={description}></h3>
+    <p class="post-meta">{date}</p>
+  </div>
+</div>
+<hr />

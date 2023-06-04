@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+export interface Props {
+	title: string;
+  description?: string;
+  author?: string;
+  image?: any;
+  date?: string;
+}
+
+const siteConfig = {}
+const { title, description, author, image, date } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image ? image.url : "/images/fullscat-draw.jpg", Astro.url).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content={author} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={date ? "article" : "website"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {
+      date && (
+        <>
+          <meta property="article:author" content={author} />
+          <meta property="article:published_time" content={date} />
+        </>
+      )
+    }
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@clear_is_me" />
+    <meta property="twitter:creator" content="@clear_is_me" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    <script define:vars={{ siteConfig }}>
+			const root = document.documentElement;
+
+			// get user preference of dark mode, 1st local storage, 2nd browser
+			const getThemePreference = () => {
+				if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+					return localStorage.getItem("theme");
+				}
+				return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			}
+
+			const isDark = getThemePreference() === "dark";
+
+			// watch document element class attribute and update user preference when it changes.
+			const observer = new MutationObserver(() => {
+				const rootIsDark = root.classList.contains("dark");
+				// store user preference
+				if (typeof localStorage !== "undefined") {
+					localStorage.setItem("theme", rootIsDark ? "dark" : "light");
+				}
+			});
+			observer.observe(root, { attributeFilter: ["class"] });
+
+			// initialise root class attribute
+			root.classList.toggle("dark", isDark);
+		</script>
+	</head>
+	<body>
+    <Header />
+		<slot />
+	</body>
+</html>

@@ -1,0 +1,13 @@
+---
+import dayjs from 'dayjs';
+import es from "dayjs/locale/es";
+dayjs.locale(es);
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404">
+	<main>
+    <h2 style={{ textAlign: 'center', marginTop: '40px' }}>¡Vaya, no encuentro lo que estás buscando!</h2>
+	</main>
+</BaseLayout>

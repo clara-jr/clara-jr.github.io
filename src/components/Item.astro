@@ -1,0 +1,9 @@
+---
+const { title, date, url } = Astro.props;
+---
+<div class="post-preview">
+  {date && <h2 class="index-date">{date}</h2>}
+  <h2>
+    <a class="index-item" href={url}>{title}</a>
+  </h2>
+</div>

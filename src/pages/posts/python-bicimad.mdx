@@ -1,0 +1,60 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: 'Python, geometría y BiciMAD 🚴🏻‍'
+pubDate: 2020/05/10
+description: '¿Alguna vez has dudado sobre qué te compensaba más entre distintas opciones de compra de una misma cosa? Seguro que si te has planteado usar las bicis de BiciMAD sabes de lo que hablo'
+author: 'Clara Jiménez'
+image:
+    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/curva1.png' 
+    alt: 'BiciMAD'
+tags: ["python", "maths"]
+---
+Llevamos 58 días en un estado de alarma en España provocado por una crisis sanitaria por pandemia. En estos días estamos dejando atrás poco a poco el confinamiento dejando paso a la desescalada y sus famosas fases. Los primeros en salir fueron los niños y ahora es momento de pasear y hacer deporte. En general lo estamos haciendo bien, pero parece que hay zonas en las que tanto deportista se está amontonando. A lo mejor no hemos hecho deporte en nuestra vida y ahora nos apasiona, pero bueno, hay que tener cuidado. El deporte es salud, sí, pero hay que saber dosificarlo y venimos de muchos días de sedentarismo entre la silla, el sofá y la cama. Yo misma me hice un esguince sin salir de casa, hará cosa de 2 semanas, corriendo por el pasillo para llegar a las 20:00 a la ventana del salón a aplaudir. Lo más apasionante del día. Y qué suerte la mía que cuando nos dejan salir a dar un paseo, no puedo.
+
+¿Y qué es lo que me gustaría a mí ahora mismo? Pues no haberme torcido el pie, claramente. Y poder salir a pasear y por qué no, a montar en bici. Y sois muchos los que estáis aprovechando también para sacar vuestras bicis por vuestra ciudad. Pero, ¿y si quiero montar en bici y no tengo? Diréis “pues te aguantas”. No, hombre, no… yo vivo en Madrid y aunque no sea una ciudad hecha para recorrerla en bici, tiene su encanto y también tiene una solución para este problema: BiciMAD. Después de 37 días sin funcionar debido a la pandemia y las restricciones de confinamiento, BiciMAD volvió a estar disponible el 22 de abril, pudiendo usarse las bicicletas tomando las debidas precauciones de higiene que eviten la propagación del virus.
+
+¿Cuánto cuesta BiciMAD?
+-----------------------
+
+Si miramos en la web de BiciMAD [\[1\]](https://www.bicimad.com/index.php?s=tarifas) podremos encontrar una tabla preciosa con los precios de los viajes en bicicleta por Madrid. Vemos dos columnas que nos indican distintos precios según el tipo de servicio que solicitemos.
+
+![Precios BiciMAD](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/bicimad.png)
+
+En caso de disponer de un abono anual de BiciMAD, tendremos un gasto inicial de 15 o 25 € según tengamos a su vez un abono transporte del CRTM o no, y a ese gasto inicial se le sumarían 0.50 € por la primera media hora de cada trayecto en bici y 0.60 € por cada media hora siguiente. Así hasta cumplir en cada trayecto un máximo de 2 horas ya que, si nos pasamos de las 2 horas, tendríamos una penalización de 4 € por cada hora extra.
+
+Si en lugar de optar por un abono anual de BiciMAD, disponemos de una tarjeta ocasional recargable por cada trayecto, tendremos que pagar 2 € por la primera hora y 4 € por la segunda hora. De nuevo, a partir de la tercera hora tendríamos una penalización de 4 €/hora.
+
+También disponemos de bonificaciones de 10 céntimos por diferentes motivos pero que son equivalentes en ambas situaciones, tanto con abono de BiciMAD como sin él. También son equivalentes las penalizaciones por sobrepasar las 2 horas de uso de las bicicletas.
+
+Pues bien, ¿ahora qué hacemos con esto? ¿Tenéis ya claro qué queréis? ¿Qué os compensa más? ¿Compramos el abono anual o la tarjeta ocasional? Sinceramente, no creo que nadie sea capaz de darme una respuesta correcta sin meditarlo profundamente. Y cuando digo meditarlo quiero decir calcularlo. Y, aun así, aun teniendo lápiz, papel y una calculadora, os acabaría doliendo la cabeza y posiblemente aún no habríais conseguido responderme. Me atrevería a decir que os dejaríais llevar por vuestra intuición. Pero,… hablando de dinero, yo creo que lo mejor es saber a ciencia cierta qué es lo que debemos hacer. Y yo voy a saber cuál es la respuesta a este enigma programando. Básicamente, saber matemáticas y, en este caso, programar, sirve para mucho a lo largo de la vida, y hay gente que vive ajena a esta situación mientras siguen creyendo que son felices.
+
+Python nos dice si nos compensa un abono anual o pagar por cada paseo
+---------------------------------------------------------------------
+
+Quien dice Python dice JavaScript, Java, Go,… ¡incluso LOLCODE o Brainfuck! Pero bueno, yo voy a mostrar el ejemplo de resolución hecho en Python[\[2\]](https://repl.it/@ClaraJimenez/BiciMAD).
+
+<iframe title="repl.it" src="https://repl.it/@ClaraJimenez/BiciMAD?lite=true" scrolling="no" allowtransparency="true" allowfullscreen="" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" width="100%" height="400px" frameborder="no"></iframe>
+
+Básicamente, se trata de averiguar cuántas veces tengo que coger la bici a lo largo de un año para que me compense pagar por el abono anual. En la opción de usar BiciMAD con un abono anual, cada pago se hará por periodos de media hora de uso. Si utilizamos la bicicleta durante hora y media, pagaremos hora y media. Sin embargo, si compramos una tarjeta ocasional, pagaremos por cada hora que utilicemos la bicicleta. Por ejemplo, si consumimos hora y media, pagaremos lo mismo que continuando nuestro paseo hasta las 2 horas. Así que lo más sensato es hacer la comparación de las casuísticas en base a viajes de horas completas: de 1 hora o de 2 horas. Recordemos que más allá de las 2 horas, hay penalizaciones, y además, son equivalentes en ambos casos, por lo que no repercuten en el cálculo de la diferencia monetaria entre una situación y otra.
+
+Separaremos nuestro problema en tres escenarios distintos. En el primero partiremos de que siempre cogeremos la bici para viajes de 1 hora. En el segundo, nuestros viajes serán de 2 horas. Finalmente, contemplaremos la posibilidad de hacer viajes tanto de 1 hora como de 2 horas indistintamente y con la misma probabilidad cada uno, es decir, un 50 %. Lo que tenemos que hacer, por tanto, será calcular para cada situación de estas 3, cuánto gasto vamos acumulando por cada viaje en el caso de disponer de un abono anual de BiciMAD y en el caso de disponer de una tarjeta ocasional. A medida que vamos acumulando este gasto, iremos comprobando si hemos llegado al punto en el que el gasto acumulado disponiendo de abono anual es menor o igual que el gasto acumulado usando una tarjeta ocasional. Utilizando una tarjeta ocasional, en nuestros primeros viajes, nuestro gasto será mucho menor ya que no tenemos que hacer un gasto inicial fijo de 15 o 25 €, cosa que sí ocurre con el abono anual. Sin embargo, la acumulación de gasto irá aumentando más rápidamente ya que los viajes en sí son más caros: 2 € la primera hora y 4 € la segunda frente a 0.50 € la primera media hora y 0.60 € las siguientes. Un viaje de 1 hora nos costaría 2 € frente a 1.10 € y un viaje de 2 horas 6 € frente a 2.30 €. Si sólo hacemos viajes de 1 hora aguantaremos más con una situación en la que la tarjeta ocasional nos compense frente al abono anual. Sin embargo, haciendo viajes de 2 horas, con un pequeño número de viajes que hagamos, nos saldrá rentable obtener el abono anual.
+
+![Gráfica BiciMAD](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/curva1.png)
+
+![Gráfica BiciMAD](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/curva2.png)
+
+Simplemente utilizando las matemáticas y la geometría podríamos encontrar el punto de corte entre dos rectas dados dos puntos de ellas: por ejemplo, los de los 2 primeros viajes. En el caso de viajes en bicicleta de 1 hora, tendremos en el viaje número 1 un coste inicial y acumulado de 2 € con tarjeta ocasional y de 16.1 € con abono anual, disponiendo previamente del abono transporte de Madrid; en el viaje número 2 acumularemos un gasto de 4 € con tarjeta ocasional y de 17.20 € con abono anual. Debemos encontrar así el punto de corte entre las rectas y = 2x (en rojo), y = 1.1x + 15 (en azul). En caso de viajes de 2 horas tendríamos un problema equivalente con las rectas y = 6x (en rojo), y = 2.3x + 15 (en azul). Podemos darnos cuenta también que estas rectas se basan en una pendiente de valor el coste de un viaje (para el viaje de 1 hora: 2 € con tarjeta ocasional y 1.10 € con abono anual; para el viaje de 2 horas: 6 € con tarjeta ocasional y 2.30 € con abono anual) y una ordenada en el origen de valor el desembolso inicial antes de realizar cualquier viaje (con tarjeta ocasional no hay gasto inicial y el abono anual cuesta 15 € si ya dispones de abono transporte). Igualando en este caso 2x y 1.1x + 15 obtenemos un valor de 16.6 periódico. Es decir, el número mínimo de viajes de 1 h que habría que hacer, si dispones previamente del abono transporte de Madrid, para que te compense comprar el abono anual de BiciMAD, sería 17. Esto mismo es lo que hemos podido realizar con nuestro código, acudiendo a la programación antes que a las matemáticas. ¿O son lo mismo?...
+
+Finalmente, obtenemos que en el caso de que dispongamos del abono transporte del CRTM para el resto de transporte público de Madrid, pagaríamos con gusto 15 € por nuestro abono anual BiciMAD sólo si nuestros viajes anuales con la bici por Madrid van a ser, al menos, 17 viajes de 1 hora, 5 de 2 horas o 8 de 1 o 2 horas (4 de 1 hora y 4 de 2 horas).
+
+![Código BiciMAD](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/code1.png)
+
+Si no tenemos el abono para el transporte público de la Comunidad de Madrid, escogeríamos pagar 25 € por un abono anual BiciMAD en caso de realizar como mínimo 28 viajes de 1 hora, 7 de 2 horas o 12 de 1 o 2 horas (6 de 1 hora y 6 de 2 horas).
+
+![Código BiciMAD](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/code2.png)
+
+Así que, si queréis montar en bici estos días y no tenéis una pero sí tenéis un abono transporte del CRTM, sacaos el abono anual de BiciMAD, que en 17 días lo tenéis más que amortizado y esto va para largo. Eso sí, pedalead y no uséis el motor, que entonces no cuenta como deporte. Y, mientras tanto, mucho ánimo. Saldremos poco a poco de todo esto.
+
+> “Las matemáticas están en todas partes, pero somos miopes”
+>
+> ###### Santi García Cremades

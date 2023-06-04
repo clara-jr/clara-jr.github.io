@@ -1,54 +1,29 @@
 {
-  "name": "blog-cjr-react",
-  "version": "0.1.0",
-  "private": true,
+  "name": "clara-jr.github.io",
+  "type": "module",
+  "version": "1.0.0",
   "homepage": "https://clara-jr.github.io",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.30",
-    "@fortawesome/free-brands-svg-icons": "^5.14.0",
-    "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "@fortawesome/react-fontawesome": "^0.1.11",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^3.4.1",
-    "font-awesome": "^4.7.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-meta-tags": "^0.7.4",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "react-twitter-widgets": "^1.9.5",
-    "reactstrap": "^8.5.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "pretty": "npx prettier . --check **/*.{js,html}",
-    "pretty:fix": "npx prettier . --write **/*.{js,html}",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build"
+    "pretty:fix": "npx prettier . --write **/*.{js,html}"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.19.6",
+    "@astrojs/rss": "^2.4.1",
+    "astro": "^2.4.1",
+    "dayjs": "^1.11.8"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {

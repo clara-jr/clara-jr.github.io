@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Talk from '../components/Talk.astro'
+
+import talks from '../content/talks.json'
+
+const pageTitle = "Talks";
+---
+
+<BaseLayout title={pageTitle}>
+	<main>
+		{talks.map((talk) => <Talk title={talk.title} description={talk.description} slides={talk.slides} date={talk.date} url={talk.url} />)}
+	</main>
+</BaseLayout>

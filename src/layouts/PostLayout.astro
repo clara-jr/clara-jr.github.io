@@ -1,0 +1,94 @@
+---
+import dayjs from 'dayjs';
+import es from "dayjs/locale/es";
+dayjs.locale(es);
+
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+let date = dayjs(frontmatter.pubDate).format('MMMM D, YYYY');
+date = date.charAt(0).toUpperCase() + date.slice(1);
+--- 
+<BaseLayout title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} image={frontmatter.image} date={date}>
+  <main>
+    <div class="post-heading">
+      <h1>{frontmatter.title}</h1>
+      <h2 class="subheading">{frontmatter.description}</h2>
+      <div class="post-content">
+        <div class="post-meta">
+          <div class="post-author-date-area">
+            <div class="post-date">
+              <div><span style={{marginRight:'3px'}}>{date}</span><span class="date-tags-separator"> | </span></div>
+              <div class="post-tags"><i style={{marginLeft:'3px'}} class="fa fa-tags"></i>
+              {frontmatter.tags.map((tag) => (
+                <a class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`} style={{margin:'3px'}}>{tag}</a>
+              ))}</div>
+            </div>
+          </div>
+          <div class="post-comment-share-area">
+            <div class="post-share">
+              <a id="share-whatsapp" class="social-share whatsapp"><i class="fa fa-whatsapp"></i></a>
+              <a id="share-facebook" class="social-share facebook"><i class="fa fa-facebook"></i></a>
+              <a id="share-twitter" class="social-share twitter"><i class="fa fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-body">
+      <slot />
+    </div>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ frontmatter }}>
+
+// button clicked, share post
+const _socialWindow = (url) => {
+  const left = (window.screen.width - 570) / 2
+  const top = (window.screen.height - 570) / 2
+  const params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left
+  window.open(url, 'NewWindow', params)
+}
+
+const setShareLinks = (rrss, title) => {
+  const pageUrl = encodeURIComponent(document.URL)
+  let url = ''
+  let tweet = title.split('<emoji>')[0].split(' ')
+  tweet = tweet.filter((val) => val !== '' && val !== '\n')
+  tweet = tweet.join(' ')
+  switch (rrss) {
+    case 'whatsapp':
+      url = 'https://api.whatsapp.com/send?text=' + tweet + '%20' + pageUrl
+      _socialWindow(url)
+      break
+    case 'facebook':
+      url = 'https://www.facebook.com/sharer.php?u=' + pageUrl + '&quote=' + tweet
+      _socialWindow(url)
+      break
+    case 'twitter':
+      url = 'https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + tweet
+      _socialWindow(url)
+      break
+    default:
+      break
+  }
+}
+
+const shareWhatsapp = () => {
+  console.log('whatsapp')
+  setShareLinks('whatsapp', frontmatter.title)
+}
+const shareFacebook = () => {
+  console.log('facebook')
+  setShareLinks('facebook', frontmatter.title)
+}
+const shareTwitter = () => {
+  console.log('twitter')
+  setShareLinks('twitter', frontmatter.title)
+}
+
+document.getElementById("share-whatsapp").addEventListener("click", shareWhatsapp);
+document.getElementById("share-facebook").addEventListener("click", shareFacebook);
+document.getElementById("share-twitter").addEventListener("click", shareTwitter);
+
+</script>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import cv from '../content/CV-es.pdf'
+
+const pageTitle = "About Me";
+---
+
+<BaseLayout title={pageTitle}>
+	<main>
+    <div id="about" class="about-items" style={{ marginRight: '5px', marginLeft: '5px' }}>
+      <div class="about_photo">
+        <img id="me" loading="lazy" alt="clear_is_me" style={{ borderRadius: '4px' }} src='/images/fullscat.jpg' onmouseover="this.src = '/images/fullscat-draw.jpg'" onmouseout="this.src = '/images/fullscat.jpg'" />
+      </div>
+      <pre class="about_inner">
+        <code class="code-colors">
+    <span class="code-comment">// About Me</span>
+    
+    <span class="code-keyword">import</span> wave <span class="code-keyword">from</span> <span class="code-string">'wave'</span>;
+    <span class="code-keyword">import</span> description <span class="code-keyword">from</span> <span class="code-string">'description'</span>;
+    <span class="code-keyword">import</span> blablabla <span class="code-keyword">from</span> <span class="code-string">'blablabla'</span>;
+    <span class="code-keyword">import</span> bye <span class="code-keyword">from</span> <span class="code-string">'bye'</span>;
+    <span class="code-keyword">import</span> cv <span class="code-keyword">from</span> <span class="code-string">'cv'</span>;
+
+    wave.<span class="code-function">send</span>(<span class="code-string">'¡Hola! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👋🏻</span>'</span>);
+            
+    description.<span class="code-function">send</span>(<span class="code-string">'Soy Clara. En este blog escribo generalmente sobre ciencia <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍🔬</span> y tecnología <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>👩🏻‍💻</span>.'</span>);
+    blablabla.<span class="code-function">send</span>(<span class="code-string">'Es mi pequeño rincón de conocimiento pero también podéis encontrar en él vuestro propio aprendizaje.'</span>);
+    blablabla.<span class="code-function">send</span>(<span class="code-string">'Incluyo además contenido sobre proyectos o desarrollos software que me han resultado interesantes.'</span>);
+
+    bye.<span class="code-function">send</span>(<span class="code-string">'¡Que os divirtáis! <span role="img" aria-label="emoji" style={{ fontSize: 18 }}>😋</span>'</span>);
+
+    <a id="cv" download href={cv}>cv.<span role="img" aria-label="emoji" class="code-function">dowload</span>(⬇️);</a>
+        </code>
+      </pre>
+    </div>
+	</main>
+</BaseLayout>

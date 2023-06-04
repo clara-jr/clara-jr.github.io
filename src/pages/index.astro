@@ -1,0 +1,39 @@
+---
+import dayjs from 'dayjs';
+import es from "dayjs/locale/es";
+dayjs.locale(es);
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Item from '../components/Item.astro';
+const posts = (await Astro.glob('../pages/posts/*.md*')).filter((post) => !post.frontmatter.draft);
+const postsByDate = posts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+let lastPosts = postsByDate.slice(0,3)
+lastPosts = lastPosts.map(post => {
+  let date = dayjs(post.frontmatter.pubDate).format('MMMM D, YYYY');
+  date = date.charAt(0).toUpperCase() + date.slice(1);
+  return {
+    ...post,
+    frontmatter: {
+      ...post.frontmatter,
+      pubDate: date
+    }
+  }
+})
+import projects from '../content/projects.json'
+const lastProjects = projects.slice(0,3)
+import talks from '../content/talks.json'
+const lastTalks = talks.slice(0,3)
+---
+
+<BaseLayout title="Blog">
+	<main>
+    <h2 class="post-title">¡Hola! 👋🏻</h2>
+    <p style={{ fontSize: '16px' }}>Soy Clara. Estudié Teleco y pasé 4 años de mi vida en un Centro de Investigación rodeada de artículos y dando clase en la Universidad. Más tarde, decidí que había llegado el momento de cambiar y empecé en una nueva empresa trabajando con mi <i>guilty pleasure</i>: JavaScript. Se podría decir que, en 2020, mi carrera profesional se marcó un <i>plot twist</i> - pasé de ser una estudiante de Doctorado a trabajar como desarrolladora FullStack. Mientras tanto, también llevo desde 2019 creando aplicaciones de voz para Alexa (obviamente en JavaScript 😼) y soy <a class="intro-link" href="https://developer.amazon.com/en-US/alexa/champions/clara-jimenez-recio">Alexa Champion</a>.</p>
+    <h2 class="post-title index-title">Last Posts</h2>
+    {lastPosts.map((post) => <Item url={post.url} title={post.frontmatter.title} date={post.frontmatter.pubDate}/>)}
+    <h2 class="post-title index-title">Last Projects</h2>
+    {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date}/>)}
+    <h2 class="post-title index-title">Last Talks</h2>
+    {lastTalks.map((talk) => <Item url={talk.url} title={talk.preview} date={talk.date}/>)}
+	</main>
+</BaseLayout>
