@@ -854,6 +854,11 @@ footer {
   }
   .post-tags {
     margin-left: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .post-meta {
+    display: block;
   }
 }
 
