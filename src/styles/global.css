@@ -646,6 +646,12 @@ a#cv {
   margin: 5px;
 }
 
+@media screen and (max-width: 410px) {
+  #knowledge svg {
+    width: 55px;
+  }
+}
+
 .skill-container {
   background-color: var(--theme-skill);
   border-radius: .25rem;
