@@ -177,7 +177,7 @@ ul {
 
 a.intro-link {
   color: var(--theme-footer);
-  font-size: 16px
+  font-size: 16px;
 }
 
 a.intro-link:hover {
@@ -204,7 +204,7 @@ a.index-item:hover {
 }
 
 .index-date {
-  color: var(--theme-footer)
+  color: var(--theme-footer);
 }
 
 a.social {
@@ -414,7 +414,7 @@ nav {
   }
 
   nav {
-    display: block
+    display: block;
   }
 
   .nav-links a {
@@ -492,15 +492,6 @@ a#cv {
   border-radius: 50px;
   border: 1px solid var(--theme-text);
 }
-
-/*
-gris: #969896
-morado: #c377be, #b169be, #a71d5d
-azul: #00afda
-rojo: #fd5750
-verde: #8dbc77
-naranja: #d7af63
-*/
 
 .code-colors {
   color: var(--astro-code-color-text);
@@ -647,7 +638,7 @@ naranja: #d7af63
   border-radius: .5rem;
   padding: .25rem;
   color: var(--theme-color-tag);
-  width: fit-content
+  width: fit-content;
 }
 
 .selected-tag {
@@ -655,7 +646,7 @@ naranja: #d7af63
   border-radius: .5rem;
   padding: 2.8px;
   color: var(--theme-color-tag);
-  width: fit-content
+  width: fit-content;
 }
 
 #buttons {
@@ -690,7 +681,7 @@ naranja: #d7af63
 }
 
 main {
-  padding: 8ch 6ch;
+  padding: 8ch 5ch;
 }
 
 #posts {
@@ -706,7 +697,7 @@ main {
   margin-top: 25px;
   display: flex;
   align-items: center;
-  gap: 5px
+  gap: 5px;
 }
 
 .back {
@@ -824,7 +815,7 @@ footer {
     display: none;
   }
   .post-preview {
-    margin-bottom: 12px
+    margin-bottom: 12px;
   }
   #about {
     display: block;
@@ -841,10 +832,10 @@ footer {
     max-width: 200px;
   }
   .all-tags {
-    margin-top: 15px
+    margin-top: 15px;
   }
   .date-tags-separator {
-    display: none
+    display: none;
   }
   .post-date {
     display: block !important;
