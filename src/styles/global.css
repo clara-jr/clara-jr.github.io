@@ -674,19 +674,19 @@ a#cv {
   text-align: center;
 }
 
-@media(max-width:463px) {
-  #buttons {
-    max-width: 160px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
 .pagination {
   display: inline-flex;
+  flex-wrap: wrap;
   padding-left: 0;
   margin: 20px 0;
   border-radius: 4px;
+  width: max-content
+}
+
+@media(max-width:430px) {
+  .pagination {
+    width: min-content
+  }
 }
 
 .pagination > li > a, .pagination > li > span {
@@ -702,7 +702,7 @@ a#cv {
 }
 
 main {
-  padding: 8ch 5ch;
+  padding: 8ch 4ch;
 }
 
 #posts {
