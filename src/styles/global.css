@@ -588,9 +588,6 @@ naranja: #d7af63
     width: 70%;
     margin-top: 20px;
   }
-  .blog-items {
-    margin-top: -20px;
-  }
 }
 
 @media(max-width:300px) {
@@ -656,7 +653,7 @@ naranja: #d7af63
 .selected-tag {
   background-color: var(--theme-accent);
   border-radius: .5rem;
-  padding: 2.7px;
+  padding: 2.8px;
   color: var(--theme-color-tag);
   width: fit-content
 }
