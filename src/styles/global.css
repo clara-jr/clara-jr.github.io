@@ -19,6 +19,7 @@
   --theme-link: #567c77;
   --theme-accent: #cc2a42;
   --theme-blockquote: #777;
+  --theme-skill: #f8f8f8;
   /* shiki */
   --astro-code-color-background: #f7f7f7;
   --astro-code-token-keyword: #d32e2f;
@@ -52,6 +53,7 @@
   --theme-link: #d480aa;
   --theme-accent: #2bbc89;
   --theme-blockquote: #cfcfcf;
+  --theme-skill: #f1f1f1;
   /* shiki */
   --astro-code-color-background: #282A36;
   --astro-code-token-keyword: #FF79C6;
@@ -631,6 +633,25 @@ a#cv {
 .fa-arrow-circle-right {
   padding-left: 3px;
   font-size: 16px;
+}
+
+#knowledge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+#knowledge svg {
+  width: 50px;
+  margin: 5px;
+}
+
+.skill-container {
+  background-color: var(--theme-skill);
+  border-radius: .25rem;
+  padding: .25rem;
+  align-items: center;
+  display: flex;
 }
 
 .tags {
