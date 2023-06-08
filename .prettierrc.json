@@ -3,14 +3,21 @@
   "printWidth": 300,
   "tabWidth": 2,
   "singleQuote": true,
-  "semi": false,
+  "semi": true,
   "arrowParens": "always",
   "bracketSpacing": true,
+  "plugins": ["prettier-plugin-astro"],
   "overrides": [
     {
       "files": "*.json",
       "options": {
         "parser": "json"
+      }
+    },
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
       }
     }
   ]

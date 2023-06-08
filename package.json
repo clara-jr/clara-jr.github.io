@@ -9,10 +9,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
-    "pretty": "npx prettier . --check **/*.{js,html}",
-    "pretty:fix": "npx prettier . --write **/*.{js,html}"
+    "lint": "npx eslint --ext .js,.astro src",
+    "lint:fix": "npx eslint --ext .js,.astro src --fix",
+    "pretty": "npx prettier src --check **/*.{js,html}",
+    "pretty:fix": "npx prettier src --write **/*.{js,html}"
   },
   "dependencies": {
     "@astrojs/mdx": "^0.19.6",
@@ -28,9 +28,11 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.59.9",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-astro": "^0.27.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.8.8",
+    "prettier-plugin-astro": "^0.10.0"
   }
 }

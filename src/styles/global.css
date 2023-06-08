@@ -5,7 +5,7 @@
   --theme-nav: #fff;
   --theme-hamburger: #555;
   --theme-nav-links: #2e2e2e;
-  --theme-transparent-nav: -webkit-linear-gradient(right,rgba(255, 255, 255, 0.6),#fff);
+  --theme-transparent-nav: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #fff);
   --theme-underlined: #cfcfcf;
   --theme-underlined-hover: #000;
   --theme-hr: #eee;
@@ -23,13 +23,13 @@
   /* shiki */
   --astro-code-color-background: #f7f7f7;
   --astro-code-token-keyword: #d32e2f;
-  --astro-code-color-text: #24292E;
+  --astro-code-color-text: #24292e;
   --astro-code-token-constant: #1876d2;
-  --astro-code-token-string: #032F62;
+  --astro-code-token-string: #032f62;
   --astro-code-token-string-expression: #23853a;
   --astro-code-token-function: #6f42c1;
-  --astro-code-token-punctuation: #24292E;
-  --astro-code-token-comment: #6A737D;
+  --astro-code-token-punctuation: #24292e;
+  --astro-code-token-comment: #6a737d;
 }
 
 :root.dark {
@@ -39,7 +39,7 @@
   --theme-nav: #fff;
   --theme-hamburger: #fff;
   --theme-nav-links: #fff;
-  --theme-transparent-nav: -webkit-linear-gradient(right,rgba(29, 31, 33, 0.8),#1d1f21); /*-webkit-linear-gradient(right,rgba(40, 42, 54, 0.8),#282a36);*/
+  --theme-transparent-nav: -webkit-linear-gradient(right, rgba(29, 31, 33, 0.8), #1d1f21); /*-webkit-linear-gradient(right,rgba(40, 42, 54, 0.8),#282a36);*/
   --theme-underlined: #b1b1b1;
   --theme-underlined-hover: #fff;
   --theme-hr: #1d1f21;
@@ -49,21 +49,21 @@
   --theme-code-bg: #292b2e;
   --theme-footer: #cfcfcf;
   --theme-color-tag: #1d1f21;
-  --theme-date: #c9cacc;;
+  --theme-date: #c9cacc;
   --theme-link: #d480aa;
   --theme-accent: #2bbc89;
   --theme-blockquote: #cfcfcf;
   --theme-skill: #f1f1f1;
   /* shiki */
-  --astro-code-color-background: #282A36;
-  --astro-code-token-keyword: #FF79C6;
-  --astro-code-color-text: #F8F8F2;
-  --astro-code-token-constant: #BD93F9;
-  --astro-code-token-string: #F1FA8C;
-  --astro-code-token-string-expression: #F1FA8C;
-  --astro-code-token-function: #50FA7B;
-  --astro-code-token-punctuation: #F8F8F2;
-  --astro-code-token-comment: #6272A4;
+  --astro-code-color-background: #282a36;
+  --astro-code-token-keyword: #ff79c6;
+  --astro-code-color-text: #f8f8f2;
+  --astro-code-token-constant: #bd93f9;
+  --astro-code-token-string: #f1fa8c;
+  --astro-code-token-string-expression: #f1fa8c;
+  --astro-code-token-function: #50fa7b;
+  --astro-code-token-punctuation: #f8f8f2;
+  --astro-code-token-comment: #6272a4;
 }
 
 * {
@@ -78,11 +78,13 @@
 }
 @font-face {
   font-family: body;
-  font-style: italic; src: url('./fonts/IBMPlexSans-TextItalic.otf');
+  font-style: italic;
+  src: url('./fonts/IBMPlexSans-TextItalic.otf');
 }
 @font-face {
   font-family: body;
-  font-weight: 800;   src: url('./fonts/IBMPlexSans-Bold.otf');
+  font-weight: 800;
+  src: url('./fonts/IBMPlexSans-Bold.otf');
 }
 @font-face {
   font-family: mono;
@@ -96,9 +98,9 @@ body {
   line-height: 1.5;
   font: 18px/28px body, sans-serif;
   color: var(--theme-text);
-  -webkit-font-feature-settings: "kern" 1,"liga" 1,"calt" 1;
-  -moz-font-feature-settings: "kern" 1,"liga" 1,"calt" 1;
-  font-feature-settings: "kern" 1,"liga" 1,"calt" 1;
+  -webkit-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -moz-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -150,9 +152,9 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-    border-top-color: currentcolor;
-    border-top-style: none;
-    border-top-width: 0px;
+  border-top-color: currentcolor;
+  border-top-style: none;
+  border-top-width: 0px;
   border-top: 1px solid var(--theme-hr);
 }
 
@@ -215,7 +217,7 @@ a.social {
 }
 
 a.social#twitter:hover {
-  color: #00AFDE;
+  color: #00afde;
 }
 
 a.social#github:hover {
@@ -223,12 +225,12 @@ a.social#github:hover {
 }
 
 .fa-twitter:hover {
-  color: #00AFDE;
+  color: #00afde;
   cursor: pointer;
 }
 
 .fa-whatsapp:hover {
-  color: #25D366;
+  color: #25d366;
   cursor: pointer;
 }
 
@@ -312,35 +314,35 @@ nav {
 }
 
 .nav-links a.active:before {
-  content: "";
+  content: '';
   width: 100%;
   background-color: var(--theme-text);
 }
 
 .nav-links a:before {
   background-color: transparent;
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   bottom: 0;
   display: block;
   height: 2px;
-  -webkit-transition: .3s all;
-  -o-transition: .3s all;
-  transition: .3s all;
+  -webkit-transition: 0.3s all;
+  -o-transition: 0.3s all;
+  transition: 0.3s all;
   width: 0;
 }
 
 .nav-links a.elements:hover:before {
   background-color: var(--theme-text);
-  content: "";
+  content: '';
   width: 100%;
 }
 
 .expanded {
-  -webkit-transition: .5s height;
-  -o-transition: .5s height;
-  transition: .5s height;
+  -webkit-transition: 0.5s height;
+  -o-transition: 0.5s height;
+  transition: 0.5s height;
   height: auto !important;
   display: block;
   border-color: #e7e7e7;
@@ -438,11 +440,15 @@ nav {
   min-width: 170px;
 }
 
-.post-preview h2, .post-preview h2 a {
+.post-preview h2,
+.post-preview h2 a {
   font-size: 16px;
 }
 
-pre, code { font-family: mono, monospace; }
+pre,
+code {
+  font-family: mono, monospace;
+}
 
 pre {
   font-size: 16px;
@@ -469,22 +475,22 @@ pre p {
 code {
   font-size: 14px !important;
   line-height: 1.67;
-  letter-spacing: .1px;
+  letter-spacing: 0.1px;
 }
 
-code.code-colors:before, code.code-colors>a.line {
+code.code-colors:before,
+code.code-colors > a.line {
   position: absolute;
   left: 0;
   width: 56px;
 }
 
 code.code-colors:before {
-  content: " ";
+  content: ' ';
   display: block;
   top: 0;
   height: 100%;
 }
-
 
 a#cv {
   font-size: 14px;
@@ -499,11 +505,14 @@ a#cv {
   color: var(--astro-code-color-text);
 }
 
-.code-comment, .code-meta {
+.code-comment,
+.code-meta {
   color: var(--astro-code-token-comment);
 }
 
-.code-keyword, .code-selector-tag, .code-type {
+.code-keyword,
+.code-selector-tag,
+.code-type {
   color: var(--astro-code-token-keyword);
 }
 
@@ -511,7 +520,12 @@ a#cv {
   color: var(--astro-code-token-function);
 }
 
-.code-emphasis, .code-quote, .code-string, .code-strong, .code-template-variable, .code-variable {
+.code-emphasis,
+.code-quote,
+.code-string,
+.code-strong,
+.code-template-variable,
+.code-variable {
   color: var(--astro-code-token-string-expression);
 }
 
@@ -553,7 +567,7 @@ a#cv {
   width: 100%;
 }
 
-@media(min-width:600px) {
+@media (min-width: 600px) {
   #about {
     display: flex;
     align-items: center;
@@ -566,7 +580,7 @@ a#cv {
   }
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
   .about_photo {
     text-align: center;
   }
@@ -583,7 +597,7 @@ a#cv {
   }
 }
 
-@media(max-width:300px) {
+@media (max-width: 300px) {
   .about_photo img {
     width: 80%;
   }
@@ -592,7 +606,7 @@ a#cv {
   }
 }
 
-@media(max-width:150px) {
+@media (max-width: 150px) {
   .about_photo img {
     width: 90%;
   }
@@ -601,7 +615,8 @@ a#cv {
   }
 }
 
-.post-title, .post-title a {
+.post-title,
+.post-title a {
   font-size: 20px;
   font-weight: 600;
   line-height: 1.3;
@@ -609,12 +624,12 @@ a#cv {
   margin-bottom: 10px;
 }
 
-
 .index-title {
   margin-top: 3rem;
 }
 
-.post-subtitle, .post-subtitle a {
+.post-subtitle,
+.post-subtitle a {
   font-size: 16px;
   font-weight: 500;
   margin-top: 20px;
@@ -654,23 +669,23 @@ a#cv {
 
 .skill-container {
   background-color: var(--theme-skill);
-  border-radius: .25rem;
-  padding: .25rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
   align-items: center;
   display: flex;
 }
 
 .tags {
   background-color: var(--theme-accent);
-  border-radius: .5rem;
-  padding: .25rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
   color: var(--theme-color-tag);
   width: fit-content;
 }
 
 .selected-tag {
   background-color: var(--theme-accent);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   padding: 2.8px;
   color: var(--theme-color-tag);
   width: fit-content;
@@ -686,16 +701,17 @@ a#cv {
   padding-left: 0;
   margin: 20px 0;
   border-radius: 4px;
-  width: max-content
+  width: max-content;
 }
 
-@media(max-width:430px) {
+@media (max-width: 430px) {
   .pagination {
-    width: min-content
+    width: min-content;
   }
 }
 
-.pagination > li > a, .pagination > li > span {
+.pagination > li > a,
+.pagination > li > span {
   position: relative;
   float: left;
   padding: 6px 12px;

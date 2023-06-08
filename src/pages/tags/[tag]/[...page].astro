@@ -1,11 +1,11 @@
 ---
 import dayjs from 'dayjs';
-import es from "dayjs/locale/es";
+import es from 'dayjs/locale/es';
 dayjs.locale(es);
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Post from '../../../components/Post.astro'
-import Pagination from "../../../components/Paginator.astro";
+import Post from '../../../components/Post.astro';
+import Pagination from '../../../components/Paginator.astro';
 
 export async function getStaticPaths({ paginate }) {
   const posts = (await Astro.glob('../../posts/*.md*')).filter((post) => !post.frontmatter.draft);
@@ -13,18 +13,18 @@ export async function getStaticPaths({ paginate }) {
 
   return tags.map((tag) => {
     const filteredPosts = posts.filter((post) => post.frontmatter.tags.includes(tag));
-	  let postsByDate = filteredPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
-    postsByDate = postsByDate.map(post => {
+    let postsByDate = filteredPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+    postsByDate = postsByDate.map((post) => {
       let date = dayjs(post.frontmatter.pubDate).format('MMMM D, YYYY');
       date = date.charAt(0).toUpperCase() + date.slice(1);
       return {
         ...post,
         frontmatter: {
           ...post.frontmatter,
-          pubDate: date
-        }
-      }
-    })
+          pubDate: date,
+        },
+      };
+    });
     return paginate(postsByDate, { params: { tag }, props: { tags }, pageSize: 4 });
   });
 }
@@ -33,20 +33,21 @@ const { tag } = Astro.params;
 const { page, tags } = Astro.props;
 
 const paginationProps = {
-	...(page.url.prev && {
-		prevUrl: {
-			url: page.url.prev,
-			text: `<i class="fa fa-arrow-circle-left"></i> Newer Posts`,
-		},
-	}),
-	...(page.url.next && {
-		nextUrl: {
-			url: page.url.next,
-			text: `Older Posts <i class="fa fa-arrow-circle-right"></i>`,
-		},
-	}),
+  ...(page.url.prev && {
+    prevUrl: {
+      url: page.url.prev,
+      text: `<i class="fa fa-arrow-circle-left"></i> Newer Posts`,
+    },
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      url: page.url.next,
+      text: `Older Posts <i class="fa fa-arrow-circle-right"></i>`,
+    },
+  }),
 };
 ---
+
 <BaseLayout title={`Clara's Blog | ${tag}`}>
   <main>
     <div id="posts">
@@ -54,25 +55,30 @@ const paginationProps = {
         <p class="title-tags">
           <p class="selected-tag"><a class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`}>{tag}</a> <a class="tags" href={`/posts`}><i class="fa fa-close"></i></a></p>
         </p>
-        {page.data.map((post) => (<Post url={post.url} title={post.frontmatter.title} description={post.frontmatter.description} date={post.frontmatter.pubDate} />))}
+        {page.data.map((post) => <Post url={post.url} title={post.frontmatter.title} description={post.frontmatter.description} date={post.frontmatter.pubDate} />)}
       </div>
       {
         tags.length && (
           <div id="tags">
             <h2 class="post-title">
               <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style={{ width: '1.5rem', height: '1.5rem', marginRight: '3px' }} viewBox="0 -1 24 20" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"></path>
-                <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"></path>
-                <path d="M6 9h-.01"></path>
-              </svg>Tags
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z" />
+                <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
+                <path d="M6 9h-.01" />
+              </svg>
+              Tags
             </h2>
             <div class="tags-flex">
-            {tags.slice(0,10).map((tag) => (
-              <p><a class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`}>{tag}</a></p>
-            ))}
+              {tags.slice(0, 10).map((tag) => (
+                <p>
+                  <a class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`}>
+                    {tag}
+                  </a>
+                </p>
+              ))}
             </div>
-            <div class="all-tags" >
+            <div class="all-tags">
               <a href="/tags/" aria-label="View all blog categories">
                 View all →
               </a>

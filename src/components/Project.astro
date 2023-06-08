@@ -8,15 +8,13 @@ const { image, title, description, date, url } = Astro.props;
   </div>
   <div>
     <h2 class="post-title">
-      <span set:html={title}></span>
-      <p style={{fontSize: '22px', marginTop: '10px', marginBottom: '0px'}}>
+      <span set:html={title} />
+      <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
         👉🏻
-        <a target="blank" class="page-link" href={url}>
-          ¡Quiero saber más!
-        </a>
+        <a target="blank" class="page-link" href={url}> ¡Quiero saber más!</a>
       </p>
     </h2>
-    <h3 class="post-subtitle project" set:html={description}></h3>
+    <h3 class="post-subtitle project" set:html={description} />
     <p class="post-meta">{date}</p>
   </div>
 </div>

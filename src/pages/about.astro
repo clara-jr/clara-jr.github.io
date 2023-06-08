@@ -1,17 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import cv from '../content/CV-es.pdf'
+import cv from '../content/CV-es.pdf';
 
 const pageTitle = "Clara's Blog | About Me";
 ---
 
 <BaseLayout title={pageTitle}>
-	<main>
+  <main>
     <div id="about" class="about-items" style={{ marginRight: '5px', marginLeft: '5px' }}>
       <div class="about_photo">
-        <img id="me" loading="lazy" alt="clear_is_me" style={{ borderRadius: '4px' }} src='/images/fullscat.jpg' onmouseover="this.src = '/images/fullscat-draw.jpg'" onmouseout="this.src = '/images/fullscat.jpg'" />
+        <img id="me" loading="lazy" alt="clear_is_me" style={{ borderRadius: '4px' }} src="/images/fullscat.jpg" onmouseover="this.src = '/images/fullscat-draw.jpg'" onmouseout="this.src = '/images/fullscat.jpg'" />
       </div>
-      <pre class="about_inner">
+      <pre
+        class="about_inner">
         <code class="code-colors">
     <span class="code-comment">// About Me</span>
     
@@ -33,5 +34,5 @@ const pageTitle = "Clara's Blog | About Me";
         </code>
       </pre>
     </div>
-	</main>
+  </main>
 </BaseLayout>

@@ -1,12 +1,13 @@
 ---
 const url = new URL(Astro.request.url);
 ---
+
 <div class="nav-links">
-  <a class={url.pathname === "/" ? "active elements" : "elements"} href="/">Home</a>
-  <a class={url.pathname.includes("/posts") || url.pathname.includes("/tags") ? "active elements" : "elements"} href="/posts/">Blog</a>
-  <a class={url.pathname.includes("/projects") ? "active elements" : "elements"} href="/projects/">Projects</a>
-  <a class={url.pathname.includes("/talks") ? "active elements" : "elements"} href="/talks/">Talks</a>
-  <a class={url.pathname.includes("/about") ? "active elements" : "elements"} href="/about/">About</a>
+  <a class={url.pathname === '/' ? 'active elements' : 'elements'} href="/">Home</a>
+  <a class={url.pathname.includes('/posts') || url.pathname.includes('/tags') ? 'active elements' : 'elements'} href="/posts/">Blog</a>
+  <a class={url.pathname.includes('/projects') ? 'active elements' : 'elements'} href="/projects/">Projects</a>
+  <a class={url.pathname.includes('/talks') ? 'active elements' : 'elements'} href="/talks/">Talks</a>
+  <a class={url.pathname.includes('/about') ? 'active elements' : 'elements'} href="/about/">About</a>
   <a href={`https://www.twitter.com/clear_is_me`} class="social" id="twitter" target="blank">
     <i class="fa fa-twitter"></i>
   </a>
@@ -17,7 +18,7 @@ const url = new URL(Astro.request.url);
 
 <script>
   // hamburguer clicked, expand menu
-  document.querySelector(".navbar-header").addEventListener("click", () => {
-    document.querySelector(".nav-links").classList.toggle("expanded");
+  document.querySelector('.navbar-header').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('expanded');
   });
 </script>
