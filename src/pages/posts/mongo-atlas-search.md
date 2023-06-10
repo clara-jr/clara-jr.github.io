@@ -5,7 +5,7 @@ pubDate: 2023/06/10
 description: 'Una solución rápida y sencilla de búsqueda de texto completo'
 author: 'Clara Jiménez'
 image:
-    url: '/images/posts/mongo-atlas-search.jpg' 
+    url: '/images/posts/mongo-atlas-search.png' 
     alt: 'MongoDB Atlas Search'
 tags: ["mongodb"]
 ---
