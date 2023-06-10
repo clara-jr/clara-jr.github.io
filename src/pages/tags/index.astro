@@ -31,7 +31,7 @@ const pageTitle = "Clara's Blog | Tags";
           <div class="tags-flex">
             {tagsWithCount.map(([tag, count]) => (
               <p>
-                <a class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`}>
+                <a style={{ marginRight: '4px' }} class="tags" href={`/tags/${tag}`} aria-label={`View all posts with the tag: ${tag}`}>
                   {tag}
                 </a>{' '}
                 → {count} Post{count !== 1 && 's'}
