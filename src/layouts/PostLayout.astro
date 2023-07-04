@@ -34,8 +34,8 @@ date = date.charAt(0).toUpperCase() + date.slice(1);
           <div class="post-comment-share-area">
             <div class="post-share">
               <a id="share-whatsapp" class="social-share whatsapp"><i class="fa fa-whatsapp"></i></a>
-              <a id="share-facebook" class="social-share facebook"><i class="fa fa-facebook"></i></a>
               <a id="share-twitter" class="social-share twitter"><i class="fa fa-twitter"></i></a>
+              <a id="share-linkedin" class="social-share linkedin"><i class="fa fa-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -58,22 +58,15 @@ date = date.charAt(0).toUpperCase() + date.slice(1);
 
   const setShareLinks = (rrss, title) => {
     const pageUrl = encodeURIComponent(document.URL);
-    let url = '';
-    let tweet = title.split('<emoji>')[0].split(' ');
-    tweet = tweet.filter((val) => val !== '' && val !== '\n');
-    tweet = tweet.join(' ');
     switch (rrss) {
       case 'whatsapp':
-        url = 'https://api.whatsapp.com/send?text=' + tweet + '%20' + pageUrl;
-        _socialWindow(url);
+        _socialWindow('https://api.whatsapp.com/send?text=' + title + '%20' + pageUrl);
         break;
-      case 'facebook':
-        url = 'https://www.facebook.com/sharer.php?u=' + pageUrl + '&quote=' + tweet;
-        _socialWindow(url);
+      case 'linkedin':
+        _socialWindow('https://www.linkedin.com/sharing/share-offsite?url=' + pageUrl);
         break;
       case 'twitter':
-        url = 'https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + tweet;
-        _socialWindow(url);
+        _socialWindow('https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + title);
         break;
       default:
         break;
@@ -84,9 +77,9 @@ date = date.charAt(0).toUpperCase() + date.slice(1);
     console.log('whatsapp');
     setShareLinks('whatsapp', frontmatter.title);
   };
-  const shareFacebook = () => {
-    console.log('facebook');
-    setShareLinks('facebook', frontmatter.title);
+  const shareLinkedin = () => {
+    console.log('linkedin');
+    setShareLinks('linkedin', frontmatter.title);
   };
   const shareTwitter = () => {
     console.log('twitter');
@@ -94,6 +87,6 @@ date = date.charAt(0).toUpperCase() + date.slice(1);
   };
 
   document.getElementById('share-whatsapp').addEventListener('click', shareWhatsapp);
-  document.getElementById('share-facebook').addEventListener('click', shareFacebook);
+  document.getElementById('share-linkedin').addEventListener('click', shareLinkedin);
   document.getElementById('share-twitter').addEventListener('click', shareTwitter);
 </script>
