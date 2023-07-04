@@ -224,6 +224,10 @@ a.social#github:hover {
   color: #800080;
 }
 
+a.social#linkedin:hover {
+  color: #0a66c2;
+}
+
 .fa-twitter:hover {
   color: #00afde;
   cursor: pointer;
