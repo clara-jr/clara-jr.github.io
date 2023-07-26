@@ -797,6 +797,14 @@ footer {
   color: var(--theme-text);
 }
 
+.post-body a {
+  color: var(--theme-accent);
+}
+
+.post-body a:hover {
+  color: var(--theme-underlined-hover);
+}
+
 .post-body h2 {
   font-weight: 700;
   -webkit-margin-before: 1.5em;
