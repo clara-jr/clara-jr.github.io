@@ -31,7 +31,9 @@ Explicación matemática
 
 Si nos ceñimos a las matemáticas, con una simple fórmula podemos ser capaces de, dado un número de saltos S con los que conectar a la población mundial, determinar cuántas personas distintas P es necesario que conozca cada individuo de la cadena. Viendo el problema desde el otro lado, podemos determinar también, asumiendo un número determinado de personas P que cada individuo conoce distintas del resto, cuál será el número de saltos o enlaces S que nos conecte a todos.
 
-![Equation](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/formula.png)
+$$$
+P^S = 7.53*10^9
+$$$
 
 Para la primera opción, asumiendo un número de saltos igual a 6 y sabiendo que somos 7.53 miles de millones de personas en el mundo, se calcula que cada persona debe conocer a 44.27 personas distintas en un primer nivel, no comunes a los conocidos de segundo o mayor nivel. Como no se conocen personas por partes, digamos que debemos conocer como mínimo a 45 personas distintas de los conocidos del resto para que esta teoría se cumpla con seguridad.
 
@@ -57,7 +59,9 @@ Al igual que ocurre en esta teoría de conexión entre personas en la que los co
 
 La Organización Mundial de la Salud (OMS) estimó que la tasa de contagio (R0) del coronavirus estaba entre 1.4 y 2.5, aunque otras estimaciones hablaron de un rango entre 2 y 3. Esto quiere decir que cada persona infectada por coronavirus puede a su vez infectar a entre 2 y 3 personas. Tomando así una tasa de contagio R0 de valor 2.5, podríamos estimar el número de saltos S que debería realizar el virus para contagiar a toda la población mundial. Este valor resulta tan sólo 25 saltos.
 
-![Equation](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/formulacovid.png)
+$$$
+2.5^S = 7.53*10^9
+$$$
 
 La rapidez con la que el virus vaya a dar esos saltos e incluso la probabilidad de que llegue a darlos en su totalidad, depende de varios factores como la duración del periodo infeccioso del virus en nuestro organismo, o el número de personas susceptibles de contagio con las que pacientes afectados entran en contacto. Por tanto, frenar una epidemia depende en gran parte de nosotros mismos. De la inmunidad de grupo cuando existe vacuna, y cuando no: de nuestros viajes, de nuestros contactos, de nuestros movimientos. Quédate en casa.
 
