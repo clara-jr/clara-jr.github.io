@@ -912,3 +912,5 @@ footer {
 .all-tags a:hover {
   color: var(--theme-underlined-hover);
 }
+
+img[alt=BiciMAD] { width: 400px; }
