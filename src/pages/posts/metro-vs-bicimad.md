@@ -22,11 +22,11 @@ Ya tenemos las tarifas de BiciMAD y del CRTM, ahora solo nos queda saber qué co
 
 ![BiciMAD](/images/posts/BiciMATH.jpg)
 
-## Abono ocasional BiciMAD 🤜🤛 abono 10 viajes CRTM
+## Abono ocasional BiciMAD 🤜🤛 Abono 10 viajes CRTM
 
 Por si no os habíais dado cuenta todavía, esta comparativa va a ser bastante corta. La primera hora en bici con un abono ocasional cuesta 2 €, y 1 viaje en transporte público en Madrid cuesta 0.61 € hasta 2024, y tal vez 1.22 € de ahí en adelante. Salvo en el peor de los casos, **sale más barato ir en transporte público** de un punto A a un punto B de Madrid frente a ir en bici. ¿Y cuál es el peor de los casos? Aquel en el que para llegar del punto A al punto B tuviésemos que hacer algún trasbordo entre bus y metro o entre varios buses. Concretamente, en 2023 nos harían falta 3 trasbordos, es decir, gastar 4 viajes (2.44 €), para que el trayecto nos saliera más barato en bici. En cuanto las tarifas del CRTM vuelvan a subir, nos bastaría un trasbordo (2 viajes) para estar en la misma situación. Si somos capaces de recorrer esa distancia en bici en menos de 1 hora, pero no somos capaces de hacerlo sin hacer ese número de trasbordos, entonces y solo entonces, nos compensaría económicamente hacer uso de BiciMAD en su versión ocasional.
 
-## Abono anual BiciMAD 🤜🤛 abono 10 viajes CRTM
+## Abono anual BiciMAD 🤜🤛 Abono 10 viajes CRTM
 
 Analizar el abono anual de BiciMAD va a ser más interesante: tenemos que ser capaces de calcular el número mínimo de viajes que deberíamos hacer en la ciudad de Madrid para que nos compense tener un abono anual de BiciMAD frente a utilizar abonos de 10 viajes de transporte público. En este caso, no podemos comparar directamente cuánto cuesta un viaje en bici frente a un viaje en metro o bus, porque el precio de un viaje en bici, teniendo el abono anual de BiciMAD, no es un precio fijo sino variable. Este precio va disminuyendo a medida que aumentamos el número de viajes que hacemos al año. Asumiendo viajes de media hora, que cuestan 0.50 €, si solo hacemos 1 viaje al año realmente habremos pagado por ese viaje 25.50 €, un 4180 % más de lo que cuesta en 2023 un viaje en metro o bus (0.61 €). Sin embargo, si hacemos 2 viajes al año, cada viaje nos saldría a 13 €. Tenemos que seguir subiendo el número de viajes hasta saber cuál es el valor que nos devuelve un precio por viaje inferior al precio de un viaje en metro o bus (0.61 € en situación de descuento y 1.22 € en situación normal). Matemáticamente, nos encontraríamos con algo como esto:
 
@@ -62,7 +62,7 @@ $$$
 \lim _{N \to \infin } \frac{25 + 1.1 * N}{N} = 1.1
 $$$
 
-## Abono anual BiciMAD 🤜🤛 abono anual CRTM
+## Abono anual BiciMAD 🤜🤛 Abono anual CRTM
 
 Ya hemos visto el número de viajes a partir del cual nos compensa viajar en bici frente a hacerlo en transporte público haciendo uso del abono de 10 viajes del CRTM, pero ¿qué pasa si viajamos demasiado a lo largo del año? ¿Sigue compensándonos usar la bici o mejor optar por el abono anual del transporte público?
 
