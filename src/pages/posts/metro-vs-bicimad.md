@@ -129,6 +129,8 @@ Una vez más, estos cálculos los he hecho asumiendo un uso de la bicicleta en b
 
 </details>
 
+Por último, dejo por [aquí](https://github.com/clara-jr/bicimath) una aplicación web que podréis utilizar cada vez que tengáis alguna duda (y la queráis resolver rápidamente) sobre qué método de transporte utilizar para moveros por Madrid.
+
 > “Las matemáticas están en todas partes, pero somos miopes”
 >
 > ###### Santi García Cremades
