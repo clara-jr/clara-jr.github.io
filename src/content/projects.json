@@ -15,7 +15,7 @@
   },
   {
     "title": "Finalist + Best Games & Trivia Skill - Alexa Skills Challenge: Beyond Voice",
-    "description": "Gané el premio en la categoría Best Games & Trivia Skill y fui finalista del <a class=\"link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/blogs/alexa/alexa-skills-kit/2021/01/announcing-the-alexa-skills-challenge--beyond-voice-winners-\">Alexa Skills Challenge: Beyond Voice</a> organizado por Amazon Alexa; participé con mi Alexa Skill basada en el popular juego <a class=\"link\" target=\"blank\" href=\"https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7\">Los Hombres Lobo</a>, también conocido como Pueblo Duerme",
+    "description": "Gané el premio en la categoría Best Games & Trivia Skill y fui finalista del <a class=\"link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/blogs/alexa/alexa-skills-kit/2021/01/announcing-the-alexa-skills-challenge--beyond-voice-winners-\">Alexa Skills Challenge: Beyond Voice</a> organizado por Amazon Alexa; participé con mi Alexa Skill basada en el popular juego <a class=\"link\" target=\"blank\" href=\"https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7\">Los Hombres Lobo</a>, también conocido como Pueblo Duerme, que fue implementada usando API Gateway (REST y WebSocket), funciones Lambda con Node.js, datos persistentes almacenados en DynamoDB y una web con HTML y CSS en S3",
     "image": "/images/projects/devpost.png",
     "date": "Enero 2021",
     "url": "https://devpost.com/software/the-werewolves-game"
