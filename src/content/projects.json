@@ -1,5 +1,12 @@
 [
   {
+    "title": "BiciMATH",
+    "description": "Aplicación Web desarrollada con Vue 3 para calcular la forma más económica de moverse por Madrid.",
+    "image": "/images/projects/bicimath.png",
+    "date": "Julio 2023",
+    "url": "https://clara-jr.github.io/bicimath"
+  },
+  {
     "title": "Alexa Skill: Habla con Pocoyó",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es una adaptación del personaje infantil Pocoyó realizada en colaboración con Zinkia Entertainment, S.A.",
     "image": "/images/projects/pocoyo.png",
