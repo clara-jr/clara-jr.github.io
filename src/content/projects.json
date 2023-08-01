@@ -1,7 +1,7 @@
 [
   {
     "title": "BiciMATH",
-    "description": "Aplicación Web desarrollada con Vue 3 para calcular la forma más económica de moverse por Madrid",
+    "description": "Si alguna vez te has preguntado cuál era la mejor opción para moverte por Madrid, esta es la aplicación indicada para resolver tus dudas. ¿Te compensa el abono mensual? ¿El abono anual? ¿Utilizar BiciMAD sería más económico? Con esta aplicación web desarrollada en Vue 3 podrás calcular la forma más económica de moverte por Madrid",
     "image": "/images/projects/bicimath.png",
     "date": "Julio 2023",
     "url": "https://clara-jr.github.io/bicimath"
