@@ -43,7 +43,7 @@
   },
   {
     "title": "Regalos en Confinamiento",
-    "description": "La impotencia de no saber cómo ayudar en los días de confinamiento, que nos ha tocado pasar por el coronavirus, me dio impulso para aportar mi granito de arena en todo esto y desarrollar la iniciativa Regalos En Confinamiento, recogida por <a class=\"link\" target=\"blank\" href=\"http://www.coayuda-19.es/blog/regalos-en-confinamiento/\" >coayuda-19</a> y <a class=\"link\" target=\"blank\" href=\"https://piensoluegoactuo.com/frente-al-coronavirus/para-todos/regalos-en-confinamiento/\" >Pienso Luego Actúo</a>, para hacer regalos virtuales por el día de la madre o para todas esas personas que están celebrando sus cumpleaños en sus casas; fue implementada con Node.js, Express, MongoDB, HTML y CSS",
+    "description": "La impotencia de no saber cómo ayudar en los días de confinamiento, que nos tocó pasar por el coronavirus, me dio impulso para aportar mi granito de arena en todo esto y desarrollar la iniciativa Regalos En Confinamiento, recogida por <a class=\"link\" target=\"blank\" href=\"http://www.coayuda-19.es/blog/regalos-en-confinamiento/\" >coayuda-19</a> y <a class=\"link\" target=\"blank\" href=\"https://piensoluegoactuo.com/frente-al-coronavirus/para-todos/regalos-en-confinamiento/\" >Pienso Luego Actúo</a>, para hacer regalos virtuales para todas esas personas que les tocó celebrar sus cumpleaños o fechas señaladas en sus casas; fue implementada con Node.js, Express, MongoDB, HTML y CSS",
     "image": "/images/projects/actuo.png",
     "date": "Abril 2020",
     "url": "https://regalos-en-confinamiento.herokuapp.com"
