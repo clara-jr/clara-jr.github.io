@@ -145,7 +145,7 @@ Por cierto, adjunto [cheat sheet muy chulo sobre Redis Streams](https://lp.redis
 Redis Pub/Sub + RSMQ para publicación y suscripción a eventos mediante colas
 ----------------------------------------------------------------------------
 
-RSMQ (Redis Simple Message Queue)[\[1\]](https://www.npmjs.com/package/rsmq)[\[2\]](https://github.com/smrchy/rsmq) es una librería, generada con Redis como base (*Just Redis and ~500 lines of javascript*), que permite gestionar envío de mensajes con Redis mediante colas.
+[RSMQ (Redis Simple Message Queue)](https://www.npmjs.com/package/rsmq) es una librería, generada con Redis como base (*Just Redis and ~500 lines of javascript*), que permite gestionar envío de mensajes con Redis mediante colas.
 
 Lo primero que debemos hacer es inicializar RSMQ con la configuración propia de Redis, añadiendo una clave más que será `ns: 'rsmq'`. Después, para poder enviar mensajes a una cola, debemos crear la cola con `createQueue`, dándole un nombre a la cola (`qname`).
 
