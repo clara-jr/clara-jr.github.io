@@ -49,7 +49,7 @@ Para reducir el tamaño de este índice es preferible especificar los atributos 
 }
 ```
 
-Este índice sirve tanto para el caso de que `translations` sea un objeto con atributos `title` y `description` de tipo *string* como para el caso de ser ambos arrays de strings.
+Este índice sirve tanto para el caso de que los atributos `title` y `description` sean de tipo *string* como para el caso de ser ambos arrays de strings.
 
 En caso de que el atributo por el que quisiéramos buscar estuviera dentro de un array de objetos, por ejemplo `translations`, con objetos distintos para cada uno de los idiomas soportados, teniendo cada objeto atributos como `lang`, `title` y `description`, el índice sería el siguiente:
 
