@@ -353,7 +353,7 @@ Otra cosa que podemos tener en cuenta sobre la funcionalidad de los operadores d
 }
 ```
 
-Se trata de separar cada palabra y asociarle un operador de autocompletado a cada una, agrupándolas finalmente en un `must`. De esta forma, con esta búsqueda obtendremos resultados que contengan tanto *"Pienso"* como *"gato"* en el título del documento. Como estamos separando cada palabra de la búsqueda, tendremos que tener en cuenta que, si usamos `autocomplete`, deberemos evitar introducir en la consulta las palabras que tengan una sola letra (a no ser que utilicemos algún analizador customizado).
+Se trata de separar cada palabra y asociarle un operador de autocompletado a cada una, agrupándolas finalmente en un `must`. De esta forma, con esta búsqueda obtendremos resultados que contengan tanto *"Pienso"* como *"gato"* en el título del documento. Como estamos separando cada palabra de la búsqueda, tendremos que tener en cuenta que, si usamos `autocomplete`, deberemos evitar introducir en la consulta las palabras que tengan una sola letra[\[7\]](https://www.mongodb.com/community/forums/t/autocomplete-search-match-multiple-words-in-a-search-term-as-and/16423/2) (a no ser que utilicemos algún analizador customizado o usemos un índice con `minGrams` a 1).
 
 ```json
 {
