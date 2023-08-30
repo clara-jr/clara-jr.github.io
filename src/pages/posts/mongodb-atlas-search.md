@@ -280,9 +280,11 @@ En esta búsqueda, por ejemplo, obtendríamos todos los documentos que incluyera
 
 Una vez visto un poco el funcionamiento de MongoDB Atlas Search y los distintos operadores de la etapa `$search`, vamos a ver también algún que otro impedimento que podríamos encontrar. Por ejemplo, podremos encontrarnos con que el operador `autocomplete` no nos devuelva ningún resultado si lo usamos con cadenas de una única letra. Para solucionar este comportamiento tendríamos que utilizar analizadores customizados[\[3\]](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/custom/) en lugar de los analizadores que encontramos por defecto en este operador.
 
-Además, si quisiéramos utilizar el operador `autocomplete` (o cualquier otro) en campos que estuviesen dentro de arrays de objetos, como era el caso comentado de un atributo `translations` que contenía un array de objetos con atributos `lang`, `title` y `description`, no podríamos utilizarlo[\[4\]](https://www.mongodb.com/community/forums/t/atlas-search-autocomplete-on-an-array-of-object/13692/9), al menos no directamente.
+Además, si quisiéramos realizar cualquier operación de búsqueda (o autocompletado) en campos que estuviesen dentro de arrays de objetos, como era el caso comentado de un atributo `translations` que contenía un array de objetos con atributos `lang`, `title` y `description`, no podríamos utilizarlo[\[4\]](https://www.mongodb.com/community/forums/t/atlas-search-autocomplete-on-an-array-of-object/13692/9), al menos no directamente.
 
-Tendríamos que redefinir el índice de búsqueda indicando como tipo `embeddedDocuments`[\[5\]](https://www.mongodb.com/docs/atlas/atlas-search/field-types/embedded-documents-type/).
+Como hemos visto, tendríamos que redefinir el índice de búsqueda indicando como tipo `embeddedDocuments`[\[5\]](https://www.mongodb.com/docs/atlas/atlas-search/field-types/embedded-documents-type/).
+
+Por ejemplo, para el índice de autocompletado:
 
 ```json
 {
@@ -306,7 +308,7 @@ Tendríamos que redefinir el índice de búsqueda indicando como tipo `embeddedD
 }
 ```
 
-Y a la hora de usar el operador `autocomplete`, deberemos usarlo también de la mano de `embeddedDocument`.
+Y a la hora de usar cualquier operador, deberemos usarlo también de la mano de `embeddedDocument`.
 
 ```json
 {
