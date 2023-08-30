@@ -59,7 +59,8 @@ En caso de que el atributo por el que quisiéramos buscar estuviera dentro de un
     "dynamic": false,
     "fields": {
       "translations": {
-        "type": "document",
+        "dynamic": false,
+        "type": "embeddedDocuments",
         "fields": {
           "title": {
             "type": "string",
@@ -76,7 +77,7 @@ En caso de que el atributo por el que quisiéramos buscar estuviera dentro de un
 }
 ```
 
-Este índice sirve tanto para el caso de que `translations` sea un objeto con propiedades `title` y `description` como para el caso mencionado de ser un array de objetos.
+Este índice de tipo `embeddedDocuments` sirve para el caso mencionado de que `translations` sea un array de objetos. Si `translations` fuera un objeto con propiedades `title` y `description`, en lugar del tipo `embeddedDocuments` usaríamos `document`.
 
 En caso de que el atributo por el que quisiéramos buscar estuviera embebido en un diccionario, por ejemplo `translations`, con claves para cada uno de los distintos idiomas soportados como `es`, `en`, etc. el índice sería el siguiente:
 
@@ -86,8 +87,10 @@ En caso de que el atributo por el que quisiéramos buscar estuviera embebido en 
     "dynamic": false,
     "fields": {
       "translations": {
+        "type": "document",
         "fields": {
           "es": {
+            "type": "document",
             "fields": {
               "title": {
                 "type": "string",
@@ -100,6 +103,7 @@ En caso de que el atributo por el que quisiéramos buscar estuviera embebido en 
             }
           },
           "en": {
+            "type": "document",
             "fields": {
               "title": {
                 "type": "string",
@@ -276,7 +280,7 @@ En esta búsqueda, por ejemplo, obtendríamos todos los documentos que incluyera
 
 Una vez visto un poco el funcionamiento de MongoDB Atlas Search y los distintos operadores de la etapa `$search`, vamos a ver también algún que otro impedimento que podríamos encontrar. Por ejemplo, podremos encontrarnos con que el operador `autocomplete` no nos devuelva ningún resultado si lo usamos con cadenas de una única letra. Para solucionar este comportamiento tendríamos que utilizar analizadores customizados[\[3\]](https://www.mongodb.com/docs/atlas/atlas-search/analyzers/custom/) en lugar de los analizadores que encontramos por defecto en este operador.
 
-Además, si quisiéramos utilizar el operador `autocomplete` en campos que estuviesen dentro de arrays de objetos, como era el caso comentado de un atributo `translations` que contenía un array de objetos con atributos `lang`, `title` y `description`, no podríamos utilizarlo[\[4\]](https://www.mongodb.com/community/forums/t/atlas-search-autocomplete-on-an-array-of-object/13692/9), al menos no directamente.
+Además, si quisiéramos utilizar el operador `autocomplete` (o cualquier otro) en campos que estuviesen dentro de arrays de objetos, como era el caso comentado de un atributo `translations` que contenía un array de objetos con atributos `lang`, `title` y `description`, no podríamos utilizarlo[\[4\]](https://www.mongodb.com/community/forums/t/atlas-search-autocomplete-on-an-array-of-object/13692/9), al menos no directamente.
 
 Tendríamos que redefinir el índice de búsqueda indicando como tipo `embeddedDocuments`[\[5\]](https://www.mongodb.com/docs/atlas/atlas-search/field-types/embedded-documents-type/).
 
