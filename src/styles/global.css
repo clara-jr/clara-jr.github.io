@@ -797,6 +797,11 @@ footer {
   color: var(--theme-text);
 }
 
+.post-body li {
+  list-style: circle;
+  margin-left: 15px;
+}
+
 .post-body a {
   color: var(--theme-accent);
 }

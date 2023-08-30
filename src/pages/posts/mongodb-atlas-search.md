@@ -119,7 +119,21 @@ En caso de que el atributo por el que quisiéramos buscar estuviera embebido en 
 }
 ```
 
-Con `"analyzer": "lucene.standard"` podremos hacer búsquedas abarcando cualquier idioma.
+El analyzer que escojamos se encargará de **transformar** en *searchable terms* (o *tokens*) tanto el campo indexado de nuestra base de datos como el campo de búsqueda que insertemos en el buscador en cuestión. Dichos términos serán los que se comparen a posteriori para devolver un resultado de búsqueda.
+
+Se puede especificar un `analyzer` por cada campo de búsqueda que indexemos, y también un `searchAnalyzer` (analizador usado para las transformaciones del input de búsqueda) distinto del `analyzer` (analizador utilizado para transformar los campos indexados en *searchable terms*). Si no se determina ningún `searchAnalyzer` se usa el asignado en `analyzer`, y si tampoco se ha determinado este, se usa por defecto `lucene.standard`.
+
+Los analizadores con los que podremos trabajar son los siguientes:
+
+- **Standard**: analizador por **defecto**, divide el texto en términos según los **límites de las palabras**, lo que lo hace neutral en cuanto al idioma para la mayoría de los casos de uso; cada idioma puede tener distintos delimitadores de palabras, no necesariamente los espacios, por ejemplo, en inglés se componen palabras con guiones (p. ej. *sign-in*) y esto representaría un separador (p. ej. *sign*, *in*). Además convierte todos los términos a **minúsculas** y **elimina la puntuación**.
+
+- **Simple**: divide el texto en términos a partir de cualquier elemento que **no sea una letra** y convierte todos los términos a **minúsculas**.
+
+- **Whitespace**: divide el texto en términos según la separación por **espacios**.
+
+- **Keyword**: no divide el texto así que solo devuelve algún resultado cuando la coincidencia es exacta con el valor almacenado.
+
+- **Language**: existe un analizador específico adaptado a cada idioma en particular; cada analizador de idiomas tiene separadores de palabras integrados según los patrones de uso de ese idioma.
 
 ## $search aggregation pipeline
 
