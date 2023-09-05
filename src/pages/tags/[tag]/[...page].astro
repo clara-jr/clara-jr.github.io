@@ -11,7 +11,7 @@ export async function getStaticPaths({ paginate }) {
   const posts = (await Astro.glob('../../posts/*.md*')).filter((post) => !post.frontmatter.draft);
   const tags = [...new Set(posts.map((post) => post.frontmatter.tags).flat())].sort();
 
-  return tags.map((tag) => {
+  return tags.flatMap((tag) => {
     const filteredPosts = posts.filter((post) => post.frontmatter.tags.includes(tag));
     let postsByDate = filteredPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
     postsByDate = postsByDate.map((post) => {
