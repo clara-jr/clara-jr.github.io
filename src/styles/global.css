@@ -919,3 +919,8 @@ footer {
 }
 
 img[alt=BiciMAD] { width: 400px; }
+img[alt="Aprendizaje Adaptativo"] { width: 500px; border-radius: 2%; }
+
+.gist-file:nth-child(2) {
+  display: none;
+}

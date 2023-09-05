@@ -1,0 +1,71 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: 'Aprendizaje Adaptativo con Python 👩🏻‍💻'
+pubDate: 2023/12/01
+description: 'Podemos personalizar la experiencia de aprendizaje de cada estudiante en función de sus habilidades y necesidades gracias al aprendizaje automático'
+author: 'Clara Jiménez'
+image:
+    url: '/images/posts/adaptative-learning.jpg' 
+    alt: 'Aprendizaje Adaptativo con Python'
+tags: ["machine learning", "python"]
+draft: true
+---
+Si estamos intentando ofrecer contenido educativo a un grupo de estudiantes para que mejoren sus conocimientos sobre algún tema en particular, y queremos cerciorarnos de que todos consiguen adquirir dichos conocimientos exitosamente, debemos ser conscientes de que cada cual tendrá unas habilidades y necesidades distintas. Visto esto, resulta evidente pensar que una misma estrategia educativa no desencadenará los mismos resultados en todos los estudiantes. Es aquí donde aparece la necesidad de ofrecer una experiencia de aprendizaje adaptada a las necesidades de cada estudiante. Y cuando esta experiencia va a ofrecerse a través de la tecnología (p.ej. un curso online), podremos ayudarnos de la misma para favorecer esta adaptación del contenido. La idea es conseguir guiar a cada estudiante de manera distinta a lo largo del curso según sus habilidades. De esta manera, todos conseguirán aprender lo mismo aunque de forma diferente, adaptada a sus necesidades. Haciendo uso del análisis de datos y aprendizaje automático, podremos adaptar el proceso de aprendizaje en tiempo real. Mediante un análisis de los aciertos y errores de cada estudiante, podremos conocer el estado del conocimiento adquirido hasta un momento específico y podremos decidir así si ofrecemos o no un apoyo educativo adicional con intención de afianzar conceptos.
+
+![Aprendizaje Adaptativo](/images/posts/adaptative-learning.jpg)
+
+El escenario más simplificado en el que podemos aplicar aprendizaje adaptativo podría ser un curso en el que tuviéramos una bifurcación entre 2 caminos en un momento dado. Por ejemplo, si a mitad del curso se detecta que un estudiante no está adquiriendo los conocimientos suficientes con soltura, se le desviará a un camino con un mayor refuerzo de dichos conocimientos antes de terminar el proceso de aprendizaje. Sin embargo, aquel estudiante que demuestre haber interiorizado adecuadamente las competencias oportunas, será desviado hacia el camino más ágil para poder terminar con su experiencia de aprendizaje. Yendo un poco más allá, en lugar de tener 2 caminos en un punto determinado del curso, podemos tener este tipo de contenido adaptativo a lo largo de todo el curso, pudiendo decidir en tiempo real si se ofrece contenido de refuerzo al estudiante en un determinado punto o no.
+
+## Selección de atributos
+
+Para poder implementar un sistema de aprendizaje adaptativo, lo primero que necesitaremos será **disponer de datos** sobre los estudiantes que previamente hayan ido pasando por nuestros cursos. Tendremos que analizar qué información puede ser relevante para el objetivo que nos planteamos, por ejemplo: aciertos y fallos en cuestionarios, tiempo de lectura de documentación o de resolución de preguntas, ayuda o pistas solicitadas a lo largo del curso, etc.
+
+A su vez, es importante no utilizar valores absolutos de los atributos (tiempos/fallos/pistas/etc.) que decidamos integrar en nuestros datos, ya que esto no nos serviría si debemos desviar a un estudiante entre 2 caminos en un punto intermedio de un curso, porque el algoritmo habría sido entrenado con datos de un orden bastante mayor y no comparable con los datos de entrada del nuevo estudiante. Para que las órdenes de magnitud sean comparables, deberíamos trabajar con **datos relativos** en lugar de absolutos o acumulativos. En lugar de utilizar, por ejemplo, el número de cuestionarios fallados, deberemos trabajar con el porcentaje de cuestionarios fallados, teniendo en cuenta por tanto cuántos cuestionarios tiene el curso en cuestión.
+
+Además, dado que cada curso puede ser *de su padre y de su madre* (la cantidad de cuestionarios y su dificultad, la densidad de la documentación a leer, etc.) puede ser de utilidad para el modelo **tener información sobre a qué curso pertenece cada entrada de datos**. Además, para tratar de predecir información sobre si ofrecer refuerzo o no a un estudiante que esté cursando un curso con el que no hayamos entrenado nuestro modelo todavía, conviene haber entrenado nuestro modelo con datos de diversos cursos y no solo de uno, para que tenga un conocimiento más generalizado del problema. Por estos motivos, es recomendable utilizar datos de entrenamiento (y test) de distintos cursos y añadir un atributo identificativo del curso a esos datos. Dado que **los algoritmos de aprendizaje automático supervisado no admiten strings**, ese identificador del curso deberá tener un valor numérico. Para esto, asumiendo que generalmente trabajamos con idetificadores en formato string hexadecimal, podemos utilizar un conversor de hexadecimal a entero en base 10: `dataframe = pd.read_csv("data.csv", converters={"courseId": lambda x: int(x, 16)})`. Esta conversión es adecuada ya que es **determinista**, de forma que cuando tengamos que hacer una predicción con un nuevo dato, asignaremos el mismo valor entero a este identificador que en el resto de datos de entrenamiento utilizados relativos al mismo curso.
+
+Otro atributo importante que podemos tener en cuenta es un identificador del usuario que está realizando el curso. De esta manera, podrá resultar relevante lo que un estudiante haga en cursos anteriores a la hora de decidir por qué camino dirigirle en un nuevo curso. Entendemos que es información relevante si un estudiante tiende generalmente a ser ágil o, por el contrario, suele necesitar refuerzo, y para eso necesitamos identificar a qué usuario pertenece cada entrada de datos. A este identificador habrá que aplicarle la misma transformación a número entero que se le aplique al identificador de curso.
+
+## Etiquetado de datos
+
+Una vez hecho un análisis previo sobre qué información podemos considerar relevante a priori para nuestro modelo de aprendizaje automático, es hora de realizar un segundo análisis más exhaustivo y apoyado por gráficas. Así, para hacer esta valoración y selección de atributos, podremos tratar de interpretar gráficas utilizando `pandas` para recuperar los datos de los que disponemos en un CSV y `matplotlib.pyplot` para *graficarlos*. Una vez escogidos los atributos, desechamos el resto de columnas y transformamos nuestros datos haciendo uso del `StandardScaler` de `sklearn.preprocessing`.
+
+Una vez tengamos un conjunto de datos con información relevante sobre una amplia cantidad de estudiantes, será momento de **etiquetar nuestros datos**, asignando así un valor a cada experiencia de aprendizaje sobre si ha sido ágil o habría necesitado refuerzo. Dado que dispondremos de una gran cantidad de datos que tendremos que etiquetar, lo mejor será automatizar de alguna manera este etiquetado. Esto lo haremos utilizando **algoritmos de *clustering*** para conseguir agrupar nuestros datos según similitudes encontradas en los valores de sus atributos. Esta técnica de aprendizaje automático se trata de un **aprendizaje no supervisado** dado que no se trabaja con el conocimiento de cuál ha de ser el resultado o la salida esperada. El algoritmo de *clustering* dividirá nuestro conjunto de datos en K grupos (siendo K el valor óptimo marcado por el algoritmo). Ojearemos las características de cada grupo y trataremos de identificar si se trata de un grupo ágil o si, por el contrario, necesitaría refuerzo.
+
+Así pues, concretamente haremos uso del algoritmo de *clustering* **KMeans**[\[1\]](https://towardsdatascience.com/how-to-perform-kmeans-clustering-using-python-7cc296cec092) de `sklearn.cluster` y trataremos de encontrar el valor óptimo de K (nº de agrupaciones). Este algoritmo se basa en establecer K centroides aleatorios de entre nuestras entradas de datos y asignar a cada entrada un grupo según el centroide que tenga más próximo (haciendo uso del cálculo de distancias euclídeas entre las entradas de datos y los centroides designados). Una vez agrupados todos los datos, se reasignan los centroides según el punto medio de cada uno de los clusters. Con los nuevos centroides, se repite el proceso hasta que la reasignación de centroides deje de tener sentido porque ya no se produzcan grandes cambios en la división de clusters. Este proceso debemos repetirlo para varios valores de K y, siguiendo el _método del codo_ o _elbow method_, encontraremos el valor óptimo de K. Este método consiste en plasmar en una gráfica, para cada valor de K, cuál ha sido el resultado de la distancia media de los centroides a los elementos pertenecientes a sus clusters (WCSS). Esta gráfica resultará tener forma de codo, de ahí el nombre del método, de forma que para `K=1` tendremos el valor mayor de WCSS y este irá disminuyendo rápidamente hasta pasar a hacerlo más lentamente o incluso a contemplar ligeras subidas además de bajadas. El valor K para el que la gráfica deja de tener una rápida bajada será el óptimo.
+
+Una vez tenemos el valor de K con el que dividir nuestros datos, podemos representar gráficamente y mediante colores los distintos clusters que se han generado. Podemos representar distintas gráficas en función de los distintos atributos de los que se componen nuestros datos para tratar de analizar los mismos y determinar qué etiqueta llevará cada cluster, en función de si percibimos que ese cluster necesitaría refuerzo o no.
+
+<script src="https://gist.github.com/clara-jr/253d384afec928d2610f4ee563a2f024.js"></script>
+
+Según los resultados del experimento realizado en este *notebook*, por ejemplo, tenemos los siguientes clusters y etiquetas:
+
+- 🔴 Rojos, 🟢 verdes y 🔵 azules: tardan poco en resolver tanto los *quizes* como los *puzzles*, no fallan mucho y no compran soluciones ni piden pistas &rarr; **Ágil**
+
+- 🟣 Morados: igual que los anteriores pero fallando más *puzzles*/*quizes* &rarr; aún así **Ágil**
+
+- 💓 Rosas: fallan bastantes *puzzles* y piden muchas pistas &rarr; **Necesita refuerzo**
+
+- 🟡 Amarillos: tardan mucho en resolver los *puzzles*/*quizzes* y compran muchas soluciones de *puzzles* &rarr; **Necesita refuerzo**
+
+- 🟠 Naranjas: tardan poco en resolver los *puzzles*/*quizes* pero fallan muchos *puzzles* y *quizes* &rarr; **Necesita refuerzo**
+
+Una vez etiquetados nuestros datos, generamos un archivo CSV en el que insertamos la columna adicional que representa el resultado de este etiquetado. Estos datos serán los que utilizaremos en la siguiente fase de implementación de un sistema de aprendizaje adaptativo.
+
+## Entrenamiento del modelo
+
+Teniendo un conjunto de datos etiquetado, y sabiendo por tanto para cada proceso de aprendizaje analizado si se trata de un proceso ágil o no, podremos entrenar un modelo con **aprendizaje automático supervisado** para que aprenda a clasificar futuros estudiantes y a asignar así caminos educativos con o sin necesidad de refuerzo.
+
+Para hacer este entrenamiento y evaluación del modelo, debemos separar los valores de entrada de los valores de salida de nuestros datos, es decir, los atributos que definen cada una de las entradas de datos y la salida que esperamos ser capaces de predecir con nuestro algoritmo de clasificación. Seguidamente, haciendo uso de `train_test_split` de `sklearn.model_selection` podemos hacer una separación de nuestros datos en **un conjunto de entrenamiento y otro de test**.
+
+Podemos representar gráficas de nuestro conjunto de test para, tras entrenar y evaluar modelos de aprendizaje automático, poder comparar lo predicho con la realidad y ser capaces de tener una representación visual de la calidad de lo predicho. Los puntos rojos 🔴 representarían los estudiantes con necesidad de refuerzo en un curso determinado y en verde 🟢 estarán aquellos datos que representen procesos de aprendizaje ágiles.
+
+Así, utilizando nuestro conjunto de entrenamiento y continuando con el uso de `sklearn`, podemos entrenar distintos modelos de aprendizaje automático supervisado[\[2\]](https://medium.com/thrive-in-ai/classification-algorithms-in-python-5f58a7a27b88) (Logistic Regression, Random Forest, Naive Bayes, KNN, Gradient Boosting, SVM, etc.) para clasificar nuevos datos de entrada, y podemos evaluar los resultados de cada modelo con nuestro conjunto de test. En el experimento realizado en el siguiente *notebook*, vemos cómo se encuentran los mejores resultados con el algoritmo Random Forest.
+
+<script src="https://gist.github.com/clara-jr/4c09c247591a0dc3c2597d047829cfa9.js"></script>
+
+Tras la toma de una decisión sobre a qué camino enviar a un estudiante, es decir, si este requiere cierto refuerzo para interiorizar los conocimientos o no, podríamos optar por reentrenar el modelo con este nuevo dato. Dado que trabajamos con atributos cuyos valores representan información relativa y no cuantitativa, esta realimentación podría realizarse igualmente tras completar el curso o en el instante en el que realizamos la predicción y la bifurcación del proceso de aprendizaje del estudiante.
+
+> “Though the use of artificial intelligence in education is far from a new phenomenon, the technology is poised to radically change the way teachers teach and students learn”
+>
+> ###### Dan Ayoub, General Manager of Education, Microsoft
