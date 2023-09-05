@@ -96,11 +96,22 @@ body {
   width: 100%;
   max-width: 95ch;
   line-height: 1.5;
-  font: 18px/28px body, sans-serif;
+  font:
+    18px/28px body,
+    sans-serif;
   color: var(--theme-text);
-  -webkit-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-  -moz-font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
-  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  -webkit-font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
+  -moz-font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1,
+    'calt' 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -918,8 +929,13 @@ footer {
   color: var(--theme-underlined-hover);
 }
 
-img[alt=BiciMAD] { width: 400px; }
-img[alt="Aprendizaje Adaptativo"] { width: 500px; border-radius: 2%; }
+img[alt='BiciMAD'] {
+  width: 400px;
+}
+img[alt='Aprendizaje Adaptativo'] {
+  width: 500px;
+  border-radius: 2%;
+}
 
 .gist-file:nth-child(2) {
   display: none;

@@ -9,7 +9,7 @@ const tagsWithCount = Object.entries(
       runningTags[tag] = (runningTags[tag] || 0) + 1;
     });
     return runningTags;
-  }, {})
+  }, {}),
 ).sort((a, b) => (a[0] > b[0] ? 1 : -1));
 const pageTitle = "Clara's Blog | Tags";
 ---
