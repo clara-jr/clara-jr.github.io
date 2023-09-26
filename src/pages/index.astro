@@ -43,7 +43,7 @@ const skills = ['nodejs', 'javascript', 'expressjs', 'mongodb', 'redis', 'git', 
     <h2 class="post-title index-title">Latest Projects</h2>
     {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date} />)}
     <h2 class="post-title index-title">Latest Talks</h2>
-    {lastTalks.map((talk) => <Item url={talk.url} title={talk.preview} date={talk.date} />)}
+    {lastTalks.map((talk) => <Item url={talk.url} title={talk.name} date={talk.date} preview={talk.preview} />)}
     <h2 class="post-title index-title">Knowledge</h2>
     <div id="knowledge">
       {

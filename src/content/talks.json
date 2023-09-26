@@ -1,15 +1,16 @@
 [
   {
-    "preview": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills",
+    "name": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills",
     "title": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://extra.codemotion.com/live-conference-madrid-2023/\">@ Codemotion Live Conference Madrid 2023</a>",
     "description": "En este Open Space presentamos la <a class=\"title-link\" target=\"blank\" href=\"https://twitter.com/comunidadalexa\">Comunidad de Alexa en Español</a> y el programa de <a class=\"title-link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/alexa/champions\">Alexa Champions</a>. También dimos un repaso al desarrollo de Alexa Skills, desde las tripas de Alexa y el diseño de flujos conversacionales hasta cómo testear, certificar e incluso monetizar una Alexa Skill.",
     "image": "",
     "date": "Mayo 2023",
-    "url": "https://clara-jr.github.io/talks/",
+    "url": "",
+    "preview": "/talks",
     "slides": ""
   },
   {
-    "preview": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon",
+    "name": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon",
     "title": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
     "description": "En esta mesa redonda comentamos ejemplos de Alexa Skills de éxito y cómo podemos sacar partido al resultado de un proyecto presentado en un Hackathon. Es una charla que forma parte del <b>Hackathon Alexa: Impacto Social</b> organizado junto a Women In Voice Spain, Women In Voice México y la Comunidad de Alexa en español.",
     "image": "",
@@ -18,7 +19,7 @@
     "slides": ""
   },
   {
-    "preview": "¿Cómo crear tu primera Skill en Amazon Alexa? ¿Es posible conseguir empleo en el mundo de los asistentes de voz?",
+    "name": "¿Cómo crear tu primera Skill en Amazon Alexa? ¿Es posible conseguir empleo en el mundo de los asistentes de voz?",
     "title": "¿Cómo crear tu primera Skill en Amazon Alexa? ¿Es posible conseguir empleo en el mundo de los asistentes de voz? <a class=\"title-link\" target=\"blank\" href=\"https://live.codemotion.com/devcast/devcast-spanish-edition-09062021\">@ Codemotion DevCast</a>",
     "description": "En esta charla hablamos del boom de los asistentes de voz (desde Alexa a Google Home), además veremos cómo poder empezar a programar tu primera skill en Alexa y trataremos de diseccionar qué trabajos se han creado en el mundo de los asistentes de voz y cuál es el futuro de estos dispositivos. Es una charla estupenda de iniciación para las personas con ganas de meterse en el mundo de los asistentes de voz.",
     "image": "https://pbs.twimg.com/media/E3CZf0KWQAEP_AB.jpg",
@@ -27,7 +28,7 @@
     "slides": ""
   },
   {
-    "preview": "¿Podríamos crear un juego al estilo Among Us con Alexa?",
+    "name": "¿Podríamos crear un juego al estilo Among Us con Alexa?",
     "title": "¿Podríamos crear un juego al estilo Among Us con Alexa? <a class=\"title-link\" target=\"blank\" href=\"https://events.codemotion.com/conferences/online/2021/online-tech-conference-spanish-edition-spring\">@ Codemotion Online Tech Conference</a>",
     "description": "2020 ha sido el año de quedarse en casa y, en 2021, se sufren las secuelas de esto. Todavía seguimos pasando mucho tiempo enfrente del ordenador o del móvil: viendo twitch, jugando al Among Us o, por qué no, creando nuestro propio Among Us. En esta charla veremos cómo crear un juego al estilo Among Us, generalmente conocido como Hombres Lobo o Pueblo Duerme, utilizando computación <b>serverless</b>, <b>WebSocket</b> y <b>Node.js</b>... ¡Y dejaremos que <b>Alexa</b> sea nuestra narradora!",
     "image": "https://pbs.twimg.com/media/EzSJbsjUYBEpgoS?format=jpg",
@@ -36,7 +37,7 @@
     "slides": "https://slides.com/clear_is_me/amongus-alexa-codemotion/fullscreen"
   },
   {
-    "preview": "Easy-Peasy Alexa Skills",
+    "name": "Easy-Peasy Alexa Skills",
     "title": "Easy-Peasy Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
     "description": "En esta charla vemos cómo podemos crear una Alexa Skill en un momentito: desde el diseño del <b>modelo de interacción vocal</b> hasta la implementación del código de nuestra Skill con ejemplos en <b>JavaScript</b>, pasando por conceptos como <b>Account Linking</b>, <b>persistencia</b> de datos, <b>SSML</b>, y hasta <b>APL</b> para dispositivos con pantalla.",
     "image": "https://pbs.twimg.com/media/EoT5i8UXcAMkwHx.jpg",
