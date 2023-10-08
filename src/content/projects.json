@@ -15,7 +15,7 @@
   },
   {
     "title":"Cat VS Carrier",
-    "description":"Juego hecho con <a class=\"link\" target=\"blank\" href=\"https://kaboomjs.com/\">Kaboom.js</a> e inspirado en mi gata Nita. Debes esquivar los transportines (o destruirlos) y comer tantas latas de comida como puedas en 30 segundos.",
+    "description":"Juego hecho con <a class=\"link\" target=\"blank\" href=\"https://kaboomjs.com/\">Kaboom.js</a> e inspirado en mi gata Nita; debes esquivar los transportines (o destruirlos) y comer tantas latas de comida como puedas en 30 segundos",
     "image":"/images/projects/catvscarrier.png",
     "date": "Julio 2021",
     "url": "https://clear-is-me.itch.io/cat-vs-carrier"
