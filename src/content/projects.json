@@ -14,6 +14,13 @@
     "url": "https://www.amazon.es/clara-jr-Habla-con-Pocoyo/dp/B0BG5KF5DW"
   },
   {
+    "title":"Cat VS Carrier",
+    "description":"Juego hecho con <a class=\"link\" target=\"blank\" href=\"https://kaboomjs.com/\">Kaboom.js</a> e inspirado en mi gata Nita. Debes esquivar los transportines (o destruirlos) y comer tantas latas de comida como puedas en 30 segundos.",
+    "image":"/images/projects/catvscarrier.png",
+    "date": "Julio 2021",
+    "url": "https://clear-is-me.itch.io/cat-vs-carrier"
+  },
+  {
     "title": "Finalist + Best Games & Trivia Skill - Alexa Skills Challenge: Beyond Voice",
     "description": "Gané el premio en la categoría Best Games & Trivia Skill y fui finalista del <a class=\"link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/blogs/alexa/alexa-skills-kit/2021/01/announcing-the-alexa-skills-challenge--beyond-voice-winners-\">Alexa Skills Challenge: Beyond Voice</a> organizado por Amazon Alexa; participé con mi Alexa Skill basada en el popular juego <a class=\"link\" target=\"blank\" href=\"https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7\">Los Hombres Lobo</a>, también conocido como Pueblo Duerme, que fue implementada usando API Gateway (REST y WebSocket), funciones Lambda con Node.js, datos persistentes almacenados en DynamoDB y una web con HTML y CSS en S3",
     "image": "/images/projects/devpost.png",
@@ -113,7 +120,7 @@
   },
   {
     "title": "#fototechUPM",
-    "description": "Primer premio en el concurso de fotografía sobre ciencia y tecnología #fototechUPM con una fotografía relacionada con la Ley de Moore y titulada \"Las cosas pequeñas son las que cambian el mundo\"",
+    "description": "Primer premio en el concurso de fotografía sobre ciencia y tecnología #fototechUPM con una fotografía relacionada con la Ley de Moore y titulada \"Las cosas pequeñas son las que cambian el mundo\"; todas las fotografías con las que he participado en varias ediciones de este concurso están en <a class=\"link\" target=\"blank\" href=\"https://fototech.upm.es/autor/clara-jimenez-recio/\">el banco de imágenes de fototech.upm.es</a>",
     "image": "/images/projects/fototechUPM.jpg",
     "date": "Noviembre 2017",
     "url": "https://www.upm.es/?id=e79e4c851819f510VgnVCM10000009c7648a____&prefmt=articulo&fmt=detail"
