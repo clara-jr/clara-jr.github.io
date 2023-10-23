@@ -119,7 +119,7 @@ async function expirationHandler(message) {
 }
 ```
 
-Pero, un momento, una última pregunta: **¿qué pasa si la instancia encargada de atender alguno de los eventos de expiración se cae?** Perderíamos todos los eventos expirados mientras que la instancia haya estado caída. Si queremos solventar también este último punto, **podremos hacer uso de `GETDEL`** y dejar de usar `anyid` para permitir que cualquier instancia atienda a cualquier evento de expiración, pero solo una recogerá el elemento de Redis (la primera que recupere el objeto y lo elimine).
+Pero, un momento, una última pregunta: **¿qué pasa si la instancia encargada de atender alguno de los eventos de expiración se cae?** Como Redis Pub/Sub tiene un funcionamiento *fire and forget*, perderíamos todos los eventos expirados mientras que la instancia haya estado caída. Si queremos solventar también este último punto, **podremos hacer uso de `GETDEL`** y dejar de usar `anyid` para permitir que cualquier instancia atienda a cualquier evento de expiración, pero solo una recogerá el elemento de Redis (la primera que recupere el objeto y lo elimine).
 
 ```javascript
 async function expirationHandler(message) {
@@ -134,6 +134,19 @@ async function expirationHandler(message) {
   }
 }
 ```
+
+¿Y qué pasaría si todas las instancias estuvieran caídas? 🫣 En este caso llegaríamos a tener datos *huérfanos*, sin clave de expiración asociada, y podrían quedarse en Redis sin llegar a persistirse en base de datos indefinidamente. Para solucionar esto, cada vez que nos llegue información actualizada sobre un objeto que tengamos almacenado en Redis, además de actualizarla podemos generar su clave de expiración si es que esta desapareció:
+
+```javascript
+const expirationKey = await redisCache.get(`reminder:${key}`)
+if (expirationKey) {
+  await redisCache.set(key, JSON.stringify(object));
+} else {
+  await redisCache.multi().set(key, JSON.stringify(object)).setex(`reminder:${key}`, TTL, 'expire').exec();
+}
+```
+
+Lo que sí hemos comprobado es que no podríamos recurrir a Redis Keyspace Notifications en caso de necesitar realizar una acción determinada en el momento justo de recibir un mensaje bajo suscripción a Redis Pub/Sub. Porque si ese mensaje llega y *no estoy*, lo habré perdido para siempre 🥵.
 
 Ya sabéis cómo utilizar almacenamiento temporal en caché. ¡Ahora sólo tenéis que utilizarlo bien!
 
