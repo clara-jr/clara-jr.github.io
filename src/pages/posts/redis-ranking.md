@@ -1,29 +1,28 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 'Redis Ranking 👩🏻‍💻'
-pubDate: 2023/10/01
+pubDate: 2023/11/20
 description: 'Utilizamos las estructuras de datos de Redis para implementar un ranking'
 author: 'Clara Jiménez'
 image:
     url: 'images/posts/redis-ranking.jpg' 
     alt: 'Redis Ranking'
 tags: ["redis", "javascript"]
-draft: true
 ---
 
-Utilizar Redis como base de datos para gestionar un ranking puede ser una buena idea (y de hecho lo es), y podemos verlo en [este artículo](https://redis.com/solutions/use-cases/leaderboards/) que muestra concretamente un caso de uso de un ranking implementado con Redis, como también vamos a ver a continuación.
+Utilizar Redis como base de datos para gestionar un ranking puede ser una buena idea (y de hecho lo es), y podemos verlo en [este artículo](https://redis.com/solutions/use-cases/leaderboards/) que muestra un caso de uso de un ranking implementado con Redis, como también vamos a ver a continuación.
 
-Concretamente, vamos a abordar una solución en la que poder crear varios rankings, asociados a distintos grupos de usuarios, ya que generalmente los usuarios de un sistema no suelen competir todos contra todos. Por cada grupo de usuarios para el que se quiera generar un ranking, **se creará un [sorted set](https://redis.io/docs/data-types/sorted-sets/)** con una clave identificativa del grupo, por ejemplo `ranking:[groupId]`. **El *score* de los elementos del sorted set representará la puntuación** de cada usuario respecto a la cual se ordena el ranking. **El identificador de estos elementos estará compuesto por un identificador asociado al usuario y un valor desempatador para elementos con un mismo *score***. Así pues, este identificador tendrá el formato `[timestamp]:[userId]`, siendo timestamp la fecha (como marca temporal de Unix en milisegundos) en que el usuario fue introducido en el ranking (por ejemplo, el momento en el que empieza a jugar un juego para el que se quiere obtener un ranking). Esto nos permitirá usar la ordenación lexicográfica de Redis para resolver los empates en puntuación automáticamente.
+Concretamente, vamos a abordar una solución en la que poder crear varios rankings, asociados a distintos grupos de usuarios, ya que generalmente los usuarios de un sistema no suelen competir todos contra todos. Por cada grupo de usuarios para el que se quiera generar un ranking, **se creará un [sorted set](https://redis.io/docs/data-types/sorted-sets/)** con una clave identificativa del grupo, por ejemplo `ranking:[groupId]`. **El *score* de los elementos del sorted set representará la puntuación** de cada usuario respecto a la cual se ordena el ranking. **El identificador de estos elementos estará compuesto por un identificador asociado al usuario y un valor desempatador para elementos con un mismo *score***. Así pues, este identificador tendrá el formato `[timestamp]:[userId]`, siendo `timestamp` la fecha (como marca temporal de Unix en milisegundos) en que el usuario fue introducido en el ranking (por ejemplo, el momento en el que empieza a jugar un juego para el que se quiere obtener un ranking). Esto nos permitirá usar la ordenación lexicográfica de Redis para resolver los empates en puntuación automáticamente.
 
 **La puntuación se almacenará como un valor negativo en los sorted sets** ya que Redis ordena los elementos de los sorted sets de menor a mayor puntuación, y **si los almacenáramos con valores positivos y los rescatáramos en orden reverso** para obtener en las primeras posiciones aquellos elementos con una mayor puntuación, **Redis también resolvería en orden lexicográfico inverso los empates**, resultando como ganador de un empate el jugador que entró más tarde al ranking en lugar del primero de ellos.
 
 Para tener también almacenada la **información asociada a cada usuario del sorted set usaremos [hashes](https://redis.io/docs/data-types/hashes/)**. Generaremos un hash por cada usuario con clave `ranking:[groupId]:[userId]`. Añadimos el identificador del grupo al que pertenece el usuario, y para el que estamos creando el ranking, con intención de facilitar operaciones en bulk sobre todos los usuarios de un grupo, como el borrado de los datos de todos los usuarios de un grupo.
 
-Estos hashes contendrán al menos el nombre del usuario (`name`) y **el identificador del usuario en el ranking** (`userRankingId`, de formato `[timestamp]:[userId]`, siendo timestamp la fecha en que el usuario entró en dicho ranking). Puede ser útil almacenar en el hash el nombre del usuario (así como otros atributos descriptivos del usuario) para recuperarlo y poder mostrarlo en una tabla en nuestra aplicación. En cuanto al campo `userRankingId`, al almacenarlo en el hash de cada usuario, podremos editar (o eliminar) fácilmente un usuario de un ranking. Si queremos sumar puntos a un determinado usuario en un ranking, conocemos su `groupId` y `userId`, rescatamos con ello el valor de su hash y utilizamos la propiedad `userRankingId` para identificar el elemento del sorted set al cual queremos incrementarle el *score*. A la hora de eliminar a un usuario de un ranking, eliminaríamos el hash del usuario y, seguidamente, podríamos eliminar el elemento correspondiente del sorted set haciendo uso de nuevo del `userRankingId`.
+Estos hashes contendrán al menos el nombre del usuario (`name`) y **el identificador del usuario en el ranking** (`userRankingId`, de formato `[timestamp]:[userId]`, siendo `timestamp` la fecha en que el usuario entró en dicho ranking). Puede ser útil almacenar en el hash el nombre del usuario (así como otros atributos descriptivos del usuario) para recuperarlo y poder mostrarlo en una tabla en nuestra aplicación. En cuanto al campo `userRankingId`, al almacenarlo en el hash de cada usuario, podremos editar (o eliminar) fácilmente un usuario de un ranking. Si queremos sumar puntos a un determinado usuario en un ranking, conocemos su `groupId` y `userId`, rescatamos con ello el valor de su hash y utilizamos la propiedad `userRankingId` para identificar el elemento del sorted set al cual queremos incrementarle el *score*. A la hora de eliminar a un usuario de un ranking, eliminaríamos el hash del usuario y, seguidamente, podríamos eliminar el elemento correspondiente del sorted set haciendo uso de nuevo del `userRankingId`.
 
 ![Redis Ranking](/images/posts/redis-ranking.jpg)
 
-Para añadir un nuevo usuario al ranking utilizaríamos `ZADD`, añadiendo así un elemento al sorted set correspondiente. Lo podríamos hacer con la opción `'NX'` para evitar sobreescribir elementos que ya estaban en el sorted set. Esto podría ser útil en caso de que tuviéramos varias instancias de un mismo servicio atendiendo a la necesidad de añadir un usuario nuevo a un ranking. El identificador del elemento que añadamos (`itemId`) deberá seguir la estructura `[timestamp]:[userId]`.
+Para añadir un nuevo usuario al ranking utilizaríamos `ZADD`, añadiendo así un elemento al sorted set correspondiente. Lo podríamos hacer con la opción `'NX'` para evitar sobreescribir elementos que ya estaban en el sorted set. Esto podría ser útil en caso de que tuviéramos varias instancias de un mismo servicio atendiendo a la necesidad de añadir un usuario nuevo a un ranking. Además, como se ha mencionado antes, el identificador del elemento que añadamos (`itemId`) deberá seguir la estructura `[timestamp]:[userId]`.
 
 ```javascript
 async function addItemToSortedSet(sortedSetKey, itemId, itemScore = 0) {
@@ -50,16 +49,16 @@ async function removeItemFromSortedSet(sortedSetKey, itemId) {
 Para saber la puntuación de un determinado usuario en un ranking podremos recurrir a `ZSCORE`.
 
 ```javascript
-async function getItemRank(sortedSetKey, itemId) {
-  return await redis.zrank(sortedSetKey, itemId);
+async function getItemScore(sortedSetKey, itemId) {
+  return await redis.zscore(sortedSetKey, itemId);
 }
 ```
 
 Además de la puntuación de un usuario, podremos conocer también la posición que ocupa en un determinado ranking haciendo uso de `ZRANK`.
 
 ```javascript
-async function getItemScore(sortedSetKey, itemId) {
-  return await redis.zscore(sortedSetKey, itemId);
+async function getItemRank(sortedSetKey, itemId) {
+  return await redis.zrank(sortedSetKey, itemId);
 }
 ```
 
@@ -85,17 +84,17 @@ Podríamos utilizar de forma equivalente `ZRANGE` con la opción `'WITHSCORES'` 
 async function rangeByScorePaginated(sortedSetKey, { page = 1, limit = 10 } = {}) {
   const from = (page - 1) * limit;
   const to = from + limit - 1;
-  let startPosition = from + 1;
 
   let rangedSortedSet = await redis.zrange(sortedSetKey, from, to, 'WITHSCORES');
 
   // zrevrange returns an array with format [id, score, id, score, ...]
   // This way we will turn it into an array with format [[id, score, rank],  [id, score, rank], ...]
+  let itemRank = from + 1;
   rangedSortedSet = rangedSortedSet
     .map((itemId, index, array) => {
       if (index % 2 === 0) {
         const itemScore = array[index + 1];
-        return [itemId, parseInt(itemScore), startPosition++];
+        return [itemId, parseInt(itemScore), itemRank++];
       }
       return null;
     })
@@ -139,6 +138,12 @@ async function updateHash(hashKey, newData) {
 
 ```javascript
 async function updateHashField(hashKey, field, value) {
+  return await redis.hset(hashKey, field, value);
+}
+```
+
+```javascript
+async function addHashField(hashKey, field, value) {
   return await redis.hsetnx(hashKey, field, value);
 }
 ```
@@ -146,6 +151,12 @@ async function updateHashField(hashKey, field, value) {
 ```javascript
 async function deleteFieldsFromHash(hashKey, fields) {
   await redis.hdel(hashKey, fields);
+}
+```
+
+```javascript
+async function deleteHash(hashKey) {
+  await redis.del(hashKey);
 }
 ```
 
