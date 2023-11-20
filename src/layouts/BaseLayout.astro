@@ -13,7 +13,7 @@ export interface Props {
 const siteConfig = {};
 const { title, description, author, image, date } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(image ? image.url : '/images/fullscat-draw.jpg', Astro.url).href;
+const socialImageURL = new URL(image?.url || '/images/fullscat-draw.jpg', Astro.site).href;
 ---
 
 <!doctype html>
