@@ -10,11 +10,11 @@ image:
 tags: ["redis", "microservices", "javascript"]
 ---
 
-Un sistema de planificación y ejecución de tareas es muy útil (y necesario) para gran cantidad de proyectos. Es muy común, por ejemplo, tener la necesidad de enviar emails a determinados usuarios cada cierto tiempo o en un momento concreto y preestablecido. Por otro lado, también es frecuente encontrarse con la necesidad de programar tareas bajo alguna expreción cronológica, como algo que haga falta hacer 1 vez al día o al mes. Por eso, vamos a ver cómo podríamos centralizar esta necesidad que tenemos en un planificador de tareas utilizando Redis.
+Un sistema de planificación y ejecución de tareas es muy útil (y necesario) para gran cantidad de proyectos. Es muy común, por ejemplo, tener la necesidad de enviar emails a determinados usuarios cada cierto tiempo o en un momento concreto y preestablecido. Por otro lado, también es frecuente encontrarse con la necesidad de programar tareas bajo alguna expresión cronológica, como algo que haga falta hacer 1 vez al día o al mes. Por eso, vamos a ver cómo podríamos centralizar esta necesidad que tenemos en un planificador de tareas utilizando Redis.
 
 ## Tareas recurrentes
 
-Para la ejecución de tareas recurrentes (bajo alguna expreción cronológica) no necesitaremos recurrir a Redis todavía. Tan solo haremos uso de [`node-cron`](https://github.com/node-cron/node-cron).
+Para la ejecución de tareas recurrentes (bajo alguna expresión cronológica) no necesitaremos recurrir a Redis todavía. Tan solo haremos uso de [`node-cron`](https://github.com/node-cron/node-cron).
 
 ```javascript
 import cron from 'node-cron';
