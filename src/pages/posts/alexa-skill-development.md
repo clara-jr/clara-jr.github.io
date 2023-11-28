@@ -5,7 +5,7 @@ pubDate: 2019/06/10
 description: 'Alexa es el servicio de voz propio de Amazon y el cerebro que se encuentra detrás de los altavoces inteligentes Amazon Echo'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/alexa.png' 
+    url: '/images/posts/alexa.png' 
     alt: 'Alexa Voice Interaction Model'
 tags: ["alexa"]
 ---
@@ -34,7 +34,7 @@ Para el caso de uso del manejo de dispositivos inteligentes debe crearse por tan
 
 Una vez creada la Skill es el momento de describir el modelo de interacción a través de la creación de Intents asociados a la misma. Estas Intents serán las acciones que se permitirá realizar al usuario. Por ejemplo, podríamos tener una Intent denominada ParameterIntent encargada de atender preguntas sobre parámetros ambientales en alguna zona de la casa. Las diferentes expresiones que podrá usar el usuario para invocar las acciones se denominan Utterances: “¿Qué temperatura hace en el salón?”, “¿Cuál es la humedad actual en la cocina?”, etc. En estas expresiones el usuario podrá incluir determinadas variables con información relevante que serán los Slots. Un Slot podría ser en este caso el parámetro ambiental por el que estamos preguntando, o el lugar de la casa en cuestión.
 
-![Alexa Voice Interaction Model](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/alexa.png)
+![Alexa Voice Interaction Model](/images/posts/alexa.png)
 
 La descripción de estas acciones posibles (Intents) con las distintas expresiones (Utterances) para su invocación así como el tipo de datos incluidos en estas expresiones con información relevante (Slots) se realiza en la herramienta Build ofrecida por la consola de desarrollador de Alexa.
 

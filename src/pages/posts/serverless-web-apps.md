@@ -5,7 +5,7 @@ pubDate: 2020/06/11
 description: 'Aplicaciones web sin servidor… ¿Perdona? ¿Cómo que “sin servidor”?'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/awsgateway.png' 
+    url: '/images/posts/awsgateway.png' 
     alt: 'Serverless Web Apps'
 tags: ["aws", "serverless"]
 ---
@@ -23,7 +23,7 @@ Azúcar, especias, y muchas cosas bonitas fueron los ingredientes escogidos para
 
 Según las necesidades que tengamos para desplegar nuestra aplicación necesitaremos utilizar todos estos componentes o quizás sólo algunos de ellos.
 
-![AWS API Gateway & Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/awsgateway.png)
+![AWS API Gateway & Lambda](/images/posts/awsgateway.png)
 
 Amazon S3 podremos utilizarlo para almacenar el frontend de nuestra web, los ficheros con información estática (ReactJS, Angular, JavaScript, HTML, CSS, imágenes, etc.). Sin embargo, si decidimos utilizar GitHub Pages para esta parte, no necesitaremos recurrir a este elemento de AWS. En cualquier caso, este frontend realizará peticiones a una API REST que estará alojada en Amazon API Gateway con un endpoint determinado y en el que podremos definir métodos HTTP como GET, PUT, POST o DELETE.
 
@@ -42,14 +42,14 @@ Al desplegar una aplicación web en AWS Amplify, podremos indicar un proveedor G
 
 De esta manera, con AWS Amplify podemos alojar rápidamente proyectos estáticos creados en GitHub o incluso en local, y, a su vez, añadir una API REST o GraphQL que controle datos almacenados en DynamoDB. En caso de recurrir a una API REST, haremos uso de nuevo de Amazon API Gateway. Si decidimos optar por una API GraphQL, entrará en juego un nuevo componente llamado AWS APPSync, que permitirá a su vez utilizar un método de subscripción a cambios en la base de datos y actualizar así la interfaz web en tiempo real (real-time UI).
 
-![AWS Amplify](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/awsamplify.png)
+![AWS Amplify](/images/posts/awsamplify.png)
 
 AWS Elastic Beanstalk + DynamoDB
 --------------------------------
 
 Por último, voy a hablaros de Amazon EC2, y concretamente, su integración con AWS Elastic Beanstalk que, en este caso, se trata de un PaaS, a diferencia de los componentes serverless como API Gateway y Lambda. Para este tipo de despliegue de aplicaciones, tanto el frontend como el backend se podrán alojar en instancias de Amazon EC2, pudiendo tener una aplicación web completa alojada en un mismo lugar, basada por ejemplo en ReactJS, Node.js y Express; además podríamos disponer de nuevo de una base de datos NoSQL haciendo uso de DynamoDB. También, haciendo uso de Amazon SNS podemos publicar notificaciones para controlar el mantenimiento de la web.
 
-![AWS Elastic Beanstalk](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/awsbeanstalk.png)
+![AWS Elastic Beanstalk](/images/posts/awsbeanstalk.png)
 
 Amazon EC2 es un servicio de Amazon utilizado para crear y ejecutar máquinas virtuales en la nube, lo que se denominan instancias de máquinas virtuales. Estas máquinas virtuales incluirán un sistema operativo determinado por el usuario e incluso podrán ser creadas con aplicaciones integradas. A parte del sistema operativo pueden escogerse otra serie de características sobre el procesador, el número de CPUs virtuales, la memoria o la velocidad de transferencia de datos. Con Elastic Beanstalk, podremos simplificar el despliegue del código de nuestra aplicación en instancias EC2, encargándose Elastic Beanstalk automáticamente del proceso.
 

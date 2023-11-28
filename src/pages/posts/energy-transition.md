@@ -5,7 +5,7 @@ pubDate: 2020/02/06
 description: 'Las ciudades representan dos tercios del consumo de energía a nivel global, siendo los edificios los principales responsables de esta cifra y protagonizando así la imprescindible transformación hacia un nuevo modelo energético'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/energia.png' 
+    url: '/images/posts/energia.png' 
     alt: 'Balance Energético de Madrid'
 tags: ["science"]
 ---
@@ -16,7 +16,7 @@ Las ciudades consumen más de dos tercios de la energía que se produce a nivel 
 
 Pero, ¿qué tipo de energía consumimos? y ¿para qué la utilizamos? En el caso particular de Madrid, según datos de 2014, la mayor cantidad de energía consumida hace referencia a productos petrolíferos y va destinada prácticamente en su totalidad al transporte, sector que supera el 30 % de la energía consumida. Por otro lado, la electricidad y el gas natural, que protagonizan otra gran parte de nuestro consumo energético, abastecen de energía al sector de la construcción (residencial, comercial e institucional). Los edificios son así los principales consumidores de energía en ciudades, abarcando un 56 % de la energía total consumida en la capital. Este sector presenta a su vez un 40 % de las emisiones de CO2.
 
-![Balance Energético de Madrid](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/energia.png)
+![Balance Energético de Madrid](/images/posts/energia.png)
 
 Además, de toda esta energía que consumimos en Madrid, solo un 2 % se genera dentro de la ciudad; el 98 % de la energía consumida es importada, al igual que ocurre con la mayoría de alimentos, productos de consumo, maquinaria electrónica, etc. en cuya elaboración también se ha utilizado energía producida en el exterior de la ciudad. Para reducir el consumo energético en la ciudad será necesario aumentar la generación producida dentro de la misma, fomentando el empleo de fuentes de energía locales, ya que su explotación y aprovechamiento supondrá un menor coste medioambiental. Además, estas fuentes de energía deberán centrarse preferiblemente en generación distribuida basada en energías renovables, y de entre las renovables, aquellas de ciclo menos contaminante denominadas energías limpias como la energía solar o eólica.
 
@@ -39,7 +39,7 @@ Sin lugar a duda el cambio climático es uno de los grandes retos a los que se e
 
 Las ciudades impactan de una manera alarmante en el medio ambiente: el 70 % de las emisiones se pueden atribuir directa o indirectamente al consumo de bienes y servicios dentro de estos entornos, siendo cada uno de nosotros los principales responsables de estas emisiones. El agua caliente, la electricidad y los combustibles de calefacción generan el mayor impacto: de media el 34 % de nuestra huella de carbono. El 26 %, una cuarta parte de nuestro impacto, se atribuye a nuestros hábitos de alimentación, siendo en gran parte consecuencia del elevado consumo de proteína animal. Al transporte privado y colectivo le corresponde el 10 % de las emisiones. El 30 % restante se asocia a otros bienes y servicios que consumimos de manera cotidiana.
 
-![Energía](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/energia2.png)
+![Energía](/images/posts/energia2.png)
 
 Tenemos que integrar en nuestras decisiones de compra criterios de sostenibilidad y conseguir que los gobiernos actúen de manera ejemplarizante. El reto del cambio climático requiere que todas las personas seamos conscientes del impacto ambiental de nuestras decisiones. Es necesario por tanto un cambio de mentalidad en el uso y consumo de los recursos energéticos, concienciándonos sobre la cantidad de energía que consumimos y responsabilizándonos en pro a su reducción. Cuanto más lo demoremos, más lejos estaremos de lograrlo y la emergencia climática no espera.
 

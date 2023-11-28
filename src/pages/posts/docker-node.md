@@ -5,7 +5,7 @@ pubDate: 2021/01/19
 description: '"Pues en mi máquina funciona"'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/docker.png' 
+    url: '/images/posts/docker.png' 
     alt: 'Docker'
 tags: ["docker", "javascript"]
 ---
@@ -23,7 +23,7 @@ Cliente: intermediario entre el usuario y el demonio; el cliente de Docker serí
 
 Registros: almacenan las imágenes en repositorios públicos o privados; el Registry predeterminado de Docker es Docker Hub pero podemos crear también un Registry propio.
 
-![Docker](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/docker.png)
+![Docker](/images/posts/docker.png)
 
 Imágenes y contenedores
 -----------------------

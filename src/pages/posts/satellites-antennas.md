@@ -5,7 +5,7 @@ pubDate: 2020/04/18
 description: 'Los satélites se encuentran a cientos o miles de kilómetros de altura respecto a la superficie terrestre y desde la Tierra somos capaces de enviarles información y recibirla de vuelta'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/awsgateway.png' 
+    url: '/images/posts/awsgateway.png' 
     alt: 'Serverless Web Apps'
 tags: ["teleco"]
 ---
@@ -36,13 +36,13 @@ Hablemos primero de routers WiFi. ¿Cómo pensáis que es la antena de vuestro r
 
 En cuanto a la telefonía móvil, para realizar o recibir una llamada telefónica en vuestro teléfono móvil, la antena utilizada en el dispositivo debe ser prácticamente isótropa, con un diagrama de radiación lo más omnidireccional posible, y por tanto de baja ganancia y directividad, para poder movernos y hablar desde cualquier lugar o posición con el mismo teléfono móvil sin necesidad de apuntar concretamente al lugar en el que esté la estación base que nos vaya a dar cobertura en cada momento. Las estaciones base son el eslabón principal que conecta a nuestros teléfonos móviles con el resto de la red de telefonía. La comunicación entre nuestro dispositivo móvil y esta estación base es inalámbrica, y por ello hemos necesitado el uso de antenas para establecer la comunicación. También lo será el camino entre la estación base destino y el móvil del usuario final que recibe la llamada. Sin embargo, desde que la estación base que nos da cobertura recibe nuestra intención de llamada, hasta que, tras un largo y complejo camino se llega a dirigir la llamada a la estación base del móvil del destinatario, la señal deja de transmitirse de forma inalámbrica para recorrer ciudades, países o incluso el mundo entero de forma cableada, generalmente a través de cables de fibra óptica terrestres y… ¡submarinos!
 
-![Internet](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/internet.png)
+![Internet](/images/posts/internet.png)
 
 Sí, así es, el planeta entero está lleno de cables y no sólo bajo el suelo o en las fachadas de nuestros edificios, también atraviesan los mares y océanos. La empresa TeleGeography ofrece un mapa interactivo[\[1\]](https://www.submarinecablemap.com) con todos los cables submarinos que hay desplegados en todo el mundo. Y del mismo modo que todo este cableado permite, en la mayoría de los casos, conectar la red de telefonía móvil de todo el planeta, permite también dar acceso global a Internet, conectando los servidores de información de todo el mundo. Es cierto que el mundo puede interconectarse también a través de satélites, pero desde la irrupción de la fibra óptica los cables han empezado a ganarle el partido en algunos servicios, permitiendo transportar muchos más datos a un coste mucho menor. El tráfico internacional de Internet que aún se transporta por satélite es realmente pequeño, inferior al 1 %.
 
 Aún así, los satélites son una solución perfecta para ciertas aplicaciones, pudiendo conectar y acercar las nuevas tecnologías a lugares que aún no hayan sido cableados por fibra óptica. También son una solución ideal para servicios que necesitan distribuir contenido de una fuente de origen a múltiples equipos de destino repartidos por diversas ubicaciones. ¿A qué os suena esto? Un servicio que se caracteriza por enviar información a múltiples destinos desde un mismo origen es la difusión de canales de televisión.
 
-![TV](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/tv.png)
+![TV](/images/posts/tv.png)
 
 ¿Cómo llegan los canales de televisión a nuestras casas? La transmisión televisiva por satélite comienza en la localización de la emisora en tierra. Esta envía la señal al satélite de comunicaciones encargado de distribuir su servicio de televisión, que estará generalmente en la órbita GEO. El envío de esta señal desde una estación en tierra hasta el satélite debe realizarse utilizando antenas parabólicas lo suficientemente grandes como para obtener una ganancia considerable y suficiente para alcanzar al satélite con la potencia y puntería necesarias.
 
@@ -52,13 +52,13 @@ Finalmente, esta señal es captada por una antena instalada en el hogar del usua
 
 Voy a hablaros finalmente de otro servicio cotidiano que requiere del uso de antenas y satélites. Estoy hablando de la tecnología GPS. Las antenas GPS de nuestros teléfonos móviles, por ejemplo, deben ser de poca ganancia ya que estamos hablando de un dispositivo móvil, el cual no vamos a tener constantemente apuntando a un satélite concreto. Sin embargo, no sólo es por esto que debe tener poca ganancia sino porque la tecnología GPS se basa en la recepción de datos provenientes de al menos 4 satélites distintos. Así que, aunque nuestro dispositivo GPS fuese fijo e inmóvil, no podríamos utilizar una antena muy directiva porque tendríamos que ser capaces de abarcar señales procedentes de 4 satélites distintos.
 
-![GPS](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/gps.jpg)
+![GPS](/images/posts/gps.jpg)
 
 La información que recibimos de estos satélites se basa en su posición y el momento justo en el que se ha enviado dicho mensaje. En nuestro dispositivo, recibimos la información y, conociendo la hora precisa a la que lo estamos recibiendo, podemos calcular cuánto ha tardado en llegar. Sabiendo cuánto ha tardado en llegar el mensaje y que se transmitía a la velocidad de la luz, podemos saber a qué distancia estamos de cada satélite. Esto nos ubica en un punto de una esfera alrededor de cada satélite, ¿pero en cuál exactamente? Recibiendo información de posición y hora de emisión del mensaje de 4 satélites distintos, podremos encontrar el punto de corte de esas 4 esferas y habremos calculado perfectamente nuestras coordenadas.
 
 Este método matemático que permite que hallemos nuestra posición a través de la distancia respecto a 3 o más puntos de referencia se denomina trilateración, análogo a la triangulación. En un problema bidimensional, de tan sólo dos dimensiones, podemos resolver la posición de un objeto dadas las distancias (r1, r2 y r3) respecto a, al menos, 3 puntos distintos (P1, P2 y P3). Trazando circunferencias alrededor de cada punto, cuyo radio sea la distancia a la que se encuentra el objeto respecto a ese punto, podemos encontrar el punto de corte entre las 3. Entre 2 circunferencias obtendremos 2 puntos de corte A y B y, para saber en cuál de esos 2 puntos se encuentra nuestro objeto, deberemos trazar la circunferencia alrededor del tercer punto.
 
-![Triangulation](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/triang.png)
+![Triangulation](/images/posts/triang.png)
 
 En un problema tridimensional, como es el caso de GPS, debemos utilizar un cuarto punto, en este caso un cuarto satélite, que nos permita saber las 3 dimensiones de nuestra posición: latitud, longitud y altura respecto del nivel del mar.
 

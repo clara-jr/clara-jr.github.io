@@ -5,13 +5,13 @@ pubDate: 2020/04/12
 description: 'Las ondas electromagnéticas pueden transmitirse por el aire sin llegar a interferirse entre ellas, ¿cómo es posible?'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/espectro.jpg' 
+    url: '/images/posts/espectro.jpg' 
     alt: 'Signals Frequencies'
 tags: ["teleco"]
 ---
 Cuando queremos transmitir información a través del aire y, por tanto, sin cables que encierren y encaminen nuestras señales, el componente principal que necesitaremos son las antenas. Las antenas nos servirán como elemento que direccione y guíe nuestras señales pero, ¿cómo mandar tantas señales por el aire sin interferir entre ellas y siendo capaces de recuperar en cada contexto las que se necesite? Aquí entran en juego las frecuencias y concretamente, el espectro radioeléctrico. Para que distintos servicios que comparten el mismo espacio en la transmisión de sus señales no lleguen a interferirse, tan sólo deben tratar de ocupar frecuencias distintas, bandas separadas dentro del espectro radioeléctrico. El espectro radioeléctrico o de radiofrecuencia (RF) se refiere a la parte menos energética del espectro electromagnético, y por tanto, la de menor frecuencia, desde 3 Hz hasta 300 GHz. Aunque este nombre lleva como raíz la palabra radio, no solo la radio utiliza estas frecuencias, también lo hacen los radares, los radiotelescopios para estudios astronómicos, o las transmisiones de televisión (TDT, televisión por cable o satélite), telefonía móvil y otras comunicaciones inalámbricas como el WiFi de nuestro router o una conexión Bluetooth. Las tecnologías RFID y NFC que podemos tener en nuestros móviles, tarjetas bancarias o tarjetas de transporte, también trabajan con este tipo de ondas electromagnéticas. Tiene también sus usos en medicina como las resonancias magnéticas o en medicina estética en tratamientos cosméticos para tensar la piel, reducir la grasa o promover la cicatrización. Los satélites de comunicaciones trabajan también en este rango del espectro electromagnético.
 
-![Signals Frequencies](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/espectro.jpg)
+![Signals Frequencies](/images/posts/espectro.jpg)
 
 Bandas de frecuencia
 --------------------

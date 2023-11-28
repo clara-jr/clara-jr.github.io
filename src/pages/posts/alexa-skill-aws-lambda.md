@@ -5,7 +5,7 @@ pubDate: 2020/05/06
 description: 'Las Alexa-Hosted Skills nos permiten desarrollar una Skill de Alexa end-to-end haciendo uso de la capa gratuita de AWS pero, ¿y si necesitamos más?'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda3.png' 
+    url: '/images/posts/lambda3.png' 
     alt: 'Alexa Skill Lambda'
 tags: ["aws", "alexa"]
 ---
@@ -40,21 +40,21 @@ Alexa.SkillBuilders.custom().withSkillId([ID])
 
 El ID de nuestra Skill se muestra en la consola de desarrollo de Alexa, tanto en el listado de Skills como en la sección Build, en el apartado Endpoint.
 
-![Alexa Skill Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda1.png)
+![Alexa Skill Lambda](/images/posts/lambda1.png)
 
 Ahora ya podemos volver a crear nuestro fichero comprimido incluyendo estas dependencias, es decir, la carpeta node\_modules trabajando con Node.js, y cargarla en nuestra función Lambda previamente creada en AWS. Esta función Lambda puede haber sido creada perfectamente como una función “Desde Cero”.
 
-![Alexa Skill Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda2.png)
+![Alexa Skill Lambda](/images/posts/lambda2.png)
 
 Una vez creada la función Lambda y habiendo desplegado en ella el código de la lógica de nuestra Skill, es momento de terminar de conectar nuestra lambda con el Modelo de Interacción Vocal de nuestra Skill en la consola de desarrollo de Alexa. Para esto, debemos añadir un desencadenador o trigger del tipo Alexa Skills Kit a nuestra Lambda e introducir en él el ID de nuestra Skill.
 
-![Alexa Skill Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda3.png)
+![Alexa Skill Lambda](/images/posts/lambda3.png)
 
-![Alexa Skill Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda4.png)
+![Alexa Skill Lambda](/images/posts/lambda4.png)
 
 Finalmente, debemos editar el endpoint de nuestra Skill en la sección Build de la consola de desarrollo, en el apartado Endpoint. Introducimos en este campo el Amazon Resource Name (ARN) de nuestra función Lambda, que lo encontraremos en AWS, en la parte de arriba a la derecha de la página de configuración de nuestra Lambda.
 
-![Alexa Skill Lambda](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda5.png)
+![Alexa Skill Lambda](/images/posts/lambda5.png)
 
 Trabajar con versiones y alias para entornos de producción y desarrollo en AWS
 ------------------------------------------------------------------------------
@@ -63,27 +63,27 @@ Lo que he contado hasta ahora supondría la existencia de una única versión de
 
 Para esto, necesitaremos tener un endpoint al que apunte nuestra Skill publicada y otro diferente para apuntar desde nuestra Skill en desarrollo. Sin embargo, ahora sólo disponemos de un endpoint asociado al ARN por defecto (Incompleto o Unqualified), el cual está conectado con la versión $LATEST. Para disponer de varios endpoints tendremos que crear nuevos alias y asociar estos a distintas versiones. No nos olvidemos tampoco de configurar el trigger Alexa Skills Kit para cada uno de los alias que creemos.
 
-![Alexa Skill Lambda Versions](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda7.png)
+![Alexa Skill Lambda Versions](/images/posts/lambda7.png)
 
-![Alexa Skill Lambda Versions](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda8.png)
+![Alexa Skill Lambda Versions](/images/posts/lambda8.png)
 
 El ARN del alias que utilicemos para publicar nuestra Skill deberá apuntar a una versión estable y estática, mientras que, podremos utilizar un segundo alias para nuestra Skill en desarrollo que, apuntando a una versión distinta, podamos editar y probar sin modificar la Skill publicada.
 
 Empecemos por tanto creando un alias para la primera publicación de nuestra Lambda, lo llamaremos “Alias 1” y quedará apuntando a la versión $LATEST. El endpoint al que vincularemos nuestra Skill en desarrollo será, por tanto, el ARN del alias “Alias 1”. Ponemos a punto nuestra versión $LATEST y mandamos nuestra Skill al proceso de certificación. Una vez publicada, estará vinculada al “Alias 1”, y no podrá cambiarse esta vinculación a no ser que pretendamos pasar otra vez el proceso de certificación.
 
-![Alexa Skill Lambda Alias](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambdaalias1.png)
+![Alexa Skill Lambda Alias](/images/posts/lambdaalias1.png)
 
 Pues bien, podemos crear ahora una nueva versión a la que llamaremos “Versión 1”, con el mismo contenido que la versión $LATEST, y podemos tomar la decisión de editar el alias “Alias 1” para que apunte a esta versión, la cual será una versión estable que a su vez debe ser estática, no es modificable. Tendremos así el código de nuestra Skill pública congelado en el alias “Alias 1” que lleva por versión “Versión 1”.
 
 Podemos crear ahora un nuevo alias para el endpoint de nuestra Skill en desarrollo al que llamaremos “Alias 2” y vincularlo a la versión $LATEST, la cual sí podremos modificar tranquilamente para testear cambios en nuestra Skill sin estropear nuestra Skill en producción.
 
-![Alexa Skill Lambda Alias](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambdaalias2.png)
+![Alexa Skill Lambda Alias](/images/posts/lambdaalias2.png)
 
 Una vez que la nueva versión es estable con los nuevos cambios añadidos, podemos publicar una versión “Versión 2” y cambiar la versión a la que apunta el “Alias 1”, endpoint de nuestra Skill pública. Habremos actualizado nuestra Skill en producción sin necesidad de pasar un proceso de certificación.
 
 En caso de realizar cambios a su vez en el Modelo de Interacción Vocal, sí deberemos pasar por el proceso de certificación y, por tanto, el endpoint de nuestra Skill publicada cambiará cuando la Skill que estaba en desarrollo sea aceptada, pasando a apuntar a la versión $LATEST del alias “Alias 2”. Una vez pasado el proceso de certificación y publicada nuestra Skill con este nuevo endpoint apuntando al ARN del alias “Alias 2” con la versión $LATEST, podemos publicar exitosamente una versión estable con nombre “Versión 2” y dejar este alias estático vinculándolo a esta versión. El “Alias 1” lo apuntaremos ahora hacia la versión $LATEST, siendo así esta versión la que editemos siempre en desarrollo y, ahora, el “Alias 1” será el que representará el endpoint de nuestra Skill en desarrollo y el “Alias 2” nuestra Skill en producción.
 
-![Alexa Skill Lambda Alias](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambdaalias3.png)
+![Alexa Skill Lambda Alias](/images/posts/lambdaalias3.png)
 
 También podríamos optar por generar un nuevo alias por cada versión que publiquemos. Sin embargo, tan sólo con dos alias y, aplicando un intercambio adecuado de versiones, podemos ser perfectamente capaces de tener nuestros dos entornos de desarrollo y producción.
 
@@ -94,7 +94,7 @@ En una Alexa-Hosted Skill, si queríamos trabajar con datos persistentes debíam
 
 En la sección de Permisos de nuestra función Lambda podemos abrir el rol que tiene asignado nuestra función, y editar las políticas que tiene asociadas, añadiendo a estas los permisos necesarios para la lectura y escritura de datos persistentes almacenados en DynamoDB.
 
-![Alexa Skill Lambda DynamoDB](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/lambda6.png)
+![Alexa Skill Lambda DynamoDB](/images/posts/lambda6.png)
 
 Podemos añadir, por ejemplo, las siguientes acciones a la política de nuestro rol de ejecución:
 

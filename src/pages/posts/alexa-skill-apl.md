@@ -5,7 +5,7 @@ pubDate: 2019/06/13
 description: 'Al combinar elementos visuales con experiencias de voz, los desarrolladores ampliarán notoriamente las formas de interacción y de muestra de contenido que puedan ofrecer sus Skills'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/apl.png' 
+    url: '/images/posts/apl.png' 
     alt: 'Alexa Presentation Language'
 tags: ["alexa"]
 ---
@@ -113,7 +113,7 @@ Diseño avanzado de un documento APL
 
 Una vez conocido el proceso de inclusión de respuestas visuales en nuestros dispositivos Amazon Echo con pantalla, podemos ser capaces de mostrar información con un diseño más elaborado y adaptable a la forma y tamaño de cada dispositivo.
 
-![Alexa Presentation Language](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/apl.png)
+![Alexa Presentation Language](/images/posts/apl.png)
 
 Para conseguir una pantalla como esta crearemos nuestros propios layouts compuestos por distintos elementos: texto, imagen, etc. En el atributo resources podemos incluir además valores parametrizados que puedan ser utilizados de forma genérica y ordenada en el resto del documento APL.
 

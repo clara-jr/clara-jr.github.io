@@ -5,7 +5,7 @@ pubDate: 2019/06/12
 description: 'El proceso de vinculación de cuentas en una Skill de Alexa permite conectar el usuario asociado a un dispositivo Amazon Echo con otro propio de una plataforma o aplicación externa, pudiendo acceder a servicios adicionales ofrecidos por dicha aplicación'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/accountlinking.png' 
+    url: '/images/posts/accountlinking.png' 
     alt: 'OAuth 2.0'
 tags: ["alexa"]
 ---
@@ -22,7 +22,7 @@ Framework de autorización OAuth 2.0
 
 La implementación de esta funcionalidad de vinculación de cuentas entre una Skill de Alexa y servicios externos sigue el estándar o framework de autorización RFC6749 conocido como OAuth 2.0. Este estándar permite a las aplicaciones obtener acceso limitado a cuentas de usuario en un servicio HTTP. Delega la autenticación del usuario al servicio que aloja la cuenta del mismo (aplicación externa) y autoriza a las aplicaciones de terceros (Alexa) el acceso a dicha cuenta de usuario. OAuth 2.0 maneja los siguientes conceptos o roles: propietario del recurso o resource owner, cliente o client, servidor de recursos o resource server, servidor de autorización o authorization server. El propietario del recurso es el usuario registrado en la aplicación externa que tiene acceso a datos restringidos del servidor de recursos. El cliente es la aplicación, en este caso la Skill de Alexa, que desea acceder a la cuenta del propietario del recurso. Primeramente, el cliente debe autenticarse a través del servidor de autorización utilizando las credenciales de usuario del propietario de recursos para obtener acceso al servidor de recursos. El servidor de recursos es el servidor donde se alojan los servicios a los que el usuario quiere acceder. El servidor de autorización, que puede ser el mismo que el servidor de recursos, es el encargado de autenticar la identidad del propietario de recursos y entregar el token de acceso oportuno. Este token es el necesario para acceder a los datos y servicios ofrecidos por el servidor de recursos. El servidor de recursos aloja por tanto las cuentas de usuario y el servidor de autorización verifica la identidad del usuario y en caso de éxito genera el token de acceso a la aplicación.
 
-![OAuth 2.0](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/accountlinking.png)
+![OAuth 2.0](/images/posts/accountlinking.png)
 
 Este es el flujo genérico del proceso, sin embargo, variará ligeramente dependiendo del tipo de autorización utilizado. El tipo de concesión de la autorización depende del método utilizado por el cliente para solicitar dicha autorización y de los tipos de autorización soportados por el propio servidor de autorización. OAuth 2.0 define distintos tipos de autorización, de los cuales Alexa ofrece autorización por código o Code Grant y autorización implícita o Implicit Grant.
 

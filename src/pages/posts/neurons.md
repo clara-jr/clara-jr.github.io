@@ -5,7 +5,7 @@ pubDate: 2019/05/21
 description: 'Los seres humanos tenemos casi 100 mil millones de neuronas, más de 10 veces la población mundial y casi tantas como estrellas tiene nuestra galaxia'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/brain.png' 
+    url: '/images/posts/brain.png' 
     alt: 'Brain'
 tags: ["science"]
 ---
@@ -29,7 +29,7 @@ El lóbulo parietal, que recibe por tanto información visual proveniente del l�
 
 Los lóbulos temporales, situados en la zona de las orejas, desempeñan por tanto un papel importante en tareas visuales complejas, como el reconocimiento de caras y son importantes también para el equilibrio. Sin embargo, se centran principalmente en la recepción y el procesado de información proveniente de los oídos, encargándose así del manejo del lenguaje auditivo y los sistemas de comprensión del habla.
 
-![Brain](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/brain.png)
+![Brain](/images/posts/brain.png)
 
 La planificación de nuestro futuro o la toma de decisiones racionales se produce en el lóbulo frontal, zona asociada al raciocinio. Es el lóbulo más grande del cerebro humano y se caracteriza por tanto por su papel en el procesamiento de funciones cognitivas complejas: la planificación, coordinación, control y ejecución de la conducta. Sin embargo, si esta parte asociada al raciocinio se desconecta de la parte emocional, las decisiones que tomamos los seres humanos se vuelven generalmente equivocadas. En la corteza motora, situada en el lóbulo frontal y encargada de nuestras funciones voluntarias, encontramos una representación de nuestro cuerpo pero mal dimensionada y recibe el nombre de homúnculo.
 

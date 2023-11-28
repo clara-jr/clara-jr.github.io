@@ -5,13 +5,13 @@ pubDate: 2020/04/26
 description: '¿Cuántos satélites necesito para cubrir la superficie lunar? ¿Se verán atraídos por la gravedad terrestre? ¿Cómo serán esos satélites? ¿Y las estaciones en la Tierra o en la Luna?'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/enlace.png' 
+    url: '/images/posts/enlace.png' 
     alt: 'Satellite Power Channels'
 tags: ["teleco"]
 ---
 Imaginemos que queremos enviar una misión a la Luna. En nuestro satélite natural colocaremos varios exploradores que recorrerán toda la superficie lunar y una estación base situada en un lugar concreto. Tanto los exploradores como la estación base, para comunicarse entre ellos y con una estación en la Tierra, necesitarán establecer enlaces satelitales. Al no existir únicamente comunicación Luna-Tierra sino que también existiría comunicación intralunar, lo más adecuado sería colocar los satélites de comunicaciones orbitando la Luna en lugar de la Tierra. Pero, ¿cuántos satélites necesitaremos?, ¿a qué altura los colocaremos? Y, ¿cómo lograrán servir de intermediario en nuestra comunicación con la Luna?
 
-![Earth-Moon Satellites](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/earthmoon.jpg)
+![Earth-Moon Satellites](/images/posts/earthmoon.jpg)
 
 Diseño de la órbita lunar
 -------------------------
@@ -20,7 +20,7 @@ Bien, ya sabemos dónde estarán nuestros satélites, ahora es momento de saber 
 
 Teniendo clara la altura a la que orbitarán nuestros satélites y partiendo del ángulo de elevación entre un satélite y el punto más lejano de su huella de cobertura, podremos obtener matemáticamente el arco de la superficie lunar que cubrirá cada uno de ellos y con ello cuántos satélites serían necesarios para una órbita circular o elíptica. A menor ángulo de elevación, mayor arco de cobertura por cada satélite y menor número de satélites necesitaremos para cubrir la superficie lunar, el cual podrá ser inferior a una decena.
 
-![Moon Orbit Design](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/sat.png)
+![Moon Orbit Design](/images/posts/sat.png)
 
 Para el caso de órbitas elípticas, otros parámetros como la excentricidad, el tamaño de los semiejes y tiempo de paso por el periapsis o periápside (zona de la órbita en la que el satélite está más cerca de la Luna) deben ser también tomados en cuenta para determinar un número de satélites adecuado que cubra toda la superficie lunar. En este caso, seguramente consiguiéramos cubrir todo el satélite natural de la Tierra con una cantidad de satélites menor que con una órbita circular; sin embargo, el diseño se vuelve mucho más completo, con velocidades cambiantes en los distintos puntos de la órbita e incluso llegando a enfrentarnos a fuerzas gravitacionales provocadas por el three-body problem en la zona del apoapsis o apoápside, donde el satélite se encuentra más alejado de su centro de atracción, en este caso la Luna. Por tanto, a pesar de reducirse el número de satélites necesarios recurriendo a una órbita elíptica, estos satélites supondrán un mayor gasto debido al aumento de consumo de combustible dada la necesidad de corrección de la órbita por la importante presencia de la fuerza gravitacional terrestre, especialmente en el apoapsis.
 
@@ -53,7 +53,7 @@ Potencia radiada
 
 Del mismo modo analizamos el enlace Luna-Tierra y sabremos con cuánta potencia deberemos enviar desde la Tierra hacia la Luna y desde la Luna hacia la Tierra, además de la potencia con la que deberá redirigir el satélite la información hacia ambos sentidos.
 
-![Satellite Power Channels](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/enlace.png)
+![Satellite Power Channels](/images/posts/enlace.png)
 
 Ahora que sabemos con cuánta potencia enviaremos desde una estación o vehículo explorador hacia el satélite y viceversa, es momento de calcular los amplificadores que se necesitarán en cada caso para conseguir dichos valores de potencia. En las estaciones base y en los vehículos de exploración necesitaremos amplificadores de potencia para conseguir la potencia calculada requerida tras la antena en transmisión. Teniendo esta potencia en transmisión conseguiremos que, al llegar al satélite, se pueda recuperar adecuadamente la señal en el mismo, separándola del ruido. La potencia a la salida de nuestro amplificador junto con la amplificación producida por la antena de la estación base o del explorador en cada caso, deberá resultar como mínimo la potencia calculada como necesaria en este punto de la transmisión. Del mismo modo, calculando qué cantidad de esta potencia es la que finalmente llega al satélite tras las pérdidas sufridas en el camino, podemos obtener el valor de la ganancia que necesitaremos en el satélite para conseguir la potencia requerida a la salida del mismo. Este valor de ganancia corresponderá a la ganancia de la antena satelital correspondiente junto con la ganancia del transpondedor del enlace determinado de nuestro satélite. El transpondedor se encargará de amplificar y cambiar de frecuencia la señal recibida para redirigirla adecuadamente a su destino. Así, la señal que llega al satélite, tras ser recuperada, se amplificará en el transpondedor con la ganancia establecida y en la antena correspondiente y llegará a su destino con la suficiente potencia para ser recuperada por la antena en recepción en la Luna o la Tierra.
 
@@ -73,7 +73,7 @@ Una vez calculada la amplificación de potencia requerida en el satélite para l
 
 Para las placas solares debe tenerse en cuenta cuál será la dimensión de las placas necesaria y, además, qué material se utilizará considerando la degradación que sufrirán las células fotovoltaicas a lo largo de la vida útil del satélite. Esta degradación, causada por el efecto de la temperatura y de la radiación recibida, debe seguir permitiendo al satélite cumplir su función hasta el final de su vida útil.
 
-![Satellite Energy System](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/placas.jpg)
+![Satellite Energy System](/images/posts/placas.jpg)
 
 Conociendo la amplificación de potencia total requerida por el satélite y la densidad de potencia o flujo radiante procedente del Sol hacia nuestro satélite, es decir, la potencia incidente en las placas por unidad de superficie, ¡podremos calcular la superficie de las placas solares necesaria para obtener la potencia que necesitamos! Por último, teniendo en cuenta las posibles degradaciones del material escogido, como puede ser el silicio o el arseniuro de galio, obtendríamos un valor ligeramente mayor que el calculado inicialmente, para poder generar la potencia necesaria y, además, hacerlo por un largo tiempo.
 

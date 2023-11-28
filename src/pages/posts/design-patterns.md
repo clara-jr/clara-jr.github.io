@@ -5,13 +5,13 @@ pubDate: 2020/11/14
 description: 'Patrones de diseño: el déjà vu del desarrollo software'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/design_patterns.png' 
+    url: '/images/posts/design_patterns.png' 
     alt: 'Design Patterns'
 tags: ["javascript"]
 ---
 Seguramente todo desarrollador se ha encontrado alguna vez con un problema que no sabía cómo resolver y ha pensado “Pero… ¡seguro que esto ya lo ha resuelto alguien antes!”. Los patrones de diseño son precisamente técnicas para resolver problemas comunes en el mundo del diseño o desarrollo de software. Cuando tienes la sensación de haber vivido un mismo problema antes o piensas que no eres el único que ha debido pasar por esa piedra, tu déjà vu tiene sentido y seguramente se resuelva con un patrón de diseño. Así que un patrón de diseño no es nada más y nada menos que una solución estandarizada, reutilizable y documentada a un problema generalmente común. Fue en el año 1995 cuando Erich Gamma, John Vlissides, Ralph Johnson y Richard Helm documentaron estos patrones de diseño en el libro “Design Patterns: Elements of Reusable Object-Oriented Software”. Al tener un nombre tan largo y venir de 4 autores, comenzaron a llamarlo popularmente el libro de la Gang of Four, abreviándose finalmente como el libro GoF. Este libro fue esencial para que el uso de los patrones se formalizara y siga latente actualmente.
 
-![Design Patterns](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/design_patterns.png)
+![Design Patterns](/images/posts/design_patterns.png)
 
 Tipos de Patrones de Diseño
 ---------------------------
@@ -50,7 +50,7 @@ console.log(developerJunior);
 console.log(developerSenior);
 ```
 
-![Singleton](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/design_patterns_1.png)
+![Singleton](/images/posts/design_patterns_1.png)
 
 Builder
 -------
@@ -102,7 +102,7 @@ console.log(developerJunior);
 console.log(developerSenior);
 ```
 
-![Builder](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/design_patterns_2.png)
+![Builder](/images/posts/design_patterns_2.png)
 
 Ahora nuestra desarrolladora Clara no se ha quedado estancada y hemos podido comprobar su avance describiendo sus características de forma bastante autodescriptiva y legible.
 
@@ -181,7 +181,7 @@ frontendDeveloper.getProperties();
 backendDeveloper.getProperties();
 ```
 
-![Prototype](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/design_patterns_3.png)
+![Prototype](/images/posts/design_patterns_3.png)
 
 Factory Method
 --------------

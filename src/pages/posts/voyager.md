@@ -5,7 +5,7 @@ pubDate: 2019/04/25
 description: 'Las sondas Voyager 1 y 2 se lanzaron en 1977 y desde entonces se encuentran explorando el sistema solar exterior'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/sondas.jpg' 
+    url: '/images/posts/sondas.jpg' 
     alt: 'Voyager'
 tags: ["science"]
 ---
@@ -17,7 +17,7 @@ Las posibilidades de que una civilización extraterrestre encuentre las sondas V
 
 La opción del disco fonográfico como formato de almacenamiento de esta información se mostraba como una opción resistente a posibles degradaciones producidas por la radiación espacial y los campos magnéticos. Las marcas sobre la cubierta del disco, que aportan información sobre cómo acceder a su contenido además de la descripción de la posición de la Tierra en el espacio, podrían durar cientos de millones de años en el espacio interestelar al tratarse de un disco fonográfico de metal adecuadamente resguardado. Además, encima del disco hay una muestra de gran pureza del isótopo de uranio-238 que tiene una vida media de 4468 millones de años. Gracias a esta muestra de uranio, las posibles civilizaciones extraterrestres que capturen las sondas serán capaces de saber con precisión la época en la que se fabricó.
 
-![Voyager](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/sondas.jpg)
+![Voyager](/images/posts/sondas.jpg)
 
 Lo primero que se encuentra al reproducir este disco de oro son saludos en 56 idiomas diferentes. Uno de los saludos más curiosos puede ser fácilmente el saludo en Amoy, dialecto chino: “Amigos del espacio, ¿cómo están ustedes? ¿Han comido ya? Vengan a visitarnos, si tienen tiempo”; por el contrario, el saludo que se envió por parte de nuestro país dejó un poco que desear: “Hola y saludos a todos”. Después de los saludos nos encontramos con sonidos procedentes de la Tierra como terremotos, rayos, ruidos de animales, risas, el latido de un corazón, el sonido del fuego,... ¡hasta el sonido de agua hirviendo en una cazuela! Finalmente llegamos a la música y vemos que los extraterrestres podrían disfrutar tanto de la música tradicional como de música clásica o rock. Además Carl Sagan incluyó un archivo de una hora de duración con las ondas cerebrales de una mujer enamorada, Ann Druyan, que posteriormente terminaría siendo su esposa.
 

@@ -5,7 +5,7 @@ pubDate: 2019/11/25
 description: 'El ADN de todo nuestro cuerpo corresponde a 200 mil veces la distancia de la Tierra a la Luna, es decir, 60 mil millones de kilómetros'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/51.jpg' 
+    url: '/images/posts/51.jpg' 
     alt: 'Fotografía 51'
 tags: ["science"]
 ---
@@ -20,7 +20,7 @@ En cuanto al tamaño de este genoma, os sorprenderá saber que si estirásemos e
 
 El ADN es un tipo de ácido nucleico como también lo es el ARN. El ADN es ácido desoxirribonucleico y el ARN es ácido ribonucleico. Los ácidos nucleicos reciben este nombre porque están formados de partículas más pequeñas denominadas nucleótidos. Cada nucleótido está formado a su vez de: una pentosa, que es un tipo de azúcar que en el caso del ADN será desoxirribosa y en el ARN ribosa; un grupo fosfato, que es la unión de un átomo de fósforo con cuatro átomos de oxígeno; y una base nitrogenada. Las bases nitrogenadas van uniéndose en secuencia sobre el esqueleto formado por pentosas y fosfatos y cada base definirá el tipo de nucleótido. Hay cuatro bases nitrogenadas que forman el ADN, pudiendo decirse por tanto que el ADN está formado por 4 letras: A, C, T y G; adenina, citosina, timina y guanina. El ADN será así una larga secuencia de nucleótidos definidos por sus bases nitrogenadas y separados en dos cadenas de información genética unidas y enrolladas entre sí en forma de hélice. Por eso generalmente recibe el nombre de “la doble hélice del ADN”. Las bases nitrogenadas de las dos cadenas de nucleótidos que forman el ADN son complementarias, es decir, son capaces de unirse entre sí entre pares de adenina-timina (A-T) y citosina-guanina (C-G). Es así como las dos cadenas de ADN se mantienen unidas, porque las bases nitrogenadas de ambas cadenas se unen entre ellas. Se dice por tanto que el ADN está formado por dos cadenas complementarias de forma que, si una cadena tiene la secuencia AAATTTCGC, la otra cadena complementaria tendrá la secuencia TTTAAAGCG. En la década de los 70 aprendimos a leer esta secuencia de letras que es lo que se conoce como secuenciación del ADN.
 
-![ADN](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/dna.png)
+![ADN](/images/posts/dna.png)
 
 Y ahora que sabemos de qué está compuesto el ADN, ¿cómo pasamos de un código de 4 letras a un organismo funcional? ¿cómo se lee toda esta información genética? Pues bien, en realidad toda esta información genética que contiene el ADN agrupada en secuencias de 4 letras servirá para producir las moléculas que nos definirán realmente: las proteínas. Las proteínas sirven para construir estructuras dentro de la célula, regulan procesos enteros como la división de la célula, son esenciales para el crecimiento por su contenido de nitrógeno, algunas como las enzimas facilitan las reacciones químicas dentro de nuestro cuerpo y otras como los anticuerpos actúan como defensa natural frente a posibles infecciones o agentes externos. En definitiva, las moléculas de ADN tienen la información necesaria para construir las proteínas que realizarán las funciones vitales para un organismo. Es por todo esto que decimos que el ADN contiene la información genética para el funcionamiento y desarrollo de la célula.
 
@@ -48,7 +48,7 @@ Fotografía 51
 
 Un aspecto triste en esta historia del descubrimiento del ADN y su importancia biológica, es la omisión del papel fundamental que tuvieron dos personas en el descubrimiento de esta estructura. Normalmente cuando hablamos del descubrimiento del ADN se menciona a Maurice Wilkins y, fundamentalmente a los premios Nobel Watson y Crick, pero se olvida el papel esencial que tuvieron dos personas en este importante momento histórico. Duele especialmente porque una de ellas, como tantas otras veces, es mujer, mujer cuyo papel importante en un descubrimiento es minimizado. Estamos hablando de la química y cristalógrafa Rosalind Franklin y su estudiante, Raymond Gosling. Ambos contribuyeron a la comprensión de la estructura del ADN y dieron con una pista fundamental para entender la estructura del ADN revelando su forma de doble hélice a través de una fotografía histórica, la famosa Fotografía 51, una de las fotografías más famosas de la historia de la ciencia y fundamental para entender cómo funcionamos como seres humanos.
 
-![Fotografía 51](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/51.jpg)
+![Fotografía 51](/images/posts/51.jpg)
 
 > “Antes pensábamos que nuestro futuro estaba en las estrellas, ahora sabemos que está en nuestros genes”
 >

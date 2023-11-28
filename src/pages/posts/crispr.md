@@ -5,13 +5,13 @@ pubDate: 2020/01/06
 description: 'Las nuevas tijeras moleculares para cortar y pegar genes que están revolucionando la ingeniería genética'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/crispr.jpg' 
+    url: '/images/posts/crispr.jpg' 
     alt: 'CRISPR'
 tags: ["science"]
 ---
 CRISPR/Cas9 es una técnica de edición genética que permite modificar el genoma de los seres vivos, ya sea “cortando” cierta parte del genoma para desactivar un gen cuya expresión produzca consecuencias negativas o “cortando” y “pegando” para sustituir la secuencia de un gen defectuoso por la secuencia correcta. Podríamos imaginarnos quizás unas tijeras con las que poder “cortar” una sección defectuosa de nuestro ADN y sustituirla por otra funcional, teniendo la posibilidad de reescribir nuestros genes por ejemplo para tratar enfermedades hereditarias, es decir, con causa genética.
 
-![CRISPR](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/crispr.jpg)
+![CRISPR](/images/posts/crispr.jpg)
 
 Sistema inmune de las bacterias
 -------------------------------

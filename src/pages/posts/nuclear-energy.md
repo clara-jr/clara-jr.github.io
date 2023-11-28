@@ -5,7 +5,7 @@ pubDate: 2020/02/07
 description: 'La energía nuclear es el sustitutivo no contaminante de los combustibles fósiles y la energía complementaria de las energías renovables'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/nuclear.png' 
+    url: '/images/posts/nuclear.png' 
     alt: 'Sistema Eléctrico Español'
 tags: ["science"]
 ---
@@ -37,7 +37,7 @@ Importancia de la energía nuclear
 
 Ahora que deberías haber perdido el miedo infundado hacia la energía nuclear, es momento de aportar más datos esperanzadores referentes al papel que desempeña esta forma de generación de electricidad en la transición energética contra el cambio climático. Según el informe anual de 2019 sobre Energía Nuclear y Cambio Climático, la energía nuclear produce más del 33 % de la electricidad libre de emisiones en España y el 20 % de la electricidad que consumimos. El parque nuclear español evita la emisión de hasta 55 millones de toneladas de CO2 al año, siendo esta cantidad equivalente a las emisiones anuales producidas por 22 millones de coches. En términos europeos, los reactores nucleares evitan la emisión de hasta 680 millones de toneladas de CO2 anuales. Un eventual abandono de la energía nuclear provocaría en España un incremento de un 25 % de las emisiones.
 
-![Sistema Eléctrico Español](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/nuclear.png)
+![Sistema Eléctrico Español](/images/posts/nuclear.png)
 
 Para la transición energética hacia las energías renovables y la descarbonización es imprescindible recurrir a la energía nuclear, siendo esta una opción clave para la mitigación del cambio climático por las bajas emisiones de gases de efecto invernadero que ocasiona. En este sentido, se prevé una reducción de las emisiones del 20 % a nivel mundial en el año 2050 gracias a la contribución de la energía nuclear. En definitiva, la necesidad de la energía nuclear está justificada desde un punto de vista técnico, representando una fuente altamente importante de generación de electricidad, y desde un punto de vista medioambiental, permitiendo reducir las emisiones contaminantes y frenar el cambio climático.
 

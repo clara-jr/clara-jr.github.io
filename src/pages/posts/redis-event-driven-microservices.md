@@ -5,7 +5,7 @@ pubDate: 2021/06/19
 description: 'O cómo conseguir arquitecturas controladas por eventos con Redis'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/redis-streams.png' 
+    url: '/images/posts/redis-streams.png' 
     alt: 'Redis Event-Driven Microservices'
 tags: ["redis", "microservices", "javascript"]
 ---
@@ -51,7 +51,7 @@ Con Redis Streams podemos tener, al igual que con Redis Pub/Sub, varios consumid
 
 Este concepto de *consumer group* podemos encontrarlo también en soluciones como RabbitMQ, KubeMQ o Apache Kafka.
 
-![Redis Streams Consumers](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/redis-streams.png)
+![Redis Streams Consumers](/images/posts/redis-streams.png)
 
 *Producer*:
 

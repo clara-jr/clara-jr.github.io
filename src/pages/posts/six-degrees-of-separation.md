@@ -5,7 +5,7 @@ pubDate: 2020/04/06
 description: 'Todos estamos conectados con cualquier otra persona del planeta a través de 5 intermediarios; ¿te lo crees?'
 author: 'Clara Jiménez'
 image:
-    url: 'https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/6grades.png' 
+    url: '/images/posts/6grades.png' 
     alt: 'Six Degrees of Separation'
 tags: ["maths"]
 ---
@@ -16,7 +16,7 @@ En estos momentos en los que estamos viviendo una pandemia mundial que se expand
 
 La teoría de los 6 grados de separación fue inicialmente propuesta en 1930 por el escritor húngaro Frigyes Karinthy en un relato de ficción llamado «Chains» y fue recogida a su vez en 1990 en la obra de teatro «Six Degrees of Separation» de John Guare y en 2003 en el libro «Six Degrees: The Science of a Connected Age», del sociólogo Duncan Watts. Esta teoría establece que cada persona del mundo puede llegar a conectarse con cualquier otra dando tan sólo 6 saltos entre personas, es decir, a través de 5 intermediarios. Yo conozco a A, A conoce a B, B conoce a C, C conoce a D, D conoce a E y E te conoce a ti. Ya estamos conectados por A, B, C, D y E. 5 intermediarios y 6 enlaces que nos unen a través de ellos. Y os preguntaréis: ¿por qué 6 saltos?
 
-![Six Degrees of Separation](https://s3-eu-west-1.amazonaws.com/blog-cjr-assets/6grades.png)
+![Six Degrees of Separation](/images/posts/6grades.png)
 
 Debemos empezar suponiendo un número de personas conocidas por cada ser humano del planeta en media. Cuantas más personas conozca cada ser humano directamente, es decir, que estén unidas por 0 intermediarios, un solo salto, menos saltos serán necesarios para alcanzar a cualquier otro ser humano del planeta.
 
