@@ -752,6 +752,10 @@ main {
   margin-left: 20px;
 }
 
+#tags p {
+  width: max-content;
+}
+
 .title-tags {
   margin-top: 25px;
   display: flex;
