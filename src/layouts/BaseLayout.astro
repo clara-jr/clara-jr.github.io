@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 
@@ -25,6 +26,7 @@ const socialImageURL = new URL(image?.url || '/images/fullscat-draw.jpg', Astro.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
