@@ -10,7 +10,7 @@ const { title, description, date, url, slides } = Astro.props;
         url && (
           <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
             🎙
-            <a target="blank" class="page-link" href={url}>
+            <a target="_blank" class="page-link" href={url}>
               ¡Quiero ver la charla!
             </a>
           </p>
@@ -20,7 +20,7 @@ const { title, description, date, url, slides } = Astro.props;
         slides && (
           <p style={{ fontSize: '22px', marginTop: '15px' }}>
             📝
-            <a target="blank" class="page-link" href={slides}>
+            <a target="_blank" class="page-link" href={slides}>
               ¡Quiero ver las slides!
             </a>
           </p>

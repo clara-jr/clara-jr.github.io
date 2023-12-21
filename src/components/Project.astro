@@ -11,7 +11,7 @@ const { image, title, description, date, url } = Astro.props;
       <span set:html={title} />
       <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
         👉🏻
-        <a target="blank" class="page-link" href={url}> ¡Quiero saber más!</a>
+        <a target="_blank" class="page-link" href={url}> ¡Quiero saber más!</a>
       </p>
     </h2>
     <h3 class="post-subtitle project" set:html={description} />

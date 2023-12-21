@@ -1,10 +1,12 @@
 ---
 const { title, date, url, preview } = Astro.props;
+const href = url || preview;
+const target = href.includes('http') && '_blank';
 ---
 
 <div class="post-preview">
   {date && <h2 class="index-date">{date}</h2>}
   <h2>
-    <a class="index-item" href={url || preview}>{title}</a>
+    <a target={target} class="index-item" href={href}>{title}</a>
   </h2>
 </div>

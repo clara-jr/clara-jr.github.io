@@ -1,5 +1,15 @@
 [
   {
+    "name": "Cómo buscar pienso para tu gato con MongoDB Atlas Search",
+    "title": "Cómo buscar pienso para tu gato con MongoDB Atlas Search <a class=\"title-link\" target=\"blank\" href=\"https://gdg.community.dev/events/details/google-gdg-madrid-presents-wtm-madrid-meetup-gatos-datos-y-ux-writing-1/\">@ Women Tech Makers</a>",
+    "description": "¿Quieres saber cuál es el mejor pienso para tu gato? Para esto lo mejor es que consultes con tu veterinario (bueno, el de tu mascota). Pero a lo que yo sí puedo ayudarte es a implementar un buscador (¡incluso search-as-you-type!) con MongoDB Atlas Search, para que encuentres el pienso que hayas decidido comprarle a tu compañero felino tras esa consulta veterinaria. Con esta charla intentaré, por tanto, compartir mi conocimiento sobre los buscadores de texto completo o de autocompletado a través de un tema que ocupa mucho mi vida y mi corazón: los gatos. Hablaré de índices de búsqueda, de los operadores de consulta que podemos utilizar para hacer queries complejas y de los analizadores y tokenizadores que ofrece MongoDB Atlas Search. Explicaré también ciertos “no es un bug, es una feature” que tiene este motor de búsqueda y cómo sortearlos. Por último, lanzaré una píldora sobre qué es la búsqueda semántica, cómo la resuelve MongoDB Atlas Vector Search, y qué sentido tendría incorporar a todo esto un LLM siguiendo la arquitectura RAG (Retrieval-Augmented Generation).",
+    "image": "",
+    "date": "Diciembre 2023",
+    "url": "",
+    "preview": "https://gdg.community.dev/events/details/google-gdg-madrid-presents-wtm-madrid-meetup-gatos-datos-y-ux-writing-1/",
+    "slides": "https://slides.com/clear_is_me/mongodb-atlas-search/fullscreen"
+  },
+  {
     "name": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills",
     "title": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://extra.codemotion.com/live-conference-madrid-2023/\">@ Codemotion Live Conference Madrid 2023</a>",
     "description": "En este Open Space presentamos la <a class=\"title-link\" target=\"blank\" href=\"https://twitter.com/comunidadalexa\">Comunidad de Alexa en Español</a> y el programa de <a class=\"title-link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/alexa/champions\">Alexa Champions</a>. También dimos un repaso al desarrollo de Alexa Skills, desde las tripas de Alexa y el diseño de flujos conversacionales hasta cómo testear, certificar e incluso monetizar una Alexa Skill.",
