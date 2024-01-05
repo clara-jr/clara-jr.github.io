@@ -33,7 +33,7 @@ En este backend, los datos podrán estar alojados de forma persistente en una ba
 
 Por último, si necesitamos autenticación de usuario en nuestra aplicación podremos recurrir de forma fácil y rápida al uso de Amazon Cognito.
 
-Todo este proceso de despliegue, además, puede verse reducido en tiempo y esfuerzo con la creación de ficheros YAML de configuración para el despliegue haciendo uso de Serverless framework[\[1\]](https://www.serverless.com).
+Todo este proceso de despliegue, además, puede verse reducido en tiempo y esfuerzo con la creación de ficheros YAML de configuración para el despliegue haciendo uso de Serverless framework[[1]](https://www.serverless.com).
 
 AWS Amplify
 -----------

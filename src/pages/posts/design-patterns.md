@@ -323,7 +323,7 @@ const WorkersFactory = {
 Refactoring.Guru
 ----------------
 
-No quería terminar este post sin mencionar un recurso muy útil para aprender y consultar sobre patrones de diseño: Refactoring.Guru[\[1\]](https://refactoring.guru/)
+No quería terminar este post sin mencionar un recurso muy útil para aprender y consultar sobre patrones de diseño: Refactoring.Guru[[1]](https://refactoring.guru/)
 
 > “Learning from your mistakes makes you smart. Learning from other people's mistakes makes you a genius.”
 >

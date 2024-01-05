@@ -12,7 +12,7 @@ tags: ["aws", "serverless"]
 Puesta a punto
 --------------
 
-Lo primero que tenemos que hacer para conseguir desplegar nuestra aplicación en la nube, en este caso, es instalar Serverless [\[1\]](https://www.serverless.com/framework/docs/getting-started/), un framework que nos facilita enormemente el despliegue de aplicaciones:
+Lo primero que tenemos que hacer para conseguir desplegar nuestra aplicación en la nube, en este caso, es instalar Serverless [[1]](https://www.serverless.com/framework/docs/getting-started/), un framework que nos facilita enormemente el despliegue de aplicaciones:
 
 ```bash
 npm install -g serverless
