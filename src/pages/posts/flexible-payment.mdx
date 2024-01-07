@@ -1,0 +1,117 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: 'Retribución flexible 💰'
+pubDate: 2024/05/25
+description: 'Si tienes retribución flexible, ofrécete a pagar en la cena de Navidad 🤑'
+author: 'Clara Jiménez'
+image:
+    url: '' 
+    alt: ''
+tags: ["maths"]
+draft: true
+---
+
+La retribución flexible es un tipo de remuneración que las empresas están teniendo bastante en cuenta actualmente. Es un tipo de retribución en especie que permite al empleado hacer gastos en determinados productos o servicios (como comida o transporte) desde su salario bruto, lo que permite conseguir una exención fiscal que reducirá el IRPF a pagar por esos productos o servicios. Si pagas un producto de valor 50 € con tu salario bruto, esto estará exento de IRPF y cuando recibas el valor neto de tu nómina en tu cuenta, en lugar de recibir 50 € menos, podrás recibir, por ejemplo, 35 € menos.
+
+## ¿Puede llegar a salirte gratis la comida?
+
+TL;DR: Sí.
+
+Muchas veces, al quedar con otras personas para comer, alguien tiene que acabar ofreciéndose a pagar toda la cuenta y el resto de personas se encargarán de hacerle llegar su parte correspondiente. Si tienes retribución flexible y te ofreces a pagar la cuenta, cuando los *bizums* que recibas del resto de comensales igualen (o superen) el pago que hayas hecho, la comida te saldrá gratis (e incluso podrás llegar a ganar dinero).
+
+$$$
+Bizums~que~recibir\acute{a}s:~C - \frac{C}{N} \\ Precio~que~pagar\acute{a}s:~C - D \% C
+$$$
+
+$$$
+C - \frac{C}{N} \geq C - D \% C
+$$$
+
+$$$
+D \% C \geq \frac{C}{N}
+$$$
+
+$$$
+\frac{D}{100} \geq \frac{1}{N}
+$$$
+
+$$$
+N \geq \frac{100}{D}
+$$$
+
+Siendo $$C$$ el coste total de la comida, $$N$$ el nº de comensales y $$D$$ el descuento que se aplicará a la comida gracias a la retribución flexible, a partir de $$100/D$$ comensales podrás disfrutar de la comida de forma gratuita (e incluso ganando dinero).
+
+Asumiendo, por ejemplo, un valor para $$D$$ del 30 %:
+
+$$$
+Bizums~que~recibir\acute{a}s:~C - \frac{C}{N} \\ Precio~que~pagar\acute{a}s:~C - 30 \% C
+$$$
+
+$$$
+N \geq \frac{100}{30} \rightarrow N \geq 3.33
+$$$
+
+Para el caso de recibir un 30 % de ahorro fiscal, a partir de 4 comensales, si pagas la cuenta, ganarás dinero 💰 `#stonks`.
+
+## ¿Cuánto puedes llegar a ahorrarte en una comida?
+
+Si no tienes la suerte de que la comida te salga gratis, al menos ahorrarás parte de lo que te hubiera costado esa comida. Concretamente, ahorrarás el $$D$$ % de $$C$$, que calculado sobre el precio proporcional a tu comida ($$C/N$$) será $$D*N$$ % de $$C/N$$.
+
+Asumiendo un valor de $$D$$ del 30 %, ahorrarías el $$30 * N$$ % del precio de tu comida. Si comes sin compañía, un 30 %, si comes con 1 acompañante, el 60 %, y si sois 3 comensales, el 90 %. Así que, una comida de 30 € por cabeza, podría salirte a 21 €, 12 € o incluso 3 € respectivamente.
+
+## ¿Cuánto puedes llegar a ganar en una comida?
+
+Si consigues reunir en una comida a suficientes comensales como para que, pagando tú la cuenta, te salga *a cuenta* (y acabes ganando dinero por comer), obtendrás como beneficio la diferencia entre los *bizums* que recibas y el pago que hayas realizado.
+
+$$$
+Bizums~que~recibir\acute{a}s:~C - \frac{C}{N} \\ Precio~que~pagar\acute{a}s:~C - D \% C
+$$$
+
+$$$
+C - \frac{C}{N} - (C - D \% C) =
+$$$
+
+$$$
+= D \% C - \frac{C}{N}  =
+$$$
+
+$$$
+= (D - \frac{100}{N}) \% C
+$$$
+
+Ganarás el $$D - 100/N$$ % de $$C$$, que calculado sobre el precio proporcional a tu comida ($$C/N$$) será $$D*N - 100$$ % de $$C/N$$.
+
+Siendo $$C$$ el coste total de la comida, $$N$$ el nº de comensales y $$D$$ el descuento que se aplicará a la comida gracias a la retribución flexible, y asumiendo de nuevo un valor para este descuento del 30 %:
+
+$$$
+Bizums~que~recibir\acute{a}s:~C - \frac{C}{N} \\ Precio~que~pagar\acute{a}s:~C - 30 \% C
+$$$
+
+$$$
+C - \frac{C}{N} - (C - 30 \% C) =
+$$$
+
+$$$
+= (30 - \frac{100}{N}) \% C =
+$$$
+
+$$$
+= (30 * N - 100) \% \frac{C}{N}
+$$$
+
+$$$
+N = 4 \rightarrow 5 \%~de~C~(20~\%~de~C/N) \\
+N = 5 \rightarrow 10 \%~de~C~(50~\%~de~C/N) \\
+N = 6 \rightarrow 13.3 \%~de~C~(80~\%~de~C/N) \\
+N = 7 \rightarrow 15.7 \%~de~C~(110~\%~de~C/N) \\
+N = 8 \rightarrow 17.5 \%~de~C~(140~\%~de~C/N) \\
+N = 9 \rightarrow 18.8 \%~de~C~(170~\%~de~C/N) \\
+N = 10 \rightarrow 20 \%~de~C~(200~\%~de~C/N) \\
+N \to \infin \rightarrow 30 \%~de~C~(\infin~\%~de~C/N)
+$$$
+
+## Calculadora
+
+import Form from '../../components/posts/Form.astro';
+
+<Form />

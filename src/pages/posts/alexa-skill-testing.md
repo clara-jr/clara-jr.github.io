@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 'Testeando Alexa Skills 👩🏻‍💻‍'
-pubDate: 2023/11/1
+pubDate: 2024/02/20
 description: 'Un código sin tests es un código con fecha de caducidad'
 author: 'Clara Jiménez'
 image:

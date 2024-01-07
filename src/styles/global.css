@@ -263,6 +263,29 @@ a.link {
   border-bottom: 2px solid var(--theme-underlined);
 }
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.7rem;
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.input-group label {
+  margin-bottom: 0.1rem;
+}
+
+.input-group input {
+  max-width: 100px;
+}
+
+#result {
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
 .page-link {
   text-transform: uppercase;
   font-size: 13px !important;
@@ -940,6 +963,9 @@ img[alt='BiciMAD'] {
 img[alt='Aprendizaje Adaptativo'] {
   width: 500px;
   border-radius: 2%;
+}
+img[alt='MongoDB Aggregation Pipeline'] {
+  width: 700px;
 }
 
 .gist-file:nth-child(2) {

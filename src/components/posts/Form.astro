@@ -1,0 +1,60 @@
+---
+
+---
+
+<div class="input-group">
+  <label for="discount">¿Cuál es el porcentaje de descuento que te proporcionará la retribución flexible?</label>
+  <div>
+    <input type="number" min="0" max="100" id="discount" value="30" placeholder="Introduce el % de descuento" required />
+     %
+  </div>
+</div>
+<div class="input-group">
+  <label for="people">¿Cuántos comensales habrá en la comida que pagarás?</label>
+  <div>
+    <input type="number" min="1" id="people" value="1" placeholder="Introduce el nº de comensales" required /> comensales
+  </div>
+</div>
+<div class="input-group">
+  <label for="price">¿Cuál será el precio total de la comida?</label>
+  <div>
+    <input type="number" min="0" id="price" value="10" placeholder="Introduce el precio total de la comida" required /> €
+  </div>
+</div>
+
+<p id="result"></p>
+
+<script>
+  // https://docs.astro.build/en/tutorials/add-view-transitions/#update-scripts
+  document.addEventListener('astro:page-load', () => {
+    const discountElement = document.getElementById('discount');
+    const peopleElement = document.getElementById('people');
+    const priceElement = document.getElementById('price');
+    const result = document.getElementById('result');
+
+    const calculate = () => {
+      const discount = discountElement?.value;
+      const people = peopleElement?.value;
+      const price = priceElement?.value;
+      const areValidValues = discount !== '' && people !== '' && price !== '' && discount >= 0 && discount <= 100 && people >= 1 && price >= 0;
+      if (!areValidValues) {
+        return (result.textContent = `Introduce valores numéricos válidos en la calculadora.`);
+      }
+      const areThereProfits = people >= 100 / discount;
+      if (areThereProfits) {
+        const profits = Math.round(((discount - 100 / people) / 100) * price * 100) / 100;
+        result.textContent = `La comida te saldrá gratis${profits > 0 ? `y, además, ganarás ${profits} € adicionales` : ''}.`;
+      } else {
+        const finalDiscount = Math.round(discount * people * 100) / 100;
+        const finalPrice = Math.round((price / people - (discount / 100) * price) * 100) / 100;
+        const saving = Math.round((discount / 100) * price * 100) / 100;
+        result.textContent = people > 1 ? `Tendrás un descuento final del ${finalDiscount} % sobre el precio de tu parte de la comida. Así que tu comida te saldrá por ${finalPrice} € (${saving} € de descuento).` : `La comida te saldrá por ${finalPrice} € (${saving} € de descuento).`;
+      }
+    };
+
+    calculate();
+    discountElement.addEventListener('input', calculate);
+    peopleElement.addEventListener('input', calculate);
+    priceElement.addEventListener('input', calculate);
+  });
+</script>
