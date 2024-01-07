@@ -20,8 +20,11 @@ const url = new URL(Astro.request.url);
 </div>
 
 <script>
-  // hamburguer clicked, expand menu
-  document.querySelector('.navbar-header').addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.toggle('expanded');
+  // https://docs.astro.build/en/tutorials/add-view-transitions/#update-scripts
+  document.addEventListener('astro:page-load', () => {
+    // hamburguer clicked, expand menu
+    document.querySelector('.navbar-header').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('expanded');
+    });
   });
 </script>

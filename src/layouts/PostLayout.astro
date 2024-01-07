@@ -48,42 +48,45 @@ date = date.charAt(0).toUpperCase() + date.slice(1);
 </BaseLayout>
 
 <script define:vars={{ frontmatter }}>
-  // button clicked, share post
-  const _socialWindow = (url) => {
-    const left = (window.screen.width - 570) / 2;
-    const top = (window.screen.height - 570) / 2;
-    const params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
-    window.open(url, 'NewWindow', params);
-  };
+  // https://docs.astro.build/en/tutorials/add-view-transitions/#update-scripts
+  document.addEventListener('astro:page-load', () => {
+    // button clicked, share post
+    const _socialWindow = (url) => {
+      const left = (window.screen.width - 570) / 2;
+      const top = (window.screen.height - 570) / 2;
+      const params = 'menubar=no,toolbar=no,status=no,width=570,height=570,top=' + top + ',left=' + left;
+      window.open(url, 'NewWindow', params);
+    };
 
-  const setShareLinks = (rrss, title) => {
-    const pageUrl = encodeURIComponent(document.URL);
-    switch (rrss) {
-      case 'whatsapp':
-        _socialWindow('https://api.whatsapp.com/send?text=' + title + '%20' + pageUrl);
-        break;
-      case 'linkedin':
-        _socialWindow('https://www.linkedin.com/sharing/share-offsite?url=' + pageUrl);
-        break;
-      case 'twitter':
-        _socialWindow('https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + title);
-        break;
-      default:
-        break;
-    }
-  };
+    const setShareLinks = (rrss, title) => {
+      const pageUrl = encodeURIComponent(document.URL);
+      switch (rrss) {
+        case 'whatsapp':
+          _socialWindow('https://api.whatsapp.com/send?text=' + title + '%20' + pageUrl);
+          break;
+        case 'linkedin':
+          _socialWindow('https://www.linkedin.com/sharing/share-offsite?url=' + pageUrl);
+          break;
+        case 'twitter':
+          _socialWindow('https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + title);
+          break;
+        default:
+          break;
+      }
+    };
 
-  const shareWhatsapp = () => {
-    setShareLinks('whatsapp', frontmatter.title);
-  };
-  const shareLinkedin = () => {
-    setShareLinks('linkedin', frontmatter.title);
-  };
-  const shareTwitter = () => {
-    setShareLinks('twitter', frontmatter.title);
-  };
+    const shareWhatsapp = () => {
+      setShareLinks('whatsapp', frontmatter.title);
+    };
+    const shareLinkedin = () => {
+      setShareLinks('linkedin', frontmatter.title);
+    };
+    const shareTwitter = () => {
+      setShareLinks('twitter', frontmatter.title);
+    };
 
-  document.getElementById('share-whatsapp').addEventListener('click', shareWhatsapp);
-  document.getElementById('share-linkedin').addEventListener('click', shareLinkedin);
-  document.getElementById('share-twitter').addEventListener('click', shareTwitter);
+    document.getElementById('share-whatsapp').addEventListener('click', shareWhatsapp);
+    document.getElementById('share-linkedin').addEventListener('click', shareLinkedin);
+    document.getElementById('share-twitter').addEventListener('click', shareTwitter);
+  });
 </script>
