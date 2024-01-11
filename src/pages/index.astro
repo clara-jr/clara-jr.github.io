@@ -38,13 +38,13 @@ const skills = ['nodejs', 'javascript', 'expressjs', 'mongodb', 'redis', 'git', 
         href="https://developer.amazon.com/en-US/alexa/champions/clara-jimenez-recio">Alexa Champion</a
       >.
     </p>
-    <h2 class="post-title index-title">Latest Posts</h2>
+    <h2 class="post-title index-title">Últimos Posts</h2>
     {lastPosts.map((post) => <Item url={post.url} title={post.frontmatter.title} date={post.frontmatter.pubDate} />)}
-    <h2 class="post-title index-title">Latest Projects</h2>
+    <h2 class="post-title index-title">Últimos Proyectos</h2>
     {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date} />)}
-    <h2 class="post-title index-title">Latest Talks</h2>
+    <h2 class="post-title index-title">Últimas Charlas</h2>
     {lastTalks.map((talk) => <Item url={talk.url} title={talk.name} date={talk.date} preview={talk.preview} />)}
-    <h2 class="post-title index-title">Knowledge</h2>
+    <h2 class="post-title index-title">Conocimiento</h2>
     <div id="knowledge">
       {
         skills.map((skill) => (

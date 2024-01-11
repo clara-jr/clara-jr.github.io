@@ -291,7 +291,7 @@ a.link {
   font-size: 13px !important;
   font-weight: 700;
   text-align: center;
-  width: 160px;
+  width: 150px;
   border-radius: 300px;
 
   background-color: var(--theme-button-bg);
@@ -434,7 +434,6 @@ nav {
 
 @media screen and (min-width: 800px) {
   .nav-links {
-    margin-left: 5em;
     display: block;
     position: static;
     width: auto;
