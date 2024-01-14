@@ -114,6 +114,7 @@ Termino esta comparativa haciendo un llamamiento al CRTM para que vuelva a subir
 
 <details>
 <summary>Aquí tienes la respuesta a esta última pregunta 🤓</summary>
+<div>
 
 $$$
 A * (25 + 0.5 * N) \geq 699
@@ -126,7 +127,7 @@ A * (25 + 50) \geq 699 \rightarrow A \geq 10
 $$$
 
 Una vez más, estos cálculos los he hecho asumiendo un uso de la bicicleta en base a mi estilo de vida; concretamente, yo disfruto del teletrabajo, de modo que no suelo necesitar hacer trayectos largos durante gran parte de la semana, por eso he asumido una media de 2 trayectos en bici por semana. Sin embargo, es probable que, trabajando de forma presencial y en una oficina a la que pudiera llegar en menos de 30 minutos en bici, llegase a coger la bicicleta del orden de 40 veces al mes. En un caso así, haríamos 480 trayectos en bici al año y, por tanto, amortizaríamos la bicicleta en 5 años. Con estas cifras, basándonos en los precios del transporte público con descuento de 2023, sería más rentable optar por el abono anual del transporte público. Sin embargo, con los precios habituales del transporte público de Madrid, nos saldría más rentable un abono anual de BiciMAD frente a utilizar el transporte público.
-
+</div>
 </details>
 
 Por último, dejo por [aquí](https://clara-jr.github.io/bicimath) una aplicación web que podréis utilizar cada vez que tengáis alguna duda (y la queráis resolver rápidamente) sobre qué método de transporte utilizar para moveros por Madrid.

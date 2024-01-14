@@ -20,7 +20,6 @@ Cuando gestionamos y manipulamos grandes cantidades de datos en MongoDB es muy p
 A continuación podemos ver algunas de las etapas que podremos utilizar en el pipeline de agregación, para qué sirven y cómo funcionan:
 
 [`$addFields`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/)<br>
-[`$count`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/count/)<br>
 [`$facet`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/facet/)<br>
 [`$group`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)<br>
 [`$lookup`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/)<br>
@@ -37,9 +36,9 @@ Aquí vemos algunos de los operadores que vamos a poder utilizar en las etapas d
 [`$divide`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/)<br>
 [`$eq`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/)<br>
 [`$exists`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/exists/)<br>
-[`$gte`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/gte/)<br>
+[`$gt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/gt/)<br>
 [`$ifNull`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/ifNull/)<br>
-[`$lte`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lte/)<br>
+[`$lt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lt/)<br>
 [`$map`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/)<br>
 [`$multiply`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/multiply/)<br>
 [`$reduce`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/)<br>
@@ -53,7 +52,7 @@ Aquí vemos algunos de los operadores que vamos a poder utilizar en las etapas d
 
 Vamos a utilizar todos estos operadores y etapas del *aggregation pipeline* para **analizar datos de encuestas de satisfacción de un servicio o producto**. Imaginemos, por ejemplo, que el producto o servicio en cuestión es un curso de una plataforma de e-learning. Tenemos multitud de usuarios registrados en diferentes cursos y, cuando los completan, responden una encuesta de satisfacción para valorar lo aprendido en el curso. Nuestra intención es analizar los datos de estas encuestas para conocer, por ejemplo, cuál es la valoración media de nuestros cursos, qué aplicabilidad tienen y con qué probabilidad los usuarios los recomendarían.
 
-Lo primero que haremos será recuperar todas las encuestas que vayamos a querer analizar, por ejemplo, las de un determinado curso; para aplicar este tipo de filtros recurrimos a la etapa `$match`. Cada encuesta tendrá un atributo `score` y un atributo `applicability`, indicando la puntuación que se le ha dado a un determinado curso (del 0 al 10) y si se ha considerado aplicable (`"yes"`) o no (`"no"`). Con la etapa `$addFields` rescataremos el valor de la puntuación con la que el usuario valoró el curso y transformaremos a valor numérico (0 o 1) el atributo que indica si el usuario consideró o no aplicable el curso para su futuro profesional (haciendo uso además de los operadores `$toInt`, `$cond` y `$eq`).
+Lo primero que haremos será recuperar todas las encuestas que vayamos a querer analizar, por ejemplo, las de un determinado curso; para aplicar este tipo de filtros recurrimos a la etapa `$match`.
 
 ```javascript
 db.surveys.aggregate([
@@ -62,32 +61,44 @@ db.surveys.aggregate([
       courseId: ObjectId("..."),
     },
   },
-  { 
-    $addFields: {
-      score: { $toInt: "$score" },
-      applicability: { $cond: [{ $eq: ["$applicability", "yes"] }, 1, 0] },
-    },
-  },
 ])
 ```
 
-Lo siguiente que vamos a querer hacer es conseguir calcular cuántos usuarios valoraron por encima de 5 el curso de la encuesta, cuántos por debajo de 7, y cuántos por encima de 8. Esto nos servirá para saber el número de recomendadores, detractores y promotores de nuestro producto. Además, queremos saber qué porcentaje de los usuarios han considerado lo impartido en el curso como aplicable en alguna de las tareas que realicen, para lo cual debemos hacer un recuento de cuántos `"yes"` tenemos en el atributo `applicability` de las encuestas. Para todos estos cálculos vamos a tener que recurrir a la etapa `$facet`, que nos permitirá trabajar con *sub-pipelines* para que lo que salga de cada `$group` o `$match` no aplique a la siguinete etapa del pipeline y podamos seguir trabajando con todas las encuestas y no solo con aquellas que salgan de la ejecución de cada una de las etapas que vamos a necesitar para hacer estos cálculos. Por ejemplo, al utilizar en una etapa un `$match` para filtrar las encuestas valoradas por encima de 8, estaríamos dejando atrás el resto de encuestas y las siguientes etapas del pipeline tendrían como entrada solo las encuestas con una nota superior a 8. Sin embargo, no queremos esto, queremos hacer este cálculo sin afectar a los datos de entrada de las siguientes etapas del pipeline, así que nuestro aliado será `$facet`.
+Cada encuesta tendrá un atributo `score` y un atributo `applicability`, indicando la puntuación que se le ha dado a un determinado curso (del 0 al 10) y si se ha considerado aplicable (`"yes"`) o no (`"no"`).
+
+Sabiendo esto, lo siguiente que vamos a querer hacer es calcular la puntuación media que se le ha dado a ese curso (para lo cual usamos `$avg` y `$toInt`), la media de usuarios que recomendaron el curso (valorándolo por encima de 5), y la diferencia entre la media de usuarios que lo valoraron por encima de 8 y los que lo hicieron por debajo de 7  (haciendo uso además de los operadores `$cond`, `$eq` y `$subtract`). Esto último representará el [ratio Net Promoter Score (NPS)](https://es.wikipedia.org/wiki/Net_Promoter_Score), que sirve para medir la satisfacción de los usuarios mediante la relación entre el porcentaje de promotores y el de detractores. Además, queremos saber qué porcentaje de los usuarios han considerado lo impartido en el curso como aplicable en alguna de las tareas que realicen, para lo cual debemos calcular la media de cuántos `"yes"` tenemos en el atributo `applicability` de las encuestas. Para esto, transformaremos a valor numérico (0 o 1) el atributo que indica si el usuario consideró o no aplicable el curso para su futuro profesional y calcularemos el valor medio con `$avg`. Por último, también querremos calcular la función de distribución de las puntuaciones que se le han dado al curso.
+
+Para todos estos cálculos vamos a tener que recurrir a la etapa `$facet`, que nos permitirá trabajar con *sub-pipelines* para que lo que salga de cada `$group` o `$match` no aplique a la siguiente etapa del pipeline y podamos seguir trabajando con todas las encuestas y no solo con aquellas que salgan de la ejecución de cada una de las etapas que vamos a necesitar para hacer estos cálculos. Por ejemplo, si utilizásemos en una etapa un `$match` para filtrar las encuestas valoradas por encima de 8, estaríamos dejando atrás el resto de encuestas y las siguientes etapas del pipeline tendrían como entrada solo las encuestas con una nota superior a 8. Sin embargo, no queremos esto, queremos hacer los cálculos con `$group` sin afectar a los datos de entrada de las siguientes etapas del pipeline, así que nuestro aliado será `$facet`.
 
 ```javascript
 db.surveys.aggregate([
   ...,
   {
     $facet: {
-      recommenders: [{ $match: { score: { $gte: 6 } } }, { $count: "total" }],
-      detractors: [{ $match: { score: { $lte: 6 } } }, { $count: "total" }],
-      promotors: [{ $match: { score: { $gt: 8 } } }, { $count: "total" }],
       data: [
         {
           $group: {
             _id: "",
-            surveys: { $sum: 1 },
-            score: { $avg: "$score" },
-            applicability: { $avg: "$applicability" },
+            surveysCount: { $sum: 1 },
+            averageScore: { $avg: { $toInt: "$score" } },
+            ratioApplicability: {
+              $avg: { $cond: { if: { $eq: ["$applicability", "yes"] }, then: 1, else: 0 } },
+            },
+            ratioRecommendation: {
+              $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 5] }, then: 1, else: 0 } },
+            },
+            ratioNPS: {
+              $avg: {
+                $subtract: [
+                  {
+                    $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 8] }, then: 1, else: 0 } },
+                  },
+                  {
+                    $avg: { $cond: { if: { $lt: [{ $toInt: "$score" }, 7] }, then: 1, else: 0 } },
+                  },
+                ],
+              },
+            },
           },
         },
       ],
@@ -97,93 +108,38 @@ db.surveys.aggregate([
 ])
 ```
 
-Tras la ejecución de esta etapa tendremos nuevos atributos: `recommenders`, `detractors`, `promotors`, `data` y `scoreDistribution`, con la peculiaridad de que todos ellos serán arrays con un solo objeto en su interior. Para poder extraer el objeto y que dejen de ser arrays, tendremos que recurrir a la etapa `$unwind`, que generará un documento por cada elemento del array que estemos deconstruyendo, pero al ser todos en este caso de una sola dimensión, solo se generará un documento.
+Tras la ejecución de esta etapa tendremos nuevos atributos: `data` y `scoreDistribution`, con la peculiaridad de que `data` será un array con un solo objeto en su interior. Para poder extraer el objeto y que deje de ser un array, tendremos que recurrir a la etapa `$unwind`, que generará un documento por cada elemento del array que estemos deconstruyendo, pero al ser en este caso un array de una sola dimensión, solo se generará un documento. Por otro lado, `scoreDistribution` contendrá un array con objetos que tendrán los atributos `_id` y `total`; `_id` representará una puntuación del 0 al 10 y `total` el número de encuestas que han sido puntuadas con dicho valor.
 
 ```javascript
 db.surveys.aggregate([
   ...,
-  { $unwind: { path: "$recommenders", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$detractors", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$promotors", preserveNullAndEmptyArrays: true } },
   { $unwind: { path: "$data", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$scoreDistribution", preserveNullAndEmptyArrays: true } },
 ])
 ```
 
-Al aplicar el `$unwind` ya tendremos los siguientes atributos: `recommenders.total`, `detractors.total`, `promotors.total`, `data.surveys`, `data.score`, `data.applicability` y `scoreDistribution`. Los tres primeros representan el número de recomendadores, detractores y promotores (para los cuales se ha usado la etapa `$count`), `data` contiene el número total de encuestas que estamos analizando, la puntuación media de dichas encuestas y el porcentaje (en tanto por 1) de encuestas que han devuelto un resultado positivo (`"yes"`) en cuanto a aplicabilidad (para lo cual se ha usado `$sum` y `$avg` en la etapa `$group`). Por último, también tendremos `scoreDistribution`, que contendrá un array con objetos que tendrán los atributos `_id` y `total`; `_id` representará una puntuación del 0 al 10 y `total` el número de encuestas que han sido puntuadas con dicho valor.
+Al aplicar el `$unwind` ya tendremos los siguientes atributos: `data.surveysCount`, `data.averageScore`, `data.ratioApplicability`, `data.ratioRecommendation` y `data.ratioNPS`. El primero contiene el número total de encuestas que estamos analizando, el siguiente representa la puntuación media de dichas encuestas, los ratios representan la media de encuestas que han devuelto un resultado positivo (`"yes"`) en cuanto a aplicabilidad, la media de usuarios que han recomendado el curso y el ratio NPS.
 
-Ahora vamos a intentar *castear* estos datos, para cubrirnos las espaldas, de forma que si alguno de ellos tiene un valor nulo, lo tomaremos como un 0. Además, con `$map` haremos una transformación a los objetos del array `scoreDistribution` para que la puntuación pase de estar almacenada en la propiedad `_id` a estarlo en la propiedad `points`.
+Ahora vamos a intentar *castear* estos datos, para cubrirnos las espaldas, de forma que si alguno de ellos tiene un valor nulo (por ejemplo, porque no existan encuestas para el curso pedido), lo tomaremos como un 0. Además, con `$map` haremos una transformación a los objetos del array `scoreDistribution` para que la puntuación pase de estar almacenada en la propiedad `_id` a estarlo en la propiedad `points`. También vamos a utilizar `$multiply` y `$round` para pasar de tanto por uno a tanto por ciento y para redondear todas las métricas a 2 decimales.
 
 ```javascript
 db.surveys.aggregate([
   ...,
   {
     $addFields: {
-      recommenders: { $ifNull: ["$recommenders.total", 0] },
-      detractors: { $ifNull: ["$detractors.total", 0] },
-      promotors: { $ifNull: ["$promotors.total", 0] },
-      surveys: { $ifNull: ["$data.surveys", 0] },
-      score: { $ifNull: ["$data.score", 0] },
-      applicability: { $ifNull: ["$data.applicability", 0] },
+      surveysCount: { $ifNull: ["$data.surveysCount", 0] },
+      averageScore: { $round: [{ $ifNull: ["$data.averageScore", 0] }, 2] },
+      ratioApplicability: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioApplicability", 0] }] }, 2],
+      },
+      ratioRecommendation: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioRecommendation", 0] }] }, 2],
+      },
+      ratioNPS: { $round: [{ $multiply: [100, { $ifNull: ["$data.ratioNPS", 0] }] }, 2] },
       scoreDistribution: {
         $map: {
           input: "$scoreDistribution",
           as: "score",
           in: { points: "$$score._id", total: "$$score.total" },
-        },
-      },
-    },
-  },
-])
-```
-
-Por (casi) último, procedemos a hacer cálculos de medias y porcentajes con los valores acumulados que tenemos. Utilizamos `$eq`, `$cond`, `$multiply`, `$divide`, `$round` y `$subtract` para acabar obteniendo la valoración media de las encuestas analizadas, el ratio de aplicación (o porcentaje de personas que consideran el curso aplicable) y de recomendación, y el ratio Net Promoter Score (NPS) para medir la satisfacción de los usuarios mediante la relación entre el porcentaje de promotores y el de detractores.
-
-```javascript
-db.surveys.aggregate([
-  ...,
-  {
-    $addFields: {
-      averageScore: { $round: ["$score", 2] },
-      ratioApplication: {
-        $round: [
-          {
-            $multiply: [100, "$applicability"],
-          },
-          2,
-        ],
-      },
-      ratioRecommendation: {
-        $cond: {
-          if: { $eq: ["$surveys", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [100, { $divide: ["$recommenders", "$surveys"] }],
-              },
-              2,
-            ],
-          },
-        },
-      },
-      ratioNPS: {
-        $cond: {
-          if: { $eq: ["$surveys", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [
-                  100,
-                  {
-                    $divide: [{ $subtract: ["$promotors", "$detractors"] }, "$surveys"],
-                  },
-                ],
-              },
-              2,
-            ],
-          },
         },
       },
     },
@@ -198,12 +154,12 @@ db.surveys.aggregate([
   ...,
   {
     $project: {
-      surveys: 1,
-      scoreDistribution: 1,
+      surveysCount: 1,
       averageScore: 1,
-      ratioApplication: 1,
+      ratioApplicability: 1,
       ratioRecommendation: 1,
       ratioNPS: 1,
+      scoreDistribution: 1,
     },
   },
 ])
@@ -212,129 +168,128 @@ db.surveys.aggregate([
 <details>
 <summary>Si quieres ver cómo quedaría el agregado final, lo tienes aquí 👀</summary>
 
+<div>
+
 ```javascript
 db.surveys.aggregate([
-  { 
+  {
+    $match: { courseId: ObjectId("...") },
+  },
+  {
+    $facet: {
+      data: [
+        {
+          $group: {
+            _id: "",
+            surveysCount: { $sum: 1 },
+            averageScore: { $avg: { $toInt: "$score" } },
+            ratioApplicability: {
+              $avg: { $cond: { if: { $eq: ["$applicability", "yes"] }, then: 1, else: 0 } },
+            },
+            ratioRecommendation: {
+              $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 5] }, then: 1, else: 0 } },
+            },
+            ratioNPS: {
+              $avg: {
+                $subtract: [
+                  {
+                    $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 8] }, then: 1, else: 0 } },
+                  },
+                  {
+                    $avg: { $cond: { if: { $lt: [{ $toInt: "$score" }, 7] }, then: 1, else: 0 } },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      ],
+      scoreDistribution: [{ $group: { _id: "$score", total: { $sum: 1 } } }],
+    },
+  },
+  { $unwind: { path: "$data", preserveNullAndEmptyArrays: true } },
+  {
+    $addFields: {
+      surveysCount: { $ifNull: ["$data.surveysCount", 0] },
+      averageScore: { $round: [{ $ifNull: ["$data.averageScore", 0] }, 2] },
+      ratioApplicability: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioApplicability", 0] }] }, 2],
+      },
+      ratioRecommendation: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioRecommendation", 0] }] }, 2],
+      },
+      ratioNPS: { $round: [{ $multiply: [100, { $ifNull: ["$data.ratioNPS", 0] }] }, 2] },
+      scoreDistribution: {
+        $map: {
+          input: "$scoreDistribution",
+          as: "score",
+          in: { points: "$$score._id", total: "$$score.total" },
+        },
+      },
+    },
+  },
+  {
+    $project: {
+      surveysCount: 1,
+      averageScore: 1,
+      ratioApplicability: 1,
+      ratioRecommendation: 1,
+      ratioNPS: 1,
+      scoreDistribution: 1,
+    },
+  },
+]);
+
+</div>
+```
+
+</details>
+
+<details>
+<summary>¿Tienes curiosidad por saber cómo se realizaría esta consulta con SQL? 👀</summary>
+
+<div>
+<p>Si utilizáramos una base de datos relacional con una tabla llamada `surveys`, tendríamos la siguiente consulta:</p>
+
+```sql
+SELECT
+  COUNT(*) AS surveysCount,
+  ROUND(AVG(CAST(score AS INT)), 2) AS averageScore,
+  ROUND(100 * AVG(CASE WHEN applicability = "yes" THEN 1 ELSE 0 END), 2) AS ratioApplicability,
+  ROUND(100 * AVG(CASE WHEN CAST(score AS INT) > 5 THEN 1 ELSE 0 END), 2) AS ratioRecommendation,
+  ROUND(100 * ((AVG(CASE WHEN CAST(score AS INT) > 8 THEN 1 ELSE 0 END) - AVG(CASE WHEN CAST(score AS INT) < 7 THEN 1 ELSE 0 END))), 2) AS ratioNPS,
+  COUNT(CASE WHEN CAST(score AS INT) = 0 THEN 1 END) AS score_0,
+  COUNT(CASE WHEN CAST(score AS INT) = 1 THEN 1 END) AS score_1,
+  COUNT(CASE WHEN CAST(score AS INT) = 2 THEN 1 END) AS score_2,
+  COUNT(CASE WHEN CAST(score AS INT) = 3 THEN 1 END) AS score_3,
+  COUNT(CASE WHEN CAST(score AS INT) = 4 THEN 1 END) AS score_4,
+  COUNT(CASE WHEN CAST(score AS INT) = 5 THEN 1 END) AS score_5,
+  COUNT(CASE WHEN CAST(score AS INT) = 6 THEN 1 END) AS score_6,
+  COUNT(CASE WHEN CAST(score AS INT) = 7 THEN 1 END) AS score_7,
+  COUNT(CASE WHEN CAST(score AS INT) = 8 THEN 1 END) AS score_8,
+  COUNT(CASE WHEN CAST(score AS INT) = 9 THEN 1 END) AS score_9,
+  COUNT(CASE WHEN CAST(score AS INT) = 10 THEN 1 END) AS score_10
+FROM
+  surveys
+WHERE
+  courseId = "...";
+GROUP BY
+  courseId
+```
+
+MySQL admite la sintaxis `IF` (`IF(condition, true_value, false_value)`), pero otros sistemas de bases de datos relacionales, por ejemplo PostgreSQL, sólo admiten `CASE` (`CASE WHEN condition THEN true_value ELSE false_value END`).
+</div>
+</details>
+
+Por rizar un poco más el rizo, vamos a analizar una situación en la que tuviéramos los cursos pudieran funcionar como rutas de aprendizaje o *learning paths* y estuviesen compuestos por varios temas o lecciones. En este caso de uso, los usuarios podrían contestar a una encuesta por cada lección del curso. De esta manera, para estos cursos, querríamos agrupar el resultado de las encuestas de cada una de sus lecciones para obtener la información propia de cada curso. Además, solo querremos tener en cuenta las encuestas de cursos completados (con todas las lecciones terminados).
+
+Para este caso de uso, deberemos buscar las encuestas asociadas a cada matrícula de un usuario en un curso. En función de cuántos temas tenga el curso tendremos un array de encuestas de mayor o menor tamaño. Se quiere obtener una valoración asociada al curso en sí mismo, de modo que calculamos la valoración media de las lecciones del curso con `$reduce` y `$divide`. Usamos también `$reduce` para saber cuántos temas del curso ha valorado el estudiante como aplicables y `$divide` para determinar si el curso en su conjunto se puede considerar como aplicable o no. Para completar estos cálculos usamos también los operadores `$round`, `$sum`, `$toInt`, `$cond`, `$eq` y `$size`.
+
+```javascript
+db.enrollments.aggregate([
+  {
     $match: {
       courseId: ObjectId("..."),
-    },
-  },
-  { 
-    $addFields: {
-      score: { $toInt: "$score" },
-      applicability: { $cond: [{ $eq: ["$applicability", "yes"] }, 1, 0] },
-    },
-  },
-  {
-    $facet: {
-      recommenders: [{ $match: { score: { $gte: 6 } } }, { $count: "total" }],
-      detractors: [{ $match: { score: { $lte: 6 } } }, { $count: "total" }],
-      promotors: [{ $match: { score: { $gt: 8 } } }, { $count: "total" }],
-      data: [
-        {
-          $group: {
-            _id: "",
-            surveys: { $sum: 1 },
-            score: { $avg: "$score" },
-            applicability: { $avg: "$applicability" },
-          },
-        },
-      ],
-      scoreDistribution: [{ $group: { _id: "$score", total: { $sum: 1 } } }],
-    },
-  },
-  { $unwind: { path: "$recommenders", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$detractors", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$promotors", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$data", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$scoreDistribution", preserveNullAndEmptyArrays: true } },
-  {
-    $addFields: {
-      recommenders: { $ifNull: ["$recommenders.total", 0] },
-      detractors: { $ifNull: ["$detractors.total", 0] },
-      promotors: { $ifNull: ["$promotors.total", 0] },
-      surveys: { $ifNull: ["$data.surveys", 0] },
-      score: { $ifNull: ["$data.score", 0] },
-      applicability: { $ifNull: ["$data.applicability", 0] },
-      scoreDistribution: {
-        $map: {
-          input: "$scoreDistribution",
-          as: "score",
-          in: { points: "$$score._id", total: "$$score.total" },
-        },
-      },
-    },
-  },
-  {
-    $addFields: {
-      averageScore: { $round: ["$score", 2] },
-      ratioApplication: {
-        $round: [
-          {
-            $multiply: [100, "$applicability"],
-          },
-          2,
-        ],
-      },
-      ratioRecommendation: {
-        $cond: {
-          if: { $eq: ["$surveys", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [100, { $divide: ["$recommenders", "$surveys"] }],
-              },
-              2,
-            ],
-          },
-        },
-      },
-      ratioNPS: {
-        $cond: {
-          if: { $eq: ["$surveys", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [
-                  100,
-                  {
-                    $divide: [{ $subtract: ["$promotors", "$detractors"] }, "$surveys"],
-                  },
-                ],
-              },
-              2,
-            ],
-          },
-        },
-      },
-    },
-  },
-  {
-    $project: {
-      surveys: 1,
-      scoreDistribution: 1,
-      averageScore: 1,
-      ratioApplication: 1,
-      ratioRecommendation: 1,
-      ratioNPS: 1,
-    },
-  },
-]);
-```
-
-</details>
-
-Por rizar un poco más el rizo, vamos a analizar una situación en la que tuviéramos tanto cursos individuales como rutas de aprendizaje o *learning paths* compuestas de varios cursos. Para estas rutas, querríamos agrupar el resultado de las encuestas de cada uno de sus cursos para obtener la información propia de cada ruta. Además, solo querremos tener en cuenta las encuestas de rutas de aprendizaje completadas (con todos los cursos terminados).
-
-Para este caso de uso, deberemos buscar las encuestas asociadas a cada matrícula de un usuario en un curso o ruta (en el primer caso, solo habrá una encuesta pero en el segundo habrá tantas como cursos conformen la ruta). En función de cuántos cursos tenga la ruta tendremos un array de encuestas de mayor o menor tamaño. Se quiere obtener una valoración asociada a la ruta en sí misma, de modo que calculamos la valoración media de los cursos de la ruta con `$reduce` y `$divide`. Usamos también `$reduce` para saber cuántos cursos de la ruta ha valorado el estudiante como aplicables y `$divide` para determinar si la ruta en su conjunto se puede considerar como aplicable o no. Para completar estos cálculos usamos también los operadores `$round`, `$sum`, `$toInt`, `$cond`, `$eq` y `$size`.
-
-```javascript
-db.enrollments.aggregate([
-  {
-    $match: {
-      courseId: ObjectId("..."), // course or path identifier
       status: "completed",
     },
   },
@@ -395,115 +350,44 @@ db.enrollments.aggregate([
         {
           $group: {
             _id: "",
-            paths: { $sum: 1 }, // number of learning paths with completed surveys
-            surveys: { $sum: { $size: "$surveys" } }, // number of completed surveys (counting N surveys by learning path)
-            score: { $avg: "$score" },
-            applicability: { $avg: "$applicability" },
-          },
-        },
-      ],
-      ...
-    },
-  },
-  ...
-]);
-```
-
-<details>
-<summary>Si quieres ver cómo quedaría el agregado final, lo tienes aquí 👀</summary>
-
-```javascript
-db.enrollments.aggregate([
-  {
-    $match: {
-      courseId: ObjectId("..."), // course or path identifier
-      status: "completed",
-    },
-  },
-  {
-    $lookup: {
-      from: "surveys",
-      localField: "_id",
-      foreignField: "enrollmentId",
-      as: "surveys",
-    },
-  },
-  {
-    $match: { "surveys.0": { $exists: true } },
-  },
-  {
-    $addFields: {
-      score: {
-        $round: [
-          {
-            $divide: [
-              {
-                $reduce: {
-                  input: "$surveys.score",
-                  initialValue: 0,
-                  in: { $sum: ["$$value", { $toInt: "$$this" }] },
-                },
-              },
-              { $size: "$surveys" },
-            ],
-          },
-          0,
-        ],
-      },
-      applicability: {
-        $round: [
-          {
-            $divide: [
-              {
-                $reduce: {
-                  input: "$surveys.applicability",
-                  initialValue: 0,
-                  in: {
-                    $sum: ["$$value", { $cond: [{ $eq: ["$$this", "yes"] }, 1, 0] }],
+            enrollmentsCount: { $sum: 1 }, // number of completed enrollments
+            surveysCount: { $sum: { $size: "$surveys" } }, // number of completed surveys (counting N surveys by course)
+            averageScore: { $avg: "$score" },
+            ratioApplicability: { $avg: "$applicability" },
+            ratioRecommendation: {
+              $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 5] }, then: 1, else: 0 } },
+            },
+            ratioNPS: {
+              $avg: {
+                $subtract: [
+                  {
+                    $avg: { $cond: { if: { $gt: [{ $toInt: "$score" }, 8] }, then: 1, else: 0 } },
                   },
-                },
+                  {
+                    $avg: { $cond: { if: { $lt: [{ $toInt: "$score" }, 7] }, then: 1, else: 0 } },
+                  },
+                ],
               },
-              { $size: "$surveys" },
-            ],
-          },
-          0,
-        ],
-      },
-    },
-  },
-  {
-    $facet: {
-      recommenders: [{ $match: { score: { $gte: 6 } } }, { $count: "total" }],
-      detractors: [{ $match: { score: { $lte: 6 } } }, { $count: "total" }],
-      promotors: [{ $match: { score: { $gte: 9 } } }, { $count: "total" }],
-      data: [
-        {
-          $group: {
-            _id: "",
-            paths: { $sum: 1 }, // number of learning paths with completed surveys
-            surveys: { $sum: { $size: "$surveys" } }, // number of completed surveys (counting N surveys by learning path)
-            score: { $svg: "$score" },
-            applicability: { $avg: "$applicability" },
+            },
           },
         },
       ],
       scoreDistribution: [{ $group: { _id: "$score", total: { $sum: 1 } } }],
     },
   },
-  { $unwind: { path: "$recommenders", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$detractors", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$promotors", preserveNullAndEmptyArrays: true } },
   { $unwind: { path: "$data", preserveNullAndEmptyArrays: true } },
-  { $unwind: { path: "$scoreDistribution", preserveNullAndEmptyArrays: true } },
   {
     $addFields: {
-      recommenders: { $ifNull: ["$recommenders.total", 0] },
-      detractors: { $ifNull: ["$detractors.total", 0] },
-      promotors: { $ifNull: ["$promotors.total", 0] },
-      surveys: { $ifNull: ["$data.surveys", 0] },
-      paths: { $ifNull: ["$data.paths", 0] },
-      score: { $ifNull: ["$data.score", 0] },
-      applicability: { $ifNull: ["$data.applicability", 0] },
+      surveysCount: { $ifNull: ["$data.surveysCount", 0] },
+      enrollmentsCount: { $ifNull: ["$data.enrollmentsCount", 0] },
+      averageScore: { $round: [{ $ifNull: ["$data.averageScore", 0] }, 2] },
+      ratioApplicability: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioApplicability", 0] }] }, 2],
+      },
+      ratioRecommendation: {
+        $round: [{ $multiply: [100, { $ifNull: ["$data.ratioRecommendation", 0] }] }, 2],
+      },
+      ratioNPS: { $round: [{ $multiply: [100, { $ifNull: ["$data.ratioNPS", 0] }] }, 2] },
       scoreDistribution: {
         $map: {
           input: "$scoreDistribution",
@@ -514,69 +398,74 @@ db.enrollments.aggregate([
     },
   },
   {
-    $addFields: {
-      averageScore: { $round: ["$score", 2] },
-      ratioApplication: {
-        $round: [
-          {
-            $multiply: [100, "$applicability"],
-          },
-          2
-        ],
-      },
-      ratioRecommendation: {
-        $cond: {
-          if: { $eq: ["$paths", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [100, { $divide: ["$recommenders", "$paths"] }],
-              },
-              2,
-            ],
-          },
-        },
-      },
-      ratioNPS: {
-        $cond: {
-          if: { $eq: ["$paths", 0] },
-          then: 0,
-          else: {
-            $round: [
-              {
-                $multiply: [
-                  100,
-                  {
-                    $divide: [{ $subtract: ["$promotors", "$detractors"] }, "$paths"],
-                  },
-                ],
-              },
-              2,
-            ],
-          },
-        },
-      },
-    },
-  },
-  {
     $project: {
-      paths: 1,
-      surveys: 1,
-      scoreDistribution: 1,
+      enrollmentsCount: 1,
+      surveysCount: 1,
       averageScore: 1,
-      ratioApplication: 1,
+      ratioApplicability: 1,
       ratioRecommendation: 1,
       ratioNPS: 1,
+      scoreDistribution: 1,
     },
   },
 ]);
 ```
 
+<details>
+<summary>¿Tienes curiosidad por saber cómo se realizaría esta consulta con SQL? 👀</summary>
+
+<div>
+
+```sql
+WITH EnrollmentsData AS (
+  SELECT
+    e.id,
+    ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
+    ROUND(AVG(CAST(s.score AS INT))) AS score
+  FROM
+    enrollments e
+  JOIN
+    surveys s ON e.id = s.enrollmentId
+  WHERE
+    e.courseId = "..." AND e.status = "completed"
+  GROUP BY
+    e.id
+)
+
+SELECT
+  COUNT(*) AS surveysCount,
+  COUNT(DISTINCT s.enrollmentId) AS enrollmentsCount,
+  ROUND(AVG(e.score), 2) AS averageScore,
+  ROUND(100 * AVG(e.applicability), 2) AS ratioApplicability,
+  ROUND(100 * SUM(CASE WHEN CAST(e.score AS INT) > 5 THEN 1 ELSE 0 END) / COUNT(DISTINCT s.enrollmentId), 2) AS ratioRecommendation,
+  ROUND(100 * (SUM(CASE WHEN CAST(e.score AS INT) > 8 THEN 1 ELSE 0 END) - SUM(CASE WHEN CAST(e.score AS INT) < 7 THEN 1 ELSE 0 END)), 2) / COUNT(DISTINCT s.enrollmentId) AS ratioNPS,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 0 THEN 1 END) AS score_0,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 1 THEN 1 END) AS score_1,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 2 THEN 1 END) AS score_2,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 3 THEN 1 END) AS score_3,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 4 THEN 1 END) AS score_4,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 5 THEN 1 END) AS score_5,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 6 THEN 1 END) AS score_6,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 7 THEN 1 END) AS score_7,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 8 THEN 1 END) AS score_8,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 9 THEN 1 END) AS score_9,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 10 THEN 1 END) AS score_10
+FROM
+  surveys s
+JOIN
+  EnrollmentsData e ON s.enrollmentId = e.id
+GROUP BY
+  s.courseId;
+```
+
+Hemos tenido que recurrir al uso de una CTE (Common Table Expression) llamada `EnrollmentsData` para calcular la valoración y la aplicabilidad que se le ha dado al curso en cada matrícula individualmente (como la media de lo que se ha respondido para cada lección del curso). Luego, en la consulta principal, se utiliza ese dato para calcular las métricas a nivel de curso.
+
+</div>
 </details>
 
 <details>
-<summary>También dejo por aquí el agregado que habría que utilizar para obtener los datos de todos los cursos o rutas y no solo de un curso o ruta en concreto 🤓</summary>
+<summary>También dejo por aquí el agregado que habría que utilizar para obtener los datos de todos los cursos y no solo de un curso en concreto, y la versión de dicha consulta en SQL 🤓</summary>
+<div>
 
 ```javascript
 db.enrollments.aggregate([
@@ -639,56 +528,54 @@ db.enrollments.aggregate([
   {
     $group: {
       _id: { courseId: "$courseId", score: "$score" },
-      count: { $sum: 1 },
-      surveys: { $sum: { $size: "$surveys" } },
-      applicability: { $sum: "$applicability" },
+      scoreCount: { $sum: 1 },
+      surveysCount: { $sum: { $size: "$surveys" } },
+      ratioApplicability: { $sum: "$applicability" },
     },
   },
   {
     $group: {
       _id: "$_id.courseId",
-      recommenders: { $sum: { $cond: [{ $gte: ["_id.score", 6] }, "$count", 0] } },
-      detractors: { $sum: { $cond: [{ $lte: ["_id.score", 6] }, "$count", 0] } },
-      promotors: { $sum: { $cond: [{ $gte: ["_id.score", 9] }, "$count", 0] } },
-      paths: { $sum: "$count" }, // number of enrollments with completed surveys for each course/path
-      surveys: { $sum: "$surveys" }, // number of completed surveys (counting N surveys by learning path) for each course/path
-      score: { $sum: { $multiply: ["$_id.score", "$count"] } },
-      applicability: { $sum: "$applicability" },
+      enrollmentsCount: { $sum: "$scoreCount" }, // number of completed enrollments
+      surveysCount: { $sum: "$surveysCount" }, // number of completed surveys (counting N surveys by learning path) for each course/path
+      averageScore: { $sum: { $multiply: ["$_id.score", "$scoreCount"] } },
+      ratioApplicability: { $sum: "$ratioApplicability" },
+      recommenders: { $sum: { $cond: [{ $gt: ["$_id.score", 5] }, "$scoreCount", 0] } },
+      detractors: { $sum: { $cond: [{ $lt: ["$_id.score", 7] }, "$scoreCount", 0] } },
+      promotors: { $sum: { $cond: [{ $gt: ["$_id.score", 8] }, "$scoreCount", 0] } },
       scoreDistribution: {
         $push: {
           points: "$_id.score",
-          total: "$count",
+          total: "$scoreCount",
         },
       },
     },
   },
   {
     $addFields: {
-      paths: { $ifNull: ["$paths", 0] },
-      surveys: { $ifNull: ["$surveys", 0] },
-      score: { $ifNull: ["$score", 0] },
-      applicability: { $ifNull: ["$applicability", 0] },
-    },
+      enrollmentsCount: { $ifNull: ["$enrollmentsCount", 0] },
+      surveysCount: { $ifNull: ["$surveysCount", 0] },
+    }
   },
   {
     $addFields: {
       averageScore: {
         $cond: {
-          if: { $eq: ["$paths", 0] },
+          if: { $eq: ["$enrollmentsCount", 0] },
           then: 0,
           else: {
-            $round: [{ $divide: ["$score", "$paths"] }, 2],
+            $round: [{ $divide: ["$averageScore", "$enrollmentsCount"] }, 2],
           },
         },
       },
-      ratioApplication: {
+      ratioApplicability: {
         $cond: {
-          if: { $eq: ["$paths", 0] },
+          if: { $eq: ["$enrollmentsCount", 0] },
           then: 0,
           else: {
             $round: [
               {
-                $multiply: [100, { $divide: ["$applicability", "$paths"] }],
+                $multiply: [100, { $divide: ["$ratioApplicability", "$enrollmentsCount"] }],
               },
               2,
             ],
@@ -697,12 +584,12 @@ db.enrollments.aggregate([
       },
       ratioRecommendation: {
         $cond: {
-          if: { $eq: ["$paths", 0] },
+          if: { $eq: ["$enrollmentsCount", 0] },
           then: 0,
           else: {
             $round: [
               {
-                $multiply: [100, { $divide: ["$recommenders", "$paths"] }],
+                $multiply: [100, { $divide: ["$recommenders", "$enrollmentsCount"] }],
               },
               2,
             ],
@@ -711,17 +598,12 @@ db.enrollments.aggregate([
       },
       ratioNPS: {
         $cond: {
-          if: { $eq: ["$paths", 0] },
+          if: { $eq: ["$enrollmentsCount", 0] },
           then: 0,
           else: {
             $round: [
               {
-                $multiply: [
-                  100,
-                  {
-                    $divide: [{ $subtract: ["$promotors", "$detractors"] }, "$paths"],
-                  },
-                ],
+                $multiply: [100, { $divide: [{ $subtract: ["$promotors", "$detractors"] }, "$enrollmentsCount"] }],
               },
               2,
             ],
@@ -732,11 +614,11 @@ db.enrollments.aggregate([
   },
   {
     $project: {
-      paths: 1,
-      surveys: 1,
+      enrollmentsCount: 1,
+      surveysCount: 1,
       scoreDistribution: 1,
       averageScore: 1,
-      ratioApplication: 1,
+      ratioApplicability: 1,
       ratioRecommendation: 1,
       ratioNPS: 1,
     },
@@ -744,6 +626,48 @@ db.enrollments.aggregate([
 ]);
 ```
 
+```sql
+WITH EnrollmentsData AS (
+  SELECT
+    e.id,
+    ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
+    ROUND(AVG(CAST(s.score AS INT))) AS score
+  FROM
+    enrollments e
+  JOIN
+    surveys s ON e.id = s.enrollmentId
+  WHERE
+    e.status = "completed"
+  GROUP BY
+    e.id
+)
+
+SELECT
+  COUNT(*) AS surveysCount,
+  COUNT(DISTINCT s.enrollmentId) AS enrollmentsCount,
+  ROUND(AVG(e.score), 2) AS averageScore,
+  ROUND(100 * AVG(e.applicability), 2) AS ratioApplicability,
+  ROUND(100 * SUM(CASE WHEN CAST(e.score AS INT) > 5 THEN 1 ELSE 0 END) / COUNT(DISTINCT s.enrollmentId), 2) AS ratioRecommendation,
+  ROUND(100 * (SUM(CASE WHEN CAST(e.score AS INT) > 8 THEN 1 ELSE 0 END) - SUM(CASE WHEN CAST(e.score AS INT) < 7 THEN 1 ELSE 0 END)), 2) / COUNT(DISTINCT s.enrollmentId) AS ratioNPS,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 0 THEN 1 END) AS score_0,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 1 THEN 1 END) AS score_1,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 2 THEN 1 END) AS score_2,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 3 THEN 1 END) AS score_3,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 4 THEN 1 END) AS score_4,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 5 THEN 1 END) AS score_5,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 6 THEN 1 END) AS score_6,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 7 THEN 1 END) AS score_7,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 8 THEN 1 END) AS score_8,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 9 THEN 1 END) AS score_9,
+  COUNT(CASE WHEN CAST(e.score AS INT) = 10 THEN 1 END) AS score_10
+FROM
+  surveys s
+JOIN
+  EnrollmentsData e ON s.enrollmentId = e.id
+GROUP BY
+  e.courseId;
+```
+</div>
 </details>
 
 > “Users love MongoDB because it offers the fastest time to value compared to any other DBMS technology”

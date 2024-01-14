@@ -510,6 +510,12 @@ pre p {
   font-size: 16px;
 }
 
+pre code {
+  margin-right: 20px;
+  display: inline-block;
+  line-height: 1.75;
+}
+
 code {
   font-size: 14px !important;
   line-height: 1.67;
@@ -969,4 +975,12 @@ img[alt='MongoDB Aggregation Pipeline'] {
 
 .gist-file:nth-child(2) {
   display: none;
+}
+
+details > div {
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 5px;
+  border: 1px solid #999;
+  border-radius: 4px;
 }
