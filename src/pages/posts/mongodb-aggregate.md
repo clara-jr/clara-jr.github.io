@@ -1,58 +1,23 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: 'MongoDB Aggregation Pipeline 👩🏻‍💻'
+title: 'Agregados con MongoDB y su equivalencia en SQL 👩🏻‍💻'
 pubDate: 2024/04/10
-description: 'Procesado de documentos y análisis de datos usando agregados de MongoDB'
+description: 'Procesado de documentos y análisis de datos usando agregados de MongoDB y consultas SQL'
 author: 'Clara Jiménez'
 image:
-    url: '/images/posts/mongo-aggregate.png' 
-    alt: 'MongoDB Aggregation Pipeline'
-tags: ["mongodb"]
+    url: '' 
+    alt: ''
+tags: ["mongodb", "sql"]
 draft: true
 ---
 
-Cuando gestionamos y manipulamos grandes cantidades de datos en MongoDB es muy probable que acabemos necesitando recurrir al uso de agregados, y esto lo haremos a través de *aggregation pipelines* [[1]](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)[[2]](https://www.mongodb.com/basics/aggregation-pipeline). Estos agregados los ejecutaremos haciendo uso del método `db.collection.aggregate()`, que nos permitirá hacer operaciones mucho más flexibles y robustas que un simple `find()`: haremos cálculos basados en agrupaciones de datos, recuperaremos información de diversas colecciones, proyectaremos solo los atributos relevantes, etc.
-
-![MongoDB Aggregation Pipeline](/images/posts/mongo-aggregate.png)
-
-## Aggregation Pipeline Stages [[3]](https://www.mongodb.com/docs/manual/reference/operator/aggregation-pipeline/)
-
-A continuación podemos ver algunas de las etapas que podremos utilizar en el pipeline de agregación, para qué sirven y cómo funcionan:
-
-[`$addFields`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/)<br>
-[`$facet`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/facet/)<br>
-[`$group`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/)<br>
-[`$lookup`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/)<br>
-[`$match`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/)<br>
-[`$project`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/)<br>
-[`$unwind`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/)
-
-## Aggregation Pipeline Operators [[4]](https://www.mongodb.com/docs/manual/reference/operator/aggregation/)
-
-Aquí vemos algunos de los operadores que vamos a poder utilizar en las etapas del pipeline de agregación:
-
-[`$avg`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/)<br>
-[`$cond`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/cond/)<br>
-[`$divide`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/)<br>
-[`$eq`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/)<br>
-[`$exists`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/exists/)<br>
-[`$gt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/gt/)<br>
-[`$ifNull`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/ifNull/)<br>
-[`$lt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lt/)<br>
-[`$map`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/)<br>
-[`$multiply`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/multiply/)<br>
-[`$reduce`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/)<br>
-[`$round`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/round/)<br>
-[`$size`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/size/)<br>
-[`$subtract`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/subtract/)<br>
-[`$sum`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/)<br>
-[`$toInt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/toInt/)<br>
+Cuando gestionamos y manipulamos grandes cantidades de datos en MongoDB es muy probable que acabemos necesitando recurrir al uso de agregados, y esto lo haremos a través de *aggregation pipelines* [[1]](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/)[[2]](https://www.mongodb.com/basics/aggregation-pipeline). Estos agregados los ejecutaremos haciendo uso del método `db.collection.aggregate()`, que nos permitirá hacer operaciones mucho más flexibles y robustas que un simple `find()`: haremos cálculos basados en agrupaciones de datos, recuperaremos información de diversas colecciones, proyectaremos solo los atributos relevantes, etc. En este artículo veremos un caso de uso en el que utilizar agregados de MongoDB y, además, podremos ver las diferencias entre las consultas hechas con agregados de MongoDB y las consultas equivalentes que se realizarían con SQL en caso de utilizar una base de datos relacional.
 
 ## ¡Vamos a por el caso de uso!
 
 Vamos a utilizar todos estos operadores y etapas del *aggregation pipeline* para **analizar datos de encuestas de satisfacción de un servicio o producto**. Imaginemos, por ejemplo, que el producto o servicio en cuestión es un curso de una plataforma de e-learning. Tenemos multitud de usuarios registrados en diferentes cursos y, cuando los completan, responden una encuesta de satisfacción para valorar lo aprendido en el curso. Nuestra intención es analizar los datos de estas encuestas para conocer, por ejemplo, cuál es la valoración media de nuestros cursos, qué aplicabilidad tienen y con qué probabilidad los usuarios los recomendarían.
 
-Lo primero que haremos será recuperar todas las encuestas que vayamos a querer analizar, por ejemplo, las de un determinado curso; para aplicar este tipo de filtros recurrimos a la etapa `$match`.
+Lo primero que haremos será recuperar todas las encuestas que vayamos a querer analizar, por ejemplo, las de un determinado curso; para aplicar este tipo de filtros recurrimos a la etapa [`$match`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/).
 
 ```javascript
 db.surveys.aggregate([
@@ -66,9 +31,9 @@ db.surveys.aggregate([
 
 Cada encuesta tendrá un atributo `score` y un atributo `applicability`, indicando la puntuación que se le ha dado a un determinado curso (del 0 al 10) y si se ha considerado aplicable (`"yes"`) o no (`"no"`).
 
-Sabiendo esto, lo siguiente que vamos a querer hacer es calcular la puntuación media que se le ha dado a ese curso (para lo cual usamos `$avg` y `$toInt`), la media de usuarios que recomendaron el curso (valorándolo por encima de 5), y la diferencia entre la media de usuarios que lo valoraron por encima de 8 y los que lo hicieron por debajo de 7  (haciendo uso además de los operadores `$cond`, `$eq`, `$gt`, `$lt` y `$subtract`). Esto último representará el [ratio Net Promoter Score (NPS)](https://es.wikipedia.org/wiki/Net_Promoter_Score), que sirve para medir la satisfacción de los usuarios mediante la relación entre el porcentaje de promotores y el de detractores. Además, queremos saber qué porcentaje de los usuarios han considerado lo impartido en el curso como aplicable en alguna de las tareas que realicen, para lo cual debemos calcular la media de cuántos `"yes"` tenemos en el atributo `applicability` de las encuestas. Para esto, transformaremos a valor numérico (0 o 1) el atributo que indica si el usuario consideró o no aplicable el curso para su futuro profesional y calcularemos el valor medio con `$avg`. Por último, también querremos calcular la función de distribución de las puntuaciones que se le han dado al curso.
+Sabiendo esto, lo siguiente que vamos a querer hacer es calcular la puntuación media que se le ha dado a ese curso (para lo cual usamos [`$avg`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/) y [`$toInt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/toInt/)), la media de usuarios que recomendaron el curso (valorándolo por encima de 5), y la diferencia entre la media de usuarios que lo valoraron por encima de 8 y los que lo hicieron por debajo de 7  (haciendo uso además de los operadores [`$cond`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/cond/), [`$eq`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/), [`$gt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/gt/), [`$lt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lt/) y [`$subtract`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/subtract/)). Esto último representará el [ratio Net Promoter Score (NPS)](https://es.wikipedia.org/wiki/Net_Promoter_Score), que sirve para medir la satisfacción de los usuarios mediante la relación entre el porcentaje de promotores y el de detractores. Además, queremos saber qué porcentaje de los usuarios han considerado lo impartido en el curso como aplicable en alguna de las tareas que realicen, para lo cual debemos calcular la media de cuántos `"yes"` tenemos en el atributo `applicability` de las encuestas. Para esto, transformaremos a valor numérico (0 o 1) el atributo que indica si el usuario consideró o no aplicable el curso para su futuro profesional y calcularemos el valor medio con [`$avg`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/avg/). Por último, también querremos calcular la función de distribución de las puntuaciones que se le han dado al curso.
 
-Para todos estos cálculos vamos a tener que recurrir a la etapa `$facet`, que nos permitirá trabajar con *sub-pipelines* para que lo que salga de cada `$group` o `$match` no aplique a la siguiente etapa del pipeline y podamos seguir trabajando con todas las encuestas y no solo con aquellas que salgan de la ejecución de cada una de las etapas que vamos a necesitar para hacer estos cálculos. Por ejemplo, si utilizásemos en una etapa un `$match` para filtrar las encuestas valoradas por encima de 8, estaríamos dejando atrás el resto de encuestas y las siguientes etapas del pipeline tendrían como entrada solo las encuestas con una nota superior a 8. Sin embargo, no queremos esto, queremos hacer los cálculos con `$group` sin afectar a los datos de entrada de las siguientes etapas del pipeline, así que nuestro aliado será `$facet`.
+Para todos estos cálculos vamos a tener que recurrir a la etapa [`$facet`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/facet/), que nos permitirá trabajar con *sub-pipelines* para que lo que salga de cada [`$group`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/) o [`$match`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/) no aplique a la siguiente etapa del pipeline y podamos seguir trabajando con todas las encuestas y no solo con aquellas que salgan de la ejecución de cada una de las etapas que vamos a necesitar para hacer estos cálculos. Por ejemplo, si utilizásemos en una etapa un [`$match`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/) para filtrar las encuestas valoradas por encima de 8, estaríamos dejando atrás el resto de encuestas y las siguientes etapas del pipeline tendrían como entrada solo las encuestas con una nota superior a 8. Sin embargo, no queremos esto, queremos hacer los cálculos con [`$group`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/group/) sin afectar a los datos de entrada de las siguientes etapas del pipeline, así que nuestro aliado será [`$facet`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/facet/).
 
 ```javascript
 db.surveys.aggregate([
@@ -108,7 +73,7 @@ db.surveys.aggregate([
 ])
 ```
 
-Tras la ejecución de esta etapa tendremos nuevos atributos: `data` y `scoreDistribution`, con la peculiaridad de que `data` será un array con un solo objeto en su interior. Para poder extraer el objeto y que deje de ser un array, tendremos que recurrir a la etapa `$unwind`, que generará un documento por cada elemento del array que estemos deconstruyendo, pero al ser en este caso un array de una sola dimensión, solo se generará un documento. Por otro lado, `scoreDistribution` contendrá un array con objetos que tendrán los atributos `_id` y `total`; `_id` representará una puntuación del 0 al 10 y `total` el número de encuestas que han sido puntuadas con dicho valor.
+Tras la ejecución de esta etapa tendremos nuevos atributos: `data` y `scoreDistribution`, con la peculiaridad de que `data` será un array con un solo objeto en su interior. Para poder extraer el objeto y que deje de ser un array, tendremos que recurrir a la etapa [`$unwind`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/), que generará un documento por cada elemento del array que estemos deconstruyendo, pero al ser en este caso un array de una sola dimensión, solo se generará un documento. Por otro lado, `scoreDistribution` contendrá un array con objetos que tendrán los atributos `_id` y `total`; `_id` representará una puntuación del 0 al 10 y `total` el número de encuestas que han sido puntuadas con dicho valor.
 
 ```javascript
 db.surveys.aggregate([
@@ -117,9 +82,9 @@ db.surveys.aggregate([
 ])
 ```
 
-Al aplicar el `$unwind` ya tendremos los siguientes atributos: `data.surveysCount`, `data.averageScore`, `data.ratioApplicability`, `data.ratioRecommendation` y `data.ratioNPS`. El primero contiene el número total de encuestas que estamos analizando, el siguiente representa la puntuación media de dichas encuestas, los ratios representan la media de encuestas que han devuelto un resultado positivo (`"yes"`) en cuanto a aplicabilidad, la media de usuarios que han recomendado el curso y el ratio NPS.
+Al aplicar el [`$unwind`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/unwind/) ya tendremos los siguientes atributos: `data.surveysCount`, `data.averageScore`, `data.ratioApplicability`, `data.ratioRecommendation` y `data.ratioNPS`. El primero contiene el número total de encuestas que estamos analizando, el siguiente representa la puntuación media de dichas encuestas, los ratios representan la media de encuestas que han devuelto un resultado positivo (`"yes"`) en cuanto a aplicabilidad, la media de usuarios que han recomendado el curso y el ratio NPS.
 
-Ahora vamos a intentar *castear* estos datos con `$ifNull`, para cubrirnos las espaldas, de forma que si alguno de ellos tiene un valor nulo (por ejemplo, porque no existan encuestas para el curso pedido), lo tomaremos como un 0. Además, con `$map` haremos una transformación a los objetos del array `scoreDistribution` para que la puntuación pase de estar almacenada en la propiedad `_id` a estarlo en la propiedad `points`. También vamos a utilizar `$multiply` y `$round` para pasar de tanto por uno a tanto por ciento y para redondear todas las métricas a 2 decimales. Para añadir estos nuevos atributos al resultado de nuestro agregado usaremos la etapa `$addFields`.
+Ahora vamos a intentar *castear* estos datos con [`$ifNull`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/ifNull/), para cubrirnos las espaldas, de forma que si alguno de ellos tiene un valor nulo (por ejemplo, porque no existan encuestas para el curso pedido), lo tomaremos como un 0. Además, con [`$map`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/map/) haremos una transformación a los objetos del array `scoreDistribution` para que la puntuación pase de estar almacenada en la propiedad `_id` a estarlo en la propiedad `points`. También vamos a utilizar [`$multiply`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/multiply/) y [`$round`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/round/) para pasar de tanto por uno a tanto por ciento y para redondear todas las métricas a 2 decimales. Para añadir estos nuevos atributos al resultado de nuestro agregado usaremos la etapa [`$addFields`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/).
 
 ```javascript
 db.surveys.aggregate([
@@ -147,7 +112,7 @@ db.surveys.aggregate([
 ])
 ```
 
-Por último, *proyectamos* con `$project` solo los atributos que queramos devolver como resultado de la consulta:
+Por último, *proyectamos* con [`$project`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/) solo los atributos que queramos devolver como resultado de la consulta:
 
 ```javascript
 db.surveys.aggregate([
@@ -166,7 +131,7 @@ db.surveys.aggregate([
 ```
 
 <details>
-<summary>Si quieres ver cómo quedaría el agregado final, lo tienes aquí 👀</summary>
+<summary>Si quieres ver cómo quedaría el agregado final, lo tienes aquí 👇🏻</summary>
 
 <div>
 
@@ -249,7 +214,8 @@ db.surveys.aggregate([
 <summary>¿Tienes curiosidad por saber cómo se realizaría esta consulta con SQL? 👀</summary>
 
 <div>
-<p>Si utilizáramos una base de datos relacional con una tabla llamada `surveys`, tendríamos la siguiente consulta:</p>
+
+Si utilizáramos una base de datos relacional con una tabla llamada `surveys`, tendríamos la siguiente consulta:
 
 ```sql
 SELECT
@@ -283,7 +249,7 @@ MySQL admite la sintaxis `IF` (`IF(condition, true_value, false_value)`), pero o
 
 Por rizar un poco más el rizo, vamos a analizar una situación en la que los cursos pudieran funcionar como rutas de aprendizaje o *learning paths* y estuviesen compuestos por varios temas o lecciones. En este caso de uso, los usuarios podrían contestar a una encuesta por cada lección del curso. De esta manera, para estos cursos, querríamos agrupar el resultado de las encuestas de cada una de sus lecciones para obtener la información propia de cada curso. Además, solo querremos tener en cuenta las encuestas de cursos completados (con todas las lecciones terminadas).
 
-Para este caso de uso, deberemos buscar las encuestas asociadas a cada matrícula de un usuario en un curso. Para recuperar las encuestas de una matrícula hay que recurrir a la etapa `$lookup`, y además podemos utilizar el operador `$exists` para tener en cuenta solo las licencias con encuestas. En función de cuántos temas tenga el curso tendremos un array de encuestas de mayor o menor tamaño. Se quiere obtener una valoración asociada al curso en sí mismo, de modo que calculamos la valoración media de las lecciones del curso con `$reduce` y `$divide`. Usamos también `$reduce` para saber cuántos temas del curso ha valorado el estudiante como aplicables y `$divide` para determinar si el curso en su conjunto se puede considerar como aplicable o no. Para completar estos cálculos usamos también los operadores `$round`, `$sum`, `$toInt`, `$cond`, `$eq` y `$size`.
+Para este caso de uso, deberemos buscar las encuestas asociadas a cada matrícula de un usuario en un curso. Para recuperar las encuestas de una matrícula hay que recurrir a la etapa [`$lookup`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/), y además podemos utilizar el operador [`$exists`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/exists/) para tener en cuenta solo las licencias con encuestas. En función de cuántos temas tenga el curso tendremos un array de encuestas de mayor o menor tamaño. Se quiere obtener una valoración asociada al curso en sí mismo, de modo que calculamos la valoración media de las lecciones del curso con [`$reduce`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/) y [`$divide`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/). Usamos también [`$reduce`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/reduce/) para saber cuántos temas del curso ha valorado el estudiante como aplicables y [`$divide`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/divide/) para determinar si el curso en su conjunto se puede considerar como aplicable o no. Para completar estos cálculos usamos también los operadores [`$round`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/round/), [`$sum`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/sum/), [`$toInt`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/toInt/), [`$cond`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/cond/), [`$eq`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/eq/) y [`$size`](https://www.mongodb.com/docs/manual/reference/operator/aggregation/size/).
 
 ```javascript
 db.enrollments.aggregate([
@@ -417,9 +383,10 @@ db.enrollments.aggregate([
 <div>
 
 ```sql
-WITH EnrollmentsData AS (
+WITH enrollmentsSurveys AS (
   SELECT
     e.id,
+    COUNT(*) AS surveysCount,
     ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
     ROUND(AVG(CAST(s.score AS INT))) AS score
   FROM
@@ -433,8 +400,8 @@ WITH EnrollmentsData AS (
 )
 
 SELECT
-  COUNT(*) AS surveysCount,
-  COUNT(DISTINCT s.enrollmentId) AS enrollmentsCount,
+  SUM(e.surveysCount) AS surveysCount,
+  COUNT(DISTINCT e.id) AS enrollmentsCount,
   ROUND(AVG(e.score), 2) AS averageScore,
   ROUND(100 * AVG(e.applicability), 2) AS ratioApplicability,
   ROUND(100 * SUM(CASE WHEN CAST(e.score AS INT) > 5 THEN 1 ELSE 0 END) / COUNT(DISTINCT s.enrollmentId), 2) AS ratioRecommendation,
@@ -451,14 +418,14 @@ SELECT
   COUNT(CASE WHEN CAST(e.score AS INT) = 9 THEN 1 END) AS score_9,
   COUNT(CASE WHEN CAST(e.score AS INT) = 10 THEN 1 END) AS score_10
 FROM
-  surveys s
-JOIN
-  EnrollmentsData e ON s.enrollmentId = e.id
+  enrollmentsSurveys e
 GROUP BY
-  s.courseId;
+  e.courseId;
 ```
 
-Hemos tenido que recurrir al uso de una CTE (Common Table Expression) llamada `EnrollmentsData` para calcular la valoración y la aplicabilidad que se le ha dado al curso en cada matrícula (como la media de lo que se ha respondido para cada lección del curso). Luego, en la consulta principal, se utiliza ese dato para calcular las métricas a nivel de curso.
+Hemos tenido que recurrir al uso de una CTE (Common Table Expression) llamada `enrollmentsSurveys` para calcular la valoración y la aplicabilidad que se le ha dado al curso en cada matrícula (como la media de lo que se ha respondido para cada lección del curso). Luego, en la consulta principal, se utiliza ese dato para calcular las métricas a nivel de curso.
+
+En `enrollmentsSurveys` buscamos las matrículas del curso en cuestión que estén completadas y tengan encuestas rellenadas. Para estas matrículas se calcula la puntuación media que se le ha dado al curso y si se ha considerado o no aplicable (1 o 0 respectivamente). Así, en nuestra consulta principal recuperaremos aquellas encuestas cuya matrícula esté en `enrollmentsSurveys`, teniendo por tanto en cuenta solo las encuestas de matrículas completadas del curso en cuestión.
 
 </div>
 </details>
@@ -627,9 +594,10 @@ db.enrollments.aggregate([
 ```
 
 ```sql
-WITH EnrollmentsData AS (
+WITH enrollmentsSurveys AS (
   SELECT
     e.id,
+    COUNT(*) AS surveysCount,
     ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
     ROUND(AVG(CAST(s.score AS INT))) AS score
   FROM
@@ -643,8 +611,8 @@ WITH EnrollmentsData AS (
 )
 
 SELECT
-  COUNT(*) AS surveysCount,
-  COUNT(DISTINCT s.enrollmentId) AS enrollmentsCount,
+  SUM(e.surveysCount) AS surveysCount,
+  COUNT(DISTINCT e.id) AS enrollmentsCount,
   ROUND(AVG(e.score), 2) AS averageScore,
   ROUND(100 * AVG(e.applicability), 2) AS ratioApplicability,
   ROUND(100 * SUM(CASE WHEN CAST(e.score AS INT) > 5 THEN 1 ELSE 0 END) / COUNT(DISTINCT s.enrollmentId), 2) AS ratioRecommendation,
@@ -661,12 +629,11 @@ SELECT
   COUNT(CASE WHEN CAST(e.score AS INT) = 9 THEN 1 END) AS score_9,
   COUNT(CASE WHEN CAST(e.score AS INT) = 10 THEN 1 END) AS score_10
 FROM
-  surveys s
-JOIN
-  EnrollmentsData e ON s.enrollmentId = e.id
+  enrollmentsSurveys e
 GROUP BY
   e.courseId;
 ```
+
 </div>
 </details>
 
