@@ -23,7 +23,7 @@ lastPosts = lastPosts.map((post) => {
 import projects from '../content/projects.json';
 const lastProjects = projects.slice(0, 3);
 import talks from '../content/talks.json';
-const lastTalks = talks.slice(0, 3);
+const lastTalks = talks.filter((talk) => !talk.draft).slice(0, 3);
 
 const skills = ['nodejs', 'javascript', 'expressjs', 'mongodb', 'redis', 'git', 'aws', 'alexa', 'astro', 'vuejs', 'react'];
 ---

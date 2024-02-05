@@ -9,6 +9,6 @@ const pageTitle = "Clara's Blog | Talks";
 
 <BaseLayout title={pageTitle}>
   <main>
-    {talks.map((talk) => <Talk title={talk.title} description={talk.description} slides={talk.slides} date={talk.date} url={talk.url} />)}
+    {talks.filter((talk) => !talk.draft).map((talk) => <Talk title={talk.title} description={talk.description} slides={talk.slides} date={talk.date} url={talk.url} />)}
   </main>
 </BaseLayout>

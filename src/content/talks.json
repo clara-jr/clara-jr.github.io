@@ -1,5 +1,17 @@
 [
   {
+    "draft": true,
+    "name": "Busca pienso para tu gato con MongoDB, vectores y LLMs",
+    "title": "Busca pienso para tu gato con MongoDB, vectores y LLMs <a class=\"title-link\" target=\"blank\" href=\"https://gdg.community.dev/events/details/google-gdg-madrid-presents-wtm-madrid-meetup-gatos-datos-y-ux-writing-1/\">@ T3chFest 2024</a>",
+    "description": "¿Quieres saber cuál es el mejor pienso para tu gato? Para esto lo mejor es que consultes con tu veterinario (bueno, el de tu mascota). Pero a lo que yo sí puedo ayudarte es a implementar un buscador textual (¡incluso search-as-you-type!) con <b>MongoDB Atlas Search</b> y un buscador semántico con <b>MongoDB Atlas Vector Search</b>, para que encuentres el pienso que cumpla lo pautado en esa consulta veterinaria. Con esta charla intentaré, por tanto, compartir mi conocimiento sobre <b>buscadores de texto y semánticos</b> a través de un tema que ocupa mucho mi vida y mi corazón: los gatos. Hablaré de <b>índices de búsqueda</b>, de <b>operadores de consulta</b> que nos permiten hacer queries complejas y de los <b>analizadores</b> y <b>tokenizadores</b> que ofrece MongoDB Atlas Search. Explicaré también ciertos <b>“no es un bug, es una feature”</b> que tiene este motor de búsqueda y cómo sortearlos. Para terminar hablaré sobre <b>búsqueda semántica</b>, cómo abordarla con <b>MongoDB Atlas Vector Search</b> y qué sentido tendría combinar todo esto con un <b>LLM</b>.",
+    "image": "",
+    "date": "Marzo 2024",
+    "url": "",
+    "preview": "https://t3chfest.es/2024/programa/busca-pienso-para-tu-gato-mongodb-vectores-llms",
+    "slides": "https://slides.com/clear_is_me/busca-pienso-para-tu-gato-con-mongodb-vectores-llms/fullscreen"
+  },
+  {
+    "draft": false,
     "name": "Cómo buscar pienso para tu gato con MongoDB Atlas Search",
     "title": "Cómo buscar pienso para tu gato con MongoDB Atlas Search <a class=\"title-link\" target=\"blank\" href=\"https://gdg.community.dev/events/details/google-gdg-madrid-presents-wtm-madrid-meetup-gatos-datos-y-ux-writing-1/\">@ Women Tech Makers</a>",
     "description": "¿Quieres saber cuál es el mejor pienso para tu gato? Para esto lo mejor es que consultes con tu veterinario (bueno, el de tu mascota). Pero a lo que yo sí puedo ayudarte es a implementar un buscador (¡incluso search-as-you-type!) con <b>MongoDB Atlas Search</b>, para que encuentres el pienso que hayas decidido comprarle a tu compañero felino tras esa consulta veterinaria. Con esta charla intentaré, por tanto, compartir mi conocimiento sobre los <b>buscadores de texto completo o de autocompletado</b> a través de un tema que ocupa mucho mi vida y mi corazón: los gatos. Hablaré de <b>índices de búsqueda</b>, de los <b>operadores de consulta</b> que podemos utilizar para hacer queries complejas y de los <b>analizadores</b> y <b>tokenizadores</b> que ofrece MongoDB Atlas Search. Explicaré también ciertos <b>“no es un bug, es una feature”</b> que tiene este motor de búsqueda y cómo sortearlos. Por último, lanzaré una píldora sobre qué es la <b>búsqueda semántica</b>, cómo la resuelve <b>MongoDB Atlas Vector Search</b>, y qué sentido tendría incorporar a todo esto un <b>LLM</b> siguiendo la arquitectura <b>RAG</b> (Retrieval-Augmented Generation).",
@@ -10,6 +22,7 @@
     "slides": "https://slides.com/clear_is_me/mongodb-atlas-search/fullscreen"
   },
   {
+    "draft": false,
     "name": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills",
     "title": "Presentación de la Comunidad de Alexa y cómo iniciarse en el desarrollo de Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://extra.codemotion.com/live-conference-madrid-2023/\">@ Codemotion Live Conference Madrid 2023</a>",
     "description": "En este Open Space presentamos la <a class=\"title-link\" target=\"blank\" href=\"https://twitter.com/comunidadalexa\">Comunidad de Alexa en Español</a> y el programa de <a class=\"title-link\" target=\"blank\" href=\"https://developer.amazon.com/en-US/alexa/champions\">Alexa Champions</a>. También dimos un repaso al desarrollo de Alexa Skills, desde las tripas de Alexa y el diseño de flujos conversacionales hasta cómo testear, certificar e incluso monetizar una Alexa Skill.",
@@ -20,6 +33,7 @@
     "slides": ""
   },
   {
+    "draft": false,
     "name": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon",
     "title": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
     "description": "En esta mesa redonda comentamos ejemplos de Alexa Skills de éxito y cómo podemos sacar partido al resultado de un proyecto presentado en un Hackathon. Es una charla que forma parte del <b>Hackathon Alexa: Impacto Social</b> organizado junto a Women In Voice Spain, Women In Voice México y la Comunidad de Alexa en español.",
@@ -29,6 +43,7 @@
     "slides": ""
   },
   {
+    "draft": false,
     "name": "¿Cómo crear tu primera Skill en Amazon Alexa? ¿Es posible conseguir empleo en el mundo de los asistentes de voz?",
     "title": "¿Cómo crear tu primera Skill en Amazon Alexa? ¿Es posible conseguir empleo en el mundo de los asistentes de voz? <a class=\"title-link\" target=\"blank\" href=\"https://live.codemotion.com/devcast/devcast-spanish-edition-09062021\">@ Codemotion DevCast</a>",
     "description": "En esta charla hablamos del boom de los asistentes de voz (desde Alexa a Google Home), además veremos cómo poder empezar a programar tu primera skill en Alexa y trataremos de diseccionar qué trabajos se han creado en el mundo de los asistentes de voz y cuál es el futuro de estos dispositivos. Es una charla estupenda de iniciación para las personas con ganas de meterse en el mundo de los asistentes de voz.",
@@ -38,6 +53,7 @@
     "slides": ""
   },
   {
+    "draft": false,
     "name": "¿Podríamos crear un juego al estilo Among Us con Alexa?",
     "title": "¿Podríamos crear un juego al estilo Among Us con Alexa? <a class=\"title-link\" target=\"blank\" href=\"https://events.codemotion.com/conferences/online/2021/online-tech-conference-spanish-edition-spring\">@ Codemotion Online Tech Conference</a>",
     "description": "2020 ha sido el año de quedarse en casa y, en 2021, se sufren las secuelas de esto. Todavía seguimos pasando mucho tiempo enfrente del ordenador o del móvil: viendo twitch, jugando al Among Us o, por qué no, creando nuestro propio Among Us. En esta charla veremos cómo crear un juego al estilo Among Us, generalmente conocido como Hombres Lobo o Pueblo Duerme, utilizando computación <b>serverless</b>, <b>WebSocket</b> y <b>Node.js</b>... ¡Y dejaremos que <b>Alexa</b> sea nuestra narradora!",
@@ -47,6 +63,7 @@
     "slides": "https://slides.com/clear_is_me/amongus-alexa-codemotion/fullscreen"
   },
   {
+    "draft": false,
     "name": "Easy-Peasy Alexa Skills",
     "title": "Easy-Peasy Alexa Skills <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
     "description": "En esta charla vemos cómo podemos crear una Alexa Skill en un momentito: desde el diseño del <b>modelo de interacción vocal</b> hasta la implementación del código de nuestra Skill con ejemplos en <b>JavaScript</b>, pasando por conceptos como <b>Account Linking</b>, <b>persistencia</b> de datos, <b>SSML</b>, y hasta <b>APL</b> para dispositivos con pantalla.",
