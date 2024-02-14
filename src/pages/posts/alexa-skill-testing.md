@@ -1,14 +1,13 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 'Testeando Alexa Skills 👩🏻‍💻‍'
-pubDate: 2024/02/20
+pubDate: 2024/02/14
 description: 'Un código sin tests es un código con fecha de caducidad'
 author: 'Clara Jiménez'
 image:
     url: ''
     alt: 'Alexa Testing'
 tags: ["alexa"]
-draft: true
 ---
 
 Hacer pruebas de nuestro código es costoso pero merece la pena. No hacer pruebas o hacer pruebas manuales es *pan para hoy, hambre para mañana* ya que, el hecho de que algo funcione *hoy*, no quiere decir que vaya a seguir haciéndolo *mañana* (tras implementar cualquier otro cambio). Además, muy pocas son las veces en las que implementamos código 100 % funcional a la primera y sin haberlo testeado, así que es probable que un código sin tests ni siquiera esté funcionando *hoy*. En el desarrollo de Alexa Skills nada de esto va a ser menos. Podemos probar nuestra Skill las veces que consideremos en nuestra consola de desarrollo de Alexa o incluso en un dispositivo físico, pero eso no es una garantía confiable de que nuestra Alexa Skill verdaderamente funciona (sobre todo más allá del *happy path*).
@@ -61,7 +60,7 @@ i18n.init({
 const alexaTest = new test.AlexaTest(skillHandler, skillSettings);
 ```
 
-Como hemos visto, debemos indicar todos los idiomas a los que está traducida nuestra Skill y, de entre ellos, seleccionar aquel para el que vamos a generar nuestro fichero de tests. Deberemos utilizar esta información para inicializar [i18n](https://www.npmjs.com/package/i18next). Por último, inicializamos nuestro test indicando las propiedades de nuestra skill (identificador de la Skill, del usuario, del dispositivo e idioma que vamos a utilizar) y el *handler* que se encargará de desviar las peticiones según la intent que estemos invocando.
+Como hemos visto, debemos indicar todos los idiomas a los que está traducida nuestra Skill y, de entre ellos, seleccionar aquel para el que vamos a generar nuestro fichero de tests. Deberemos utilizar esta información para inicializar [i18n](https://www.npmjs.com/package/i18next). Por último, inicializamos nuestro test indicando las propiedades de nuestra Skill (identificador de la Skill, del usuario, del dispositivo e idioma que vamos a utilizar) y el *handler* que se encargará de desviar las peticiones según la *intent* que estemos invocando.
 
 Además, si tenemos intención de testear una Alexa Skill que incluya datos persistentes en DynamoDB, deberemos incluir el siguiente código previo a la ejecución de nuestros tests:
 
@@ -76,7 +75,7 @@ describe('Alexa Skill', () => {
 
 ## Testeando la respuesta de Alexa
 
-**Los atributos `saysLike` y `repromtsLike` comprueban que los mensajes de respuesta y de *repromt* que ofrece Alexa contengan el *string* que indiquemos**. Si queremos hacer comprobaciones exactas podemos utilizar directamente `says` o `reprompts`. Con `repromptsNothing` y `shouldEndSession` comprobamos si hay mensaje de *repromt* y si la sesión permacena abierta o se cierra respectivamente. En la misma línea tenemos también el atributo `saysNothing`, que puede ser útil para testear respuestas en las que utilicemos APLA como vía de comunicación en lugar del *speech output* que se envía como respuesta en `handlerInput.responseBuilder.speak()`.
+**Los atributos `saysLike` y `repromtsLike` comprueban que los mensajes de respuesta y de *repromt* que ofrece Alexa contengan el *string* que indiquemos**. Si queremos hacer comprobaciones exactas podemos utilizar directamente `says` o `reprompts`. Con `repromptsNothing` y `shouldEndSession` comprobamos si hay mensaje de *repromt* y si la sesión permanece abierta o se cierra respectivamente. En la misma línea tenemos también el atributo `saysNothing`, que puede ser útil para testear respuestas en las que utilicemos APLA como vía de comunicación en lugar del *speech output* que se envía como respuesta en `handlerInput.responseBuilder.speak()`.
 
 **El atributo `ignoreQuestionCheck` es muy útil para evitar comprobar que el mensaje ofrecido por Alexa contenga un signo de interrogación** cuando la sesión permanezca abierta. Generalmente, no es necesario que Alexa haga una pregunta para que el hilo de la conversación siga abierto. Por ejemplo, puede ofrecernos una respuesta con un imperativo verbal para que respondamos a su petición: "Dime a qué categoría quieres jugar". Esta respuesta sería perfectamente válida para continuar la conversación con el usuario y, sin embargo, para `ask-sdk-test` no lo es y nuestro test fallaría. Podemos evitar eso asignando un valor `true` a `ignoreQuestionCheck`.
 
@@ -99,7 +98,7 @@ describe('should open the Skill with a welcome message', () => {
 
 ## Testing de atributos
 
-Otro elemento importante que podremos testear es *el contexto: los atributos de sesión y persistentes*. Con `hasAtttributes` y `storesAttributes` pobremos comprobar que los atributos de sesión y persistentes, respectivamente, son los esperados al completar la intent y devolver una respuesta. A su vez, podemos hacer uso de `withSessionAttributes` y `withStoredAttributes` para indicar los atributos de sesión y persistentes de los que partiremos en la *intent* que estemos testeando.
+Otro elemento importante que podremos testear es **el contexto: los atributos de sesión y persistentes**. Con `hasAtttributes` y `storesAttributes` podremos comprobar que los atributos de sesión y persistentes, respectivamente, son los esperados al completar la *intent* y devolver una respuesta. A su vez, podemos hacer uso de `withSessionAttributes` y `withStoredAttributes` para indicar los atributos de sesión y persistentes de los que partiremos en la *intent* que estemos testeando.
 
 ```javascript
 describe('should update session & persistent attributes correctly', () => {
@@ -154,7 +153,7 @@ describe('should render APL document', () => {
 });
 ```
 
-Igual que **introducimos `.withInterfaces({ apl: true })` para indicar que el dispositivo virtual con el que queremos ejecutar el test tiene pantalla**, podríamos añadir además **`video: true` para probar el comportamiento de nuestra Skill en dispositivos con pantalla que soporten vídeo**. Hasta febrero de 2023, esta condición simplemente editaba el valor de `handlerInput.requestEnvelope.context.System.device.supportedInterfaces.VideoApp` para poder probar la interfaz `VideoApp`, sin embargo también existe el parámetro `handlerInput.requestEnvelope.context.Viewport.video` que indica si un dispositivo puede reproducir vídeos, lo cual es necesario para renderizar componentes de tipo `Video` (sin recurrir a `VideoApp`). Pero, a raíz de abrir [este issue](https://github.com/taimos/ask-sdk-test/issues/31) y [esta PR](https://github.com/taimos/ask-sdk-test/pull/37), si intriducimos el valor video: true, estaremos editando la propiedad `handlerInput.requestEnvelope.context.Viewport.video`, que tomará el valor `{ codecs: ['H_264_41', 'H_264_42'] }`, indicando así que podemos usar el componente `Video` en nuestros documentos APL.
+Igual que **introducimos `.withInterfaces({ apl: true })` para indicar que el dispositivo virtual con el que queremos ejecutar el test tiene pantalla**, podríamos añadir además **`video: true` para probar el comportamiento de nuestra Skill en dispositivos con pantalla que soporten vídeo**. Hasta febrero de 2023, esta condición simplemente editaba el valor de `handlerInput.requestEnvelope.context.System.device.supportedInterfaces.VideoApp` para poder probar la interfaz `VideoApp`, sin embargo también existe el parámetro `handlerInput.requestEnvelope.context.Viewport.video` que indica si un dispositivo puede reproducir vídeos, lo cual es necesario para renderizar componentes de tipo `Video` (sin recurrir a `VideoApp`). Pero, a raíz de abrir [este issue](https://github.com/taimos/ask-sdk-test/issues/31) y [esta PR](https://github.com/taimos/ask-sdk-test/pull/37), si introducimos el valor `video: true`, estaremos editando la propiedad `handlerInput.requestEnvelope.context.Viewport.video`, que tomará el valor `{ codecs: ['H_264_41', 'H_264_42'] }`, indicando así que podemos usar el componente `Video` en nuestros documentos APL.
 
 En cuanto al testeo de documentos APLA, podremos realizarlo de forma equivalente al testeo de documentos APL:
 
@@ -187,7 +186,7 @@ Además de todos los atributos para testing que se han mencionado, tenemos tambi
 
 Aún así hay bastantes atributos más que podéis utilizar y se encuentran en [el repositorio de `ask-sdk-test`](https://github.com/taimos/ask-sdk-test/blob/master/src/types.ts), concretamente en `SequenceItem`. Hay atributos para comprobar que Alexa pregunta al usuario por el valor de un *slot* necesario, o que pide confirmación de dicho valor, etc. Podemos testear también la información que se muestra en una card enviada a la Alexa App, interfaces de `AudioPlayer` y `VideoApp`, así como información relativa a *account linking*, como el token almacenado del usuario.
 
-Por último, y no por ello menos importante (de hecho es bastante interesante), debemos saber que tenemos la posibilidad de testear literalmente **el flujo de una conversación**. Si os habéis fijado, el parámetro que introducimos al ejecutar `alexaTest.test()` es un array 👀; esto quiere decir que podemos ir anidando intents una detrás de otra como si fueran interacciones continuadas dentro de una misma conversación. Testear una *intent* en solitario está bien, pero realmente **lo que vamos a necesitar que funcione es esa *intent* invocada en cualquier momento de la conversación, la cual es probable que no devuelva la misma respuesta en cualquier contexto**.
+Por último, y no por ello menos importante (de hecho es bastante interesante), debemos saber que tenemos la posibilidad de testear literalmente **el flujo de una conversación**. Si os habéis fijado, el parámetro que introducimos al ejecutar `alexaTest.test()` es un array 👀; esto quiere decir que podemos ir anidando *intents* una detrás de otra como si fueran interacciones continuadas dentro de una misma conversación. Testear una *intent* en solitario está bien, pero realmente **lo que vamos a necesitar que funcione es esa *intent* invocada en cualquier momento de la conversación, la cual es probable que no devuelva la misma respuesta en cualquier contexto**.
 
 ```javascript
 describe('should follow the conversation correctly', () => {
