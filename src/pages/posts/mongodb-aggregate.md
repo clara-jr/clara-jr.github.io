@@ -387,6 +387,7 @@ db.enrollments.aggregate([
 WITH enrollmentsSurveys AS (
   SELECT
     e.id,
+    e.courseId,
     COUNT(*) AS surveysCount,
     ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
     ROUND(AVG(CAST(s.score AS INT))) AS score
@@ -598,6 +599,7 @@ db.enrollments.aggregate([
 WITH enrollmentsSurveys AS (
   SELECT
     e.id,
+    e.courseId,
     COUNT(*) AS surveysCount,
     ROUND(AVG(CASE WHEN s.applicability = "yes" THEN 1.0 ELSE 0.0 END)) AS applicability,
     ROUND(AVG(CAST(s.score AS INT))) AS score
