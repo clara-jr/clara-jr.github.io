@@ -34,9 +34,19 @@
   },
   {
     "draft": false,
+    "name": "Arquitectura tecnológica de un producto de voz",
+    "title": "Arquitectura tecnológica de un producto de voz <a class=\"title-link\" target=\"blank\" href=\"https://www.linkedin.com/school/esic/\">@ ESIC Business & Marketing School</a>",
+    "description": "Desde <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">Women In Voice Spain</a> creamos una serie de píldoras formativas sobre el diseño y desarrollo de un producto de voz y su estrategia de publicidad para la plataforma <a class=\"title-link\" target=\"blank\" href=\"https://app.esicplay.com/masterclass/d66eb3ac-392f-485f-9d5d-bcf3136670cc\">ESIC Play</a> de la <a class=\"title-link\" target=\"blank\" href=\"https://www.linkedin.com/school/esic/\">ESIC Business & Marketing School</a>.",
+    "image": "",
+    "date": "Junio 2022",
+    "url": "https://youtu.be/dTgePJfx1yc?si=H4fXcYgtN6r8FCk7",
+    "slides": ""
+  },
+  {
+    "draft": false,
     "name": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon",
     "title": "Ejemplos de Alexa Skills de éxito, y más allá del Hackathon <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">@ Women In Voice Spain</a>",
-    "description": "En esta mesa redonda comentamos ejemplos de Alexa Skills de éxito y cómo podemos sacar partido al resultado de un proyecto presentado en un Hackathon. Es una charla que forma parte del <b>Hackathon Alexa: Impacto Social</b> organizado junto a Women In Voice Spain, Women In Voice México y la Comunidad de Alexa en español.",
+    "description": "En esta mesa redonda comentamos ejemplos de Alexa Skills de éxito y cómo podemos sacar partido al resultado de un proyecto presentado en un Hackathon. Es una charla que forma parte del <b>Hackathon Alexa: Impacto Social</b> organizado junto a <a class=\"title-link\" target=\"blank\" href=\"https://womeninvoice.org/wiv-spain\">Women In Voice Spain</a>, <a class=\"title-link\" target=\"blank\" href=\"https://www.womeninvoice.mx/\">Women In Voice México</a> y la <a class=\"title-link\" target=\"blank\" href=\"https://twitter.com/comunidadalexa\">Comunidad de Alexa en Español</a>.",
     "image": "",
     "date": "Septiembre 2021",
     "url": "https://www.youtube.com/watch?v=qxu-xjZoR5k",
