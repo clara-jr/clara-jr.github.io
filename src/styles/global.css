@@ -991,7 +991,7 @@ div.audio {
 
 audio {
   width: 100%;
-  max-width: 250px;
+  max-width: 270px;
   background-color: var(--theme-bg);
   color: var(--theme-bg);
   border-radius: 20px;
