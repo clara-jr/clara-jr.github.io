@@ -7,6 +7,7 @@ author: 'Clara Jiménez'
 image:
     url: '/images/posts/sondas.jpg' 
     alt: 'Voyager'
+audio: '/audios/fonos-el-disco-de-oro-de-las-sondas-voyager.mp3'
 tags: ["science"]
 ---
 La primera sonda Voyager se lanzó el 5 de septiembre de 1977 precedida por el lanzamiento de la sonda Voyager 2 el 20 de agosto de 1977, ambas desde Cabo Cañaveral.
