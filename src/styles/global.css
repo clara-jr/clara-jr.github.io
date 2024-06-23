@@ -984,3 +984,27 @@ details > div {
   border: 1px solid #999;
   border-radius: 4px;
 }
+
+div.audio {
+  text-align: center;
+}
+
+audio {
+  width: 100%;
+  max-width: 250px;
+  background-color: var(--theme-bg);
+  color: var(--theme-bg);
+  border-radius: 20px;
+}
+
+p.caption,
+p.caption a {
+  font-size: 12px;
+  margin: 0;
+}
+
+@media (min-width: 450px) {
+  audio {
+    max-width: 540px;
+  }
+}
