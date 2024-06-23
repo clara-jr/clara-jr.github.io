@@ -5,7 +5,7 @@
   --theme-nav: #fff;
   --theme-hamburger: #555;
   --theme-nav-links: #2e2e2e;
-  --theme-transparent-nav: -webkit-linear-gradient(right, rgba(255, 255, 255, 0.6), #fff);
+  --theme-transparent-nav: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.6), #fff);
   --theme-underlined: #cfcfcf;
   --theme-underlined-hover: #000;
   --theme-hr: #eee;
