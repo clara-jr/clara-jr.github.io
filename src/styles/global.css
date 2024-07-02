@@ -729,12 +729,14 @@ a#cv {
 
 #knowledge svg {
   width: 48px;
+  height: 48px;
   margin: 5px;
 }
 
 @media screen and (max-width: 410px) {
   #knowledge svg {
-    width: 55px;
+    width: 60px;
+    height: 60px;
   }
 }
 
