@@ -34,12 +34,15 @@
 
 :root.dark {
   color-scheme: dark;
-  --theme-bg: #1d1f21; /*#1d1f21;*/ /*#282a36*/
+  --theme-bg: #1d1f21;
+  /*#1d1f21;*/
+  /*#282a36*/
   --theme-text: #fff;
   --theme-nav: #fff;
   --theme-hamburger: #fff;
   --theme-nav-links: #fff;
-  --theme-transparent-nav: -webkit-linear-gradient(right, rgba(29, 31, 33, 0.8), #1d1f21); /*-webkit-linear-gradient(right,rgba(40, 42, 54, 0.8),#282a36);*/
+  --theme-transparent-nav: -webkit-linear-gradient(right, rgba(29, 31, 33, 0.8), #1d1f21);
+  /*-webkit-linear-gradient(right,rgba(40, 42, 54, 0.8),#282a36);*/
   --theme-underlined: #b1b1b1;
   --theme-underlined-hover: #fff;
   --theme-hr: #1d1f21;
@@ -76,16 +79,19 @@
   font-family: body;
   src: url('./fonts/IBMPlexSans-Text.otf');
 }
+
 @font-face {
   font-family: body;
   font-style: italic;
   src: url('./fonts/IBMPlexSans-TextItalic.otf');
 }
+
 @font-face {
   font-family: body;
   font-weight: 800;
   src: url('./fonts/IBMPlexSans-Bold.otf');
 }
+
 @font-face {
   font-family: mono;
   src: url('./fonts/IBMPlexMono-Text.otf');
@@ -126,17 +132,21 @@ h5,
 h6 {
   margin: 0px;
 }
+
 h1 {
   font-size: 36px;
 }
+
 h2 {
   font-size: 24px;
   font-weight: 500;
 }
+
 h3 {
   font-size: 20px;
   font-weight: 600;
 }
+
 p {
   font-size: 15px;
   font-weight: 400;
@@ -148,11 +158,13 @@ p {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
+
 ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
+
 a,
 a:active,
 a:focus,
@@ -160,6 +172,7 @@ a:active {
   text-decoration: none !important;
   font-size: 15px;
 }
+
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -321,6 +334,7 @@ nav {
   background: var(--theme-transparent-nav);
   padding: 1.5rem;
 }
+
 .dark nav {
   color: var(--theme-text) !important;
 }
@@ -400,6 +414,7 @@ nav {
   margin-left: -15px;
   cursor: pointer;
 }
+
 .navbar-header .navbar-toggle {
   margin-top: 7px;
   margin-right: 15px;
@@ -412,6 +427,7 @@ nav {
   font: inherit;
   cursor: pointer;
 }
+
 .navbar-header .navbar-toggle .icon-bar {
   background: var(--theme-hamburger);
   display: block;
@@ -419,15 +435,19 @@ nav {
   height: 2px;
   border-radius: 1px;
 }
-.navbar-toggle .icon-bar + .icon-bar {
+
+.navbar-toggle .icon-bar+.icon-bar {
   margin-top: 4px;
 }
+
 .navbar-header .navbar-toggle:focus {
   background: none;
 }
+
 .navbar-header .navbar-toggle:active {
   background: none;
 }
+
 .navbar-header .navbar-toggle:hover {
   background: none;
 }
@@ -523,7 +543,7 @@ code {
 }
 
 code.code-colors:before,
-code.code-colors > a.line {
+code.code-colors>a.line {
   position: absolute;
   left: 0;
   width: 56px;
@@ -616,9 +636,11 @@ a#cv {
     display: flex;
     align-items: center;
   }
+
   .about_photo img {
     width: 100%;
   }
+
   .project_photo img {
     width: 100%;
   }
@@ -628,13 +650,16 @@ a#cv {
   .about_photo {
     text-align: center;
   }
+
   .about_photo img {
     width: 70%;
     margin-bottom: 20px;
   }
+
   .project_photo {
     text-align: center;
   }
+
   .project_photo img {
     width: 70%;
     margin-top: 20px;
@@ -645,6 +670,7 @@ a#cv {
   .about_photo img {
     width: 80%;
   }
+
   .project_photo img {
     width: 80%;
   }
@@ -654,6 +680,7 @@ a#cv {
   .about_photo img {
     width: 90%;
   }
+
   .project_photo img {
     width: 90%;
   }
@@ -701,7 +728,7 @@ a#cv {
 }
 
 #knowledge svg {
-  width: 50px;
+  width: 48px;
   margin: 5px;
 }
 
@@ -754,8 +781,8 @@ a#cv {
   }
 }
 
-.pagination > li > a,
-.pagination > li > span {
+.pagination>li>a,
+.pagination>li>span {
   position: relative;
   float: left;
   padding: 6px 12px;
@@ -903,52 +930,65 @@ footer {
   #posts {
     display: block;
   }
+
   #posts #tags {
     margin-left: 0px;
     margin-bottom: 25px;
   }
+
   #posts #tags .tags-flex {
     display: flex;
     column-gap: 5px;
     flex-wrap: wrap;
   }
+
   #posts #tags .tags-flex p {
     margin-bottom: 0;
   }
+
   .index-date {
     display: none;
   }
+
   .post-preview {
     margin-bottom: 12px;
   }
+
   #about {
     display: block;
     margin-top: 10px;
   }
+
   .about-items .about_photo {
     margin-left: auto;
     margin-right: auto;
   }
+
   .blog-items .project_photo {
     margin-left: auto;
     margin-right: auto;
     min-width: 200px;
     max-width: 200px;
   }
+
   .all-tags {
     margin-top: 15px;
   }
+
   .date-tags-separator {
     display: none;
   }
+
   .post-date {
     display: block !important;
   }
+
   .post-tags {
     margin-left: 0px;
     margin-top: 8px;
     margin-bottom: 8px;
   }
+
   .post-meta {
     display: block;
   }
@@ -965,10 +1005,12 @@ footer {
 img[alt='BiciMAD'] {
   width: 400px;
 }
+
 img[alt='Aprendizaje Adaptativo'] {
   width: 500px;
   border-radius: 2%;
 }
+
 img[alt='MongoDB Aggregation Pipeline'] {
   width: 700px;
 }
@@ -977,7 +1019,7 @@ img[alt='MongoDB Aggregation Pipeline'] {
   display: none;
 }
 
-details > div {
+details>div {
   padding-right: 10px;
   padding-left: 10px;
   margin-top: 5px;
