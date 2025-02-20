@@ -78,7 +78,7 @@ redisClient.xadd(STREAMS_KEY, '*',
 *Consumer*:
 
 ```javascript
-import redis from 'redis';
+import redis from 'ioredis';
 import async from 'async';
 const config = { host: '127.0.0.1', port: 6379 };
 
