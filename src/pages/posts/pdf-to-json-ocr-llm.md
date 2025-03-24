@@ -63,7 +63,7 @@ Si el PDF es una imagen escaneada, transformaremos primero el PDF en imagen, usa
 import { pdf } from 'pdf-to-img';
 import Tesseract from 'tesseract.js';
 
-const convertPDFToImage = async (path) => {
+async function convertPDFToImage (path) {
   const image = await pdf(path, { scale: 3 });
   return image.getPage(1);
 }
