@@ -29,7 +29,7 @@ import parsePDF from 'pdf-parse';
 
 async function extractTextFromPDF (path) {
   const buffer = fs.readFileSync(path);
-  const { data: { text } } = await parsePDF(buffer);
+  const { text } = await parsePDF(buffer);
   return text;
 }
 
