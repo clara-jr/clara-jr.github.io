@@ -68,7 +68,7 @@ async function convertPDFToImage (path) {
   return image.getPage(1);
 }
 
-async function extractTextFromImage (image) {
+async function extractTextFromImage (image, language = 'eng') {
   const { data: { text } } = await Tesseract.recognize(image, language);
   return text;
 }
