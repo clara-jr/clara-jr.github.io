@@ -23,12 +23,6 @@
     "rehype-katex": "^6.0.3",
     "remark-math": "^5.1.1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.6.0",
     "eslint": "^8.48.0",
