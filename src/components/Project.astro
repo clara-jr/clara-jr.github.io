@@ -1,5 +1,5 @@
 ---
-const { image, title, description, date, url } = Astro.props;
+const { image, title, description, date, url, isSold } = Astro.props;
 ---
 
 <div class="blog-items" id="about">
@@ -9,6 +9,7 @@ const { image, title, description, date, url } = Astro.props;
   <div>
     <h2 class="post-title">
       <span set:html={title} />
+      {isSold && (<br><span style={{ fontSize: '15px', fontWeight: '500' }}>[Vendido a <a href="https://www.appcano.io/" target="_blank" class="link">Appcano LLC</a> en enero de 2026]</span>)}
       <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
         👉🏻
         <a target="_blank" class="page-link" href={url}> ¡Quiero saber más!</a>
