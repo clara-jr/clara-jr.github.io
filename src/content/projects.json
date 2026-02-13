@@ -39,21 +39,24 @@
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es un audiojuego basado en el juego de mesa ¿Quién es Quién? perfecto para dispositivos con pantalla y jugable en dispositivos sin pantalla gracias a la web <a class=\"link\" target=\"blank\" href=\"http://quienesquienjuego.es\">quienesquienjuego.es</a>, desde la cual puedes descargar e imprimir un tablero ¡y hasta unas tarjetitas con los personajes!",
     "image": "/images/projects/quien.png",
     "date": "Enero 2021",
-    "url": "https://www.amazon.es/clara-jr-Quién-es/dp/B08SJJG7TC"
+    "url": "https://www.amazon.es/clara-jr-Quién-es/dp/B08SJJG7TC",
+    "isSold": true
   },
   {
     "title": "Alexa Skill: Papá Noel",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB y audios en S3; es una Skill muy navideña para hablar y cantar con Papá Noel",
     "image": "/images/projects/noel.png",
     "date": "Noviembre 2020",
-    "url": "https://www.amazon.es/clara-jr-Papá-Noel/dp/B08NF2GLWB"
+    "url": "https://www.amazon.es/clara-jr-Papá-Noel/dp/B08NF2GLWB",
+    "isSold": true
   },
   {
     "title": "Alexa Skill: The Werewolves Game",
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js, datos persistentes almacenados en DynamoDB, una API REST y una API WebSocket utilizando Amazon API Gateway y Serverless Framework; es un audiojuego interactivo narrado por Alexa en el que los jugadores deben entrar en una sala en la web <a class=\"link\" target=\"blank\" href=\"http://hombreslobo.es\">hombreslobo.es</a> que simbolizará un pueblo en el que los jugadores son sus habitantes, recibiendo cada uno un rol en sus pantallas: hombre lobo o campesino; todos duermen cada noche y los lobos se despiertan para matar a un campesino seleccionando el nombre del jugador en sus pantallas, cuando el pueblo despierta, deben averiguar quiénes son los lobos",
     "image": "/images/projects/wolf.png",
     "date": "Julio 2020",
-    "url": "https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7"
+    "url": "https://www.amazon.es/clara-jr-Los-Hombres-Lobo/dp/B08CZ9XHG7",
+    "isSold": true
   },
   {
     "title": "Regalos en Confinamiento",
@@ -67,21 +70,24 @@
     "description": "Alexa Skill desarrollada utilizando una Lambda Function escrita en Node.js y con datos persistentes almacenados en DynamoDB; se basa en el popular juego de niños Simón Dice en el que si Alexa dice \"Simón dice que saltes\", deberás saltar y si sólo dice \"Salta\", no deberás hacerlo y, cada vez que lo hagas bien, ganarás puntos y podrás competir contra tus amigos",
     "image": "/images/projects/simon.png",
     "date": "Septiembre 2019",
-    "url": "https://www.amazon.es/clara-jr-Simón-Dice/dp/B07XW73LFM"
+    "url": "https://www.amazon.es/clara-jr-Simón-Dice/dp/B07XW73LFM",
+    "isSold": true
   },
   {
     "title": "Alexa Skill: Keyword",
     "description": "Alexa-Hosted Skill escrita en Node.js y basada en un juego multijugador de adivinar palabras rápidamente; Alexa ofrece pistas de una única palabra y por turnos debéis adivinar qué palabra está describiendo",
     "image": "/images/projects/keyword.png",
     "date": "Septiembre 2019",
-    "url": "https://www.amazon.es/clara-jr-Palabra-Clave/dp/B07YB8GLD3"
+    "url": "https://www.amazon.es/clara-jr-Palabra-Clave/dp/B07YB8GLD3",
+    "isSold": true
   },
   {
     "title": "Alexa Skill: Nim",
     "description": "Alexa-Hosted Skill escrita en Node.js y basada en un juego de estrategia matemática contra Alexa, denominado Nim, que consiste en retirar, alternativamente, fichas o palos dispuestos en una serie de filas hasta que no quede ninguno; el jugador que se vea obligado a retirar el último palo en su turno, perderá",
     "image": "/images/projects/nim.png",
     "date": "Septiembre 2019",
-    "url": "https://www.amazon.es/clara-jr-Nim/dp/B07Y1ZLJGN"
+    "url": "https://www.amazon.es/clara-jr-Nim/dp/B07Y1ZLJGN",
+    "isSold": true
   },
   {
     "title": "1<sup>st</sup> Prize - Alexa Games Hackathon",
