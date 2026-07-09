@@ -10,10 +10,10 @@ const { image, title, description, date, url, isSold } = Astro.props;
     <h2 class="post-title">
       <span set:html={title} />
       {isSold && (<br><span style={{ fontSize: '15px', fontWeight: '500' }}>[Vendido a <a href="https://www.appcano.io/" target="_blank" class="link">Appcano LLC</a> en enero de 2026]</span>)}
-      <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
+      {url && <p style={{ fontSize: '22px', marginTop: '10px', marginBottom: '0px' }}>
         👉🏻
         <a target="_blank" class="page-link" href={url}> ¡Quiero saber más!</a>
-      </p>
+      </p>}
     </h2>
     <h3 class="post-subtitle project" set:html={description} />
     <p class="post-meta">{date}</p>

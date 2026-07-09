@@ -1,5 +1,19 @@
 [
   {
+    "title": "NestEgg",
+    "description": "Simulador vibe-coded (utilizando <a class=\"link\" target=\"blank\" href=\"https://opencode.ai/\">OpenCode</a> y <a class=\"link\" target=\"blank\" href=\"https://astro.build/\">Astro</a>) de ahorros 💰, compra de casa 🏡 y jubilación 🏝️",
+    "image": "/images/projects/nestegg.png",
+    "date": "Julio 2026",
+    "url": "https://clara-jr.github.io/nestegg"
+  },
+  {
+    "title": "Nita's Feeder",
+    "description": "Bot de Whatsapp vibe-coded hecho con <a class=\"link\" target=\"blank\" href=\"https://www.npmjs.com/package/whatsapp-web.js/\">whatsapp-web.js</a> y <a class=\"link\" target=\"blank\" href=\"https://www.npmjs.com/package/qrcode-terminal/\">qrcode-terminal</a> para llevar un registro de lo que come mi gata Nita 😺",
+    "image": "/images/projects/nitas-feeder.png",
+    "date": "Marzo 2026",
+    "preview": "/projects"
+  },
+  {
     "title": "redismb",
     "description": "Paquete de npm para configurar un sistema de publicación/consumo de mensajes apropiado para sistemas de comunicación en tiempo real, arquitecturas basadas en eventos y sistemas distribuidos utilizando <a class=\"link\" target=\"blank\" href=\"https://redis.io/docs/latest/develop/data-types/streams/\">Redis Streams</a>",
     "image": "/images/projects/npm.png",

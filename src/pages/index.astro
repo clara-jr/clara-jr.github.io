@@ -41,7 +41,7 @@ const skills = ['nodejs', 'javascript', 'typescript', 'expressjs', 'mongodb', 'r
     <h2 class="post-title index-title">Últimos Posts</h2>
     {lastPosts.map((post) => <Item url={post.url} title={post.frontmatter.title} date={post.frontmatter.pubDate} />)}
     <h2 class="post-title index-title">Últimos Proyectos</h2>
-    {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date} />)}
+    {lastProjects.map((project) => <Item url={project.url} title={project.title} date={project.date} preview={project.preview} />)}
     <h2 class="post-title index-title">Últimas Charlas</h2>
     {lastTalks.map((talk) => <Item url={talk.url} title={talk.name} date={talk.date} preview={talk.preview} />)}
     <h2 class="post-title index-title">Conocimiento</h2>
